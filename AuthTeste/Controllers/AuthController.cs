@@ -57,5 +57,11 @@ namespace AuthTeste.Controllers
             ModelState.AddModelError("", "Falha ao realizar a autenticação");
             return View(user);
         }
+
+		[HttpGet]
+		public IActionResult ResetPassword()
+        {
+            return View();
+        }
     }
 }

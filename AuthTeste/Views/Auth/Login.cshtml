@@ -5,11 +5,11 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AuthTeste</title>
+    <title>@ViewData["Title"] Login </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AuthTeste.styles.css" asp-append-version="true" />
@@ -37,7 +37,7 @@
 						data-aos="fade" data-aos-duration="500"></span>
 						</div>
 						<div class="botaoArea mt-3 mb-3">
-							<span><a href="">Esqueci minha senha</a></span>
+							<span><a asp-area="" asp-controller="Auth" asp-action="ResetPassword">Esqueci minha senha</a></span>
 							<button class="btn botaoLogin mt-3" type="submit">Entrar</button>
 						</div>
 						<div asp-validation-summary="All" class="text-danger"
