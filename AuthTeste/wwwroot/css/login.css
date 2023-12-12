@@ -1,0 +1,107 @@
+﻿html, body{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: content-box;
+}
+
+.content {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 30px;
+   width: 100%;
+   height: 100%;
+}
+
+.loginArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+    height: 75%;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.formArea {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.formInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+
+.botaoArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%
+}
+
+botaoArea > span {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.botaoLogin {
+    background-color: #51023B;
+    color: white;
+    width: 25%;
+}
+
+span > a {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600
+}
+
+span > h1, a, label {
+    color: #51023B;
+}
+
+.LoginImg{
+    width: 50%;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+}
+
+.LoginImg > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+}
+
+@media only screen and (max-width: 960px) {
+    .loginArea{
+        flex-direction: column;
+        width: 100%
+    }
+
+    .formArea, .formInputs{
+        height: 70%;
+        width: 100%
+    }
+
+    .LoginImg{
+        display: none;
+    }
+
+    .botaoLogin{
+        width: 50%;
+    }
+}
