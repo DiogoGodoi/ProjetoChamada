@@ -25,9 +25,9 @@
 						<h1>ENTRAR</h1>
 						</span>
 						<div class="form-group col-lg-8 col-md-10 col-sm-8">
-						<label asp-for="userName" class="control-label"></label>
-							<input asp-for="userName" class="form-control" placeholder="Digite o nome de usuário" />
-							<span asp-validation-for="userName" class="text-danger"
+						<label asp-for="email" class="control-label"></label>
+						<input asp-for="email" class="form-control" placeholder="Digite o nome de usuário" />
+						<span asp-validation-for="email" class="text-danger"
 							  data-aos-duration="500"></span>
 						</div>
 					<div class="form-group col-lg-8 col-md-10 col-sm-8 mt-2">
@@ -37,7 +37,7 @@
 						data-aos="fade" data-aos-duration="500"></span>
 						</div>
 						<div class="botaoArea mt-3 mb-3">
-							<span><a asp-area="" asp-controller="Auth" asp-action="ResetPassword">Esqueci minha senha</a></span>
+							<span><a asp-area="" asp-controller="Auth" asp-action="ForgotPassword">Esqueci minha senha</a></span>
 							<button class="btn botaoLogin mt-3" type="submit">Entrar</button>
 						</div>
 						<div asp-validation-summary="All" class="text-danger"

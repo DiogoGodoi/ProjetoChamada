@@ -2,7 +2,7 @@
 
 namespace AuthTeste.Models
 {
-	public class MdlUser
+	public class MdlResetPassword
 	{
 		[Key]
 		public int id { get; set; }
@@ -16,5 +16,6 @@ namespace AuthTeste.Models
 		[DataType(DataType.Password)]
 		[Display(Name = "Senha")]
 		public string password { get; set; }
+		public string token { get; set; }
 	}
 }

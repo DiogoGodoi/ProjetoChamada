@@ -2,7 +2,7 @@
 
 namespace AuthTeste.Models
 {
-	public class MdlUser
+	public class MdlForgotPassword
 	{
 		[Key]
 		public int id { get; set; }
@@ -11,10 +11,5 @@ namespace AuthTeste.Models
 		[DataType(DataType.Text)]
 		[Display(Name = "E-mail")]
 		public string email { get; set; }
-
-		[Required(ErrorMessage = "Campo obrigatorio")]
-		[DataType(DataType.Password)]
-		[Display(Name = "Senha")]
-		public string password { get; set; }
 	}
 }
