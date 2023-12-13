@@ -9,11 +9,10 @@ namespace BoundarySMTP
     {
 
         private string remetente { get; set; } = "diogogoddoi@gmail.com";
-        private string destinatario { get; set; } = "diogogoddoi@gmail.com";
         private string assunto { get; set; } = "Redefinicao de senha";
         public string corpo { get; set; } = "";
 
-		public void EnviarEmail()
+		public void EnviarEmail(string destinatario)
         {
             var server = "smtp.gmail.com";
             var porta = 587;

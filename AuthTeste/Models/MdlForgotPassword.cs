@@ -11,5 +11,6 @@ namespace AuthTeste.Models
 		[DataType(DataType.Text)]
 		[Display(Name = "E-mail")]
 		public string email { get; set; }
+
 	}
 }

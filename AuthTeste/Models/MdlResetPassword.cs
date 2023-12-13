@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuthTeste.Models
 {
@@ -15,7 +16,11 @@ namespace AuthTeste.Models
 		[Required(ErrorMessage = "Campo obrigatorio")]
 		[DataType(DataType.Password)]
 		[Display(Name = "Senha")]
-		public string password { get; set; }
-		public string token { get; set; }
+		public string password { get; set; } = "";
+		[Required(ErrorMessage = "Campo obrigatorio")]
+		[DataType(DataType.Password)]
+		[Display(Name = "Confirmar senha")]
+		public string confirmPassword { get; set; } = "";
+		public string token { get; set; } = "";
 	}
 }

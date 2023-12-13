@@ -1,7 +1,9 @@
 ﻿using AuthTeste.Models;
 using BoundarySMTP;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AuthTeste.Controllers
 {
@@ -10,6 +12,7 @@ namespace AuthTeste.Controllers
 
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private string tokenReset { get; set; } = "";
 
         public AuthController(UserManager<IdentityUser> _userManager, SignInManager<IdentityUser> _signInManager)
         {
@@ -24,6 +27,7 @@ namespace AuthTeste.Controllers
         }
 
         [HttpPost]
+		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(MdlUser user)
         {
@@ -43,20 +47,20 @@ namespace AuthTeste.Controllers
                     }
                     else
                     {
-						ModelState.AddModelError("", "Usuario invalido");
+						ModelState.AddModelError("", "Erro na autenticacao");
 						return View(user);
 					}
                 }
                 else
                 {
-					ModelState.AddModelError("", "Usuario inexistente");
+					ModelState.AddModelError("", "Erro na autenticação");
 					return View();
                         
                 }
 
             }
 
-            ModelState.AddModelError("", "Falha ao realizar a autenticação");
+            ModelState.AddModelError("", "Erro na autenticação");
             return View(user);
         }
 
@@ -67,34 +71,40 @@ namespace AuthTeste.Controllers
         }
 
 		[HttpPost]
+        [AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> ForgotPassword(MdlForgotPassword forgotUser)
 		{
+
 			if (ModelState.IsValid)
 			{
-				var findUser = await _userManager.FindByEmailAsync(forgotUser.email);
-				    
-                if (findUser != null)
+				var findUser = await _userManager.FindByNameAsync(forgotUser.email);
+
+				if (findUser != null)
 				    {
-					    var token = await _userManager.GeneratePasswordResetTokenAsync(findUser);
-					    var callbackUrl = Url.Action("ResetPassword", "Auth", new { userId = forgotUser.id, code = token }, protocol: HttpContext.Request.Scheme);
+					    string code = await _userManager.GeneratePasswordResetTokenAsync(findUser);
+					    var callbackUrl = Url.Action("ResetPassword", "Auth", new { userId = forgotUser.id }, protocol: HttpContext.Request.Scheme);
 
                         SmtpConfig smtpConfig = new SmtpConfig();
-                        smtpConfig.corpo = $"Por favor, redefina sua senha clicando <a href='{callbackUrl}'>aqui</a>.";
+                        smtpConfig.corpo = $"Por favor, redefina sua senha clicando <a href='{callbackUrl}'>aqui</a>";
 
-					    smtpConfig.EnviarEmail();
+					    smtpConfig.EnviarEmail(forgotUser.email);
 
-					    return Redirect("/Auth/Login");
+                        TempData["TokenGerado"] = code;
+					    TempData["Email"] = forgotUser.email;
+					    ViewBag.Sucesso = "Link enviado";
+
+					    return View();
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Houve um erro durante o processo de recuperação de senha");
+                        ModelState.AddModelError("", "Erro na recuperação da senha");
                         return View(forgotUser);
                     }
             }
             else
             {
-                ModelState.AddModelError("", "Erro interno");
+                ModelState.AddModelError("", "Erro na recuperação da senha");
 				return View(forgotUser);
             }
 		}
@@ -106,37 +116,52 @@ namespace AuthTeste.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(MdlResetPassword resetPassword)
         {
-            if (ModelState.IsValid)
+
+			if (ModelState.IsValid)
             {
                 var userFind = await _userManager.FindByEmailAsync(resetPassword.email);
 
                 if (userFind != null)
                 {
-                    var resultado = await _userManager.ResetPasswordAsync(userFind, resetPassword.token, resetPassword.password);
 
-                    if (resultado.Succeeded)
+                    if(resetPassword.password == resetPassword.confirmPassword)
                     {
-                        return Redirect("/Auth/Login");
+                        var resultado = await _userManager.ResetPasswordAsync(userFind, resetPassword.token, resetPassword.confirmPassword);
+
+                        if (resultado.Succeeded)
+                        {
+
+                            await _signInManager.RefreshSignInAsync(userFind);
+
+                            ViewBag.Sucesso = "Alterado com sucesso";
+						    return View();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Erro na redefinição");
+                            return View(resetPassword);
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Erro na redefinição");
-                        return View(resetPassword);
-                    }
+						ModelState.AddModelError("", "Erro na redefinição");
+						return View(resetPassword);
+					}
                 }
                 else
                 {
-					ModelState.AddModelError("", "Erro interno");
+					ModelState.AddModelError("", "Erro na redefinição");
 					return View(resetPassword);
 				}
             }
             else
             {
-				ModelState.AddModelError("", "Erro externo");
-				return View();
+				ModelState.AddModelError("", "Erro na redefinição");
+				return View(resetPassword);
             }
 
 		}
