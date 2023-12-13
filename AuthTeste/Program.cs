@@ -1,4 +1,5 @@
 using AuthTeste.Contexto;
+using BoundarySMTP;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,8 @@ namespace AuthTeste
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                 options.SlidingExpiration = true;
             });
+
+            builder.Services.AddScoped<SmtpConfig>();
 
             var app = builder.Build();
 

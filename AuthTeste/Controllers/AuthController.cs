@@ -3,7 +3,6 @@ using BoundarySMTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace AuthTeste.Controllers
 {
@@ -12,12 +11,14 @@ namespace AuthTeste.Controllers
 
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SmtpConfig _smtpConfig;
         private string tokenReset { get; set; } = "";
 
-        public AuthController(UserManager<IdentityUser> _userManager, SignInManager<IdentityUser> _signInManager)
+        public AuthController(UserManager<IdentityUser> _userManager, SignInManager<IdentityUser> _signInManager, SmtpConfig _smtpConfig)
         {
             this._userManager = _userManager;
             this._signInManager = _signInManager;
+            this._smtpConfig = _smtpConfig;
         }
 
         [HttpGet]
@@ -85,10 +86,9 @@ namespace AuthTeste.Controllers
 					    string code = await _userManager.GeneratePasswordResetTokenAsync(findUser);
 					    var callbackUrl = Url.Action("ResetPassword", "Auth", new { userId = forgotUser.id }, protocol: HttpContext.Request.Scheme);
 
-                        SmtpConfig smtpConfig = new SmtpConfig();
-                        smtpConfig.corpo = $"Por favor, redefina sua senha clicando <a href='{callbackUrl}'>aqui</a>";
+                        _smtpConfig.corpo = $"Por favor, redefina sua senha clicando <a href='{callbackUrl}'>aqui</a>";
 
-					    smtpConfig.EnviarEmail(forgotUser.email);
+					    _smtpConfig.EnviarEmail(forgotUser.email);
 
                         TempData["TokenGerado"] = code;
 					    TempData["Email"] = forgotUser.email;
