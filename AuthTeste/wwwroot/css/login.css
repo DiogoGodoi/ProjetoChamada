@@ -91,9 +91,20 @@ span > h1, a, label {
     border-radius: 0 10px 10px 0;
 }
 
-.text-danger ul {
-    list-style-type: none; 
-    padding-left: 0; 
+.alert-danger ul, label, .text-danger {
+    list-style-type: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+
+
+.alert-danger {
+    border-radius: 10px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (max-width: 960px) {
