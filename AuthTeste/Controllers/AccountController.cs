@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthTeste.Controllers
 {
-   
     public class AccountController : Controller
     {
 

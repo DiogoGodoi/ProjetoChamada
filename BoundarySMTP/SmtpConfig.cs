@@ -7,7 +7,6 @@ namespace BoundarySMTP
 {
     public class SmtpConfig
     {
-
         private string remetente { get; set; } = "diogogoddoi@gmail.com";
         private string assunto { get; set; } = "Redefinicao de senha";
         public string corpo { get; set; } = "";
