@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <header>
+    <header data-aos="fade">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,17 +45,20 @@
                         </ul>
                     </div>
                     <div class="logout">
-                            <a asp-controller="Auth" asp-action="Login" class="nav-link" style="color: white">Logout</a>
+                        <form asp-controller="Auth" asp-action="Logout" method="post" role="form">
+                            <button type="submit" class="btn btn btn-outline-primary nav-link" style="color: white">Logout</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="content">
+
+    <div data-aos="fade" data-aos-delay="500" class="content">
             @RenderBody()
     </div>
 
-    <footer class="rodape">
+    <footer data-aos="fade" class="rodape">
         <div class="container-fluid">
             <h5>&copy; 2023 - AuthTeste</h5>
         </div>

@@ -70,6 +70,13 @@ footer > div {
     height: 100%;
 }
 
+header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 0;
+}
+
 .navbar {
     background-color: #51023B;
     height: 70px;
@@ -100,4 +107,14 @@ a{
     flex-direction: row;
     justify-content: end;
     align-items: center;
+}
+
+.btn-outline-primary{
+    border: white solid 1px
+}
+
+.btn-outline-primary:hover {
+    background-color: #7A0359;
+    color: white;
+    border: white solid 1px
 }

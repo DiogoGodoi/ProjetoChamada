@@ -165,5 +165,13 @@ namespace AuthTeste.Controllers
             }
 
 		}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Auth");
+        }
 	}
 }
