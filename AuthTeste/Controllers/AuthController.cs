@@ -40,7 +40,7 @@ namespace AuthTeste.Controllers
 
                     if(resultado.Succeeded) {
 
-                    return Redirect("/Home/Index");
+                    return Redirect("/Home/Menu");
 
                     }
                     else

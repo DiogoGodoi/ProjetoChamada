@@ -110,7 +110,8 @@ a{
 }
 
 .btn-outline-primary{
-    border: white solid 1px
+    border: white solid 1px;
+    color: white;
 }
 
 .btn-outline-primary:hover {
@@ -155,12 +156,24 @@ a{
 }
 
 .subSection1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     background-color: #7A0359;
     border: 5px solid #51023B;
     width: 33.33%;
     height: 100%;
+    margin: 5px;
+    padding: 20px
+}
+
+.subSection1 > span{
+    color: white;
+    text-align: center;
     margin: 5px
 }
+
 
 .subSection1:hover {
     transform: scale(1.05, 1.05);
@@ -179,6 +192,12 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center
+}
+
+.iconMenu {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 5px;
 }
 
 @media only screen and (max-width: 1200px) {

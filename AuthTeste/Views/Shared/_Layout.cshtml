@@ -19,35 +19,35 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse secaoNav" id="navbarNav">
-                    <img src="~/css/images/logo.png" class="img-fluid"/>
+                    <a asp-controller="Home" asp-action="Menu"><img src="~/css/images/logo.png" class="img-fluid" /></a>
                     <div class="navList">
                         <ul class="navbar-nav mx-3">
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Home</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Alunos</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Alunos</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Professores</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Professores</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Escolas</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Escolas</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Turmas</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Turmas</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Horarios</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Horarios</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Index" class="nav-link" style="color: white;">Chamada</a>
+                                <a asp-controller="Home" asp-action="Menu" class="nav-link" style="color: white;">Chamada</a>
                             </li>
                         </ul>
                     </div>
                     <div class="logout">
                         <form asp-controller="Auth" asp-action="Logout" method="post" role="form">
-                            <button type="submit" class="btn btn btn-outline-primary nav-link" style="color: white">Logout</button>
+                            <button type="submit" class="btn btn-outline-primary nav-link" style="color: white">Logout</button>
                         </form>
                     </div>
                 </div>

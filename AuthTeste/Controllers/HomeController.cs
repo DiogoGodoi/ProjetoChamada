@@ -15,7 +15,7 @@ namespace AuthTeste.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Menu()
         {
             return View();
         }
