@@ -21,6 +21,12 @@ namespace AuthTeste.Controllers
         }
 
         [HttpGet]
+        public IActionResult CreateAccount()
+        {
+            return View();  
+        }
+
+        [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
