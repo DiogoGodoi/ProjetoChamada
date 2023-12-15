@@ -45,20 +45,20 @@ namespace AuthTeste.Controllers
                     }
                     else
                     {
-						ModelState.AddModelError("", "Erro na autenticacao");
+						ModelState.AddModelError("", "Erro !!");
 						return View(user);
 					}
                 }
                 else
                 {
-					ModelState.AddModelError("", "Erro na autenticação");
+					ModelState.AddModelError("", "Erro !!");
 					return View();
                         
                 }
 
             }
 
-            ModelState.AddModelError("", "Erro na autenticação");
+            ModelState.AddModelError("", "Erro !!");
             return View(user);
         }
 
