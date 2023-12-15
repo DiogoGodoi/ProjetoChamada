@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Confirmação de E-mail";
+}
+
+<div class="text-center">
+    @if (ViewBag.ConfirmationStatus == true)
+    {
+        <h2>Seu e-mail foi confirmado com sucesso!</h2>
+        <p>Obrigado por confirmar o seu e-mail.</p>
+        <p>Redirecionando para a página inicial...</p>
+        <script>
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 3000); // Redireciona após 3 segundos
+        </script>
+    }
+    else
+    {
+        <h2>Erro ao confirmar o e-mail</h2>
+        <p>Houve um erro ao confirmar o seu e-mail. Por favor, entre em contato conosco para obter assistência.</p>
+        <p>Redirecionando para a página inicial...</p>
+        <script>
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 3000); // Redireciona após 3 segundos
+        </script>
+    }
+</div>

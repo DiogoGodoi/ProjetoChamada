@@ -20,13 +20,15 @@ namespace AuthTeste
             });
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
+            {  
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 1;
+
             }).AddEntityFrameworkStores<MeuContexto>().AddDefaultTokenProviders();
 
             builder.Services.ConfigureApplicationCookie(options =>
@@ -35,7 +37,7 @@ namespace AuthTeste
                 options.SlidingExpiration = true;
             });
 
-            builder.Services.AddScoped<SmtpConfig>();
+            builder.Services.AddTransient<ISmtpConfig, SmtpConfig>();
 
             var app = builder.Build();
 

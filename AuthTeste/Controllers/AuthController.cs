@@ -1,6 +1,4 @@
 ﻿using AuthTeste.Models;
-using BoundarySMTP;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +23,6 @@ namespace AuthTeste.Controllers
         }
 
         [HttpPost]
-		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(MdlUserAuth user)
         {
@@ -45,20 +42,20 @@ namespace AuthTeste.Controllers
                     }
                     else
                     {
-						ModelState.AddModelError("", "Erro !!");
+						ModelState.AddModelError("", "Erro 1 !!");
 						return View(user);
 					}
                 }
                 else
                 {
-					ModelState.AddModelError("", "Erro !!");
+					ModelState.AddModelError("", "Erro 2 !!");
 					return View();
                         
                 }
 
             }
 
-            ModelState.AddModelError("", "Erro !!");
+            ModelState.AddModelError("", "Erro 3 !!");
             return View(user);
         }
 

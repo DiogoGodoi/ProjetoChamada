@@ -2,16 +2,17 @@
 using System.Dynamic;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace BoundarySMTP
 {
-    public class SmtpConfig
+    public class SmtpConfig: ISmtpConfig
     {
-        private string remetente { get; set; } = "diogogoddoi@gmail.com";
-        private string assunto { get; set; } = "Redefinicao de senha";
-        public string corpo { get; set; } = "";
+        public string remetente { get; set; } = "diogogoddoi@gmail.com";
+		public string assunto { get; set; } = "";
+		public string corpo { get; set; } = "";
 
-		public void EnviarEmail(string destinatario)
+		public Task EnviarEmail(string destinatario, string assunto)
         {
             var server = "smtp.gmail.com";
             var porta = 587;
@@ -36,6 +37,8 @@ namespace BoundarySMTP
             {
                 Console.WriteLine(ex.ToString());   
             }
+
+            return Task.CompletedTask;
 
         }
 
