@@ -45,6 +45,8 @@ namespace AuthTeste.Controllers
 			    if (resultado.Succeeded)
                 {
 
+                    await _userManager.AddToRoleAsync(user, usuario.permissao);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));   
                     var callBack = Url.Action("ConfirmEmail", "Account", new {User = user.Id, code}, Request.Scheme, Request.Host.ToString());
