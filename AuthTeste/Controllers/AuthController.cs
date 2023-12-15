@@ -42,20 +42,20 @@ namespace AuthTeste.Controllers
                     }
                     else
                     {
-						ModelState.AddModelError("", "Erro 1 !!");
+						ModelState.AddModelError("", "Erro !!");
 						return View(user);
 					}
                 }
                 else
                 {
-					ModelState.AddModelError("", "Erro 2 !!");
+					ModelState.AddModelError("", "Erro !!");
 					return View();
                         
                 }
 
             }
 
-            ModelState.AddModelError("", "Erro 3 !!");
+            ModelState.AddModelError("", "Erro !!");
             return View(user);
         }
 
