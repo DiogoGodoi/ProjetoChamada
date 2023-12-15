@@ -31,7 +31,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%
 }
 
 botaoArea > span {
@@ -43,7 +42,12 @@ botaoArea > span {
 .botaoCriar {
     background-color: #51023B;
     color: white;
-    width: 35%;
+    border-radius: 10px;
+}
+
+.botaoVoltar {
+    background-color: green;
+    color: white;
     border-radius: 10px;
 }
 
