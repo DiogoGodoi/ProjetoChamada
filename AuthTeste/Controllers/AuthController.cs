@@ -27,7 +27,7 @@ namespace AuthTeste.Controllers
         [HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(MdlUser user)
+		public async Task<IActionResult> Login(MdlUserAuth user)
         {
 
             if(ModelState.IsValid)

@@ -174,7 +174,7 @@ a{
     border: 1px solid #7A0359;
 }
 
-.conteudo{
+.conteudo {
     margin-top: 110px;
     margin-bottom: 40px;
     width: 90%;
@@ -183,7 +183,8 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    border: 1px solid #51023B;
 }
 
 .iconMenu {

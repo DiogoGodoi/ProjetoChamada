@@ -1,0 +1,51 @@
+﻿@model MdlUserCreate;
+
+<link rel="stylesheet" href="~/css/style/CreateAccount.css" />
+
+<div class="accountContainer shadow col-lg-5 col-md-8 col-sm-8 d-flex flex-column justify-content-center align-items-center">
+	<form class="formInputs col-12" asp-controller="Auth" asp-action="Login" method="post" role="form">
+		<div data-aos="fade" class="jumbotron col-12">
+			<span><img src="~/css/images/userIcon.png" class="img-fluid iconMenu" /></span>
+			<h1>USUARIO</h1>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="email" class="control-label"></label>
+			<input asp-for="email" class="form-control" placeholder="Digite o nome de usuário" />
+			<span asp-validation-for="email" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="password" class="control-label"></label>
+			<input asp-for="password" class="form-control" placeholder="Digite a senha" />
+			<span asp-validation-for="password" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="permissao" class="control-label"></label>
+			<select asp-for="permissao" class="form-select">
+				<option selected value="Admin">Administrador</option>
+				<option value="User">Usuario</option>
+			</select>
+			<span asp-validation-for="password" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+		</div>
+
+		@if (!ViewData.ModelState.IsValid)
+		{
+
+			<div class="alert alert-danger mt-4 mb-2">
+				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+			</div>
+		}
+
+		<div class="botaoArea mt-2 mb-3">
+			<button type="submit" class="btn botaoCriar mt-3">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"></path>
+					<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+				</svg>
+				Cadastrar
+			</button>
+		</div>
+	</form>
+</div>
