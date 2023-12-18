@@ -223,9 +223,8 @@ namespace AuthTeste.Controllers
         }
 
         [HttpGet]
-        [Route("/Auth/ListAccount/{id}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetId(string id)
+        public IActionResult GetAccountId(string id)
         {
             var usuario = _userManager.Users.FirstOrDefault(i => i.Id == id);
 
