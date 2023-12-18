@@ -2,16 +2,25 @@
     ViewData["Title"] = "Confirmação de E-mail";
 }
 
-<div class="text-center">
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/style/ConfirmAccount.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="accountContainer d-flex justify-content-center align-items-center">
+    <div class="accountMessageContainer col-xl-8 col-lg-8 col-md-11 col-sm-11 col-xs-11  d-flex flex-column justify-content-center align-items-center shadow">
+
     @if (ViewBag.ConfirmationStatus == true)
     {
-        <h2>Seu e-mail foi confirmado com sucesso!</h2>
-        <p>Obrigado por confirmar o seu e-mail.</p>
-        <p>Redirecionando para a página inicial...</p>
+        <span><h2>Seu e-mail foi confirmado com sucesso!</h2></span>
+        <span><p>Obrigado por confirmar o seu e-mail</p></span>
+        <span><p>Redirecionando para a página inicial...</p></span>
         <script>
             setTimeout(function () {
                 window.location.href = '/';
-            }, 3000); // Redireciona após 3 segundos
+            }, 7000); // Redireciona após 4 segundos
         </script>
     }
     else
@@ -25,4 +34,5 @@
             }, 3000); // Redireciona após 3 segundos
         </script>
     }
-</div>
+    </div>
+ </div>

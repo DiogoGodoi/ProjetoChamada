@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
-using System.Text.Encodings.Web;
 
 namespace AuthTeste.Controllers
 {
@@ -47,9 +46,8 @@ namespace AuthTeste.Controllers
 
                     await _userManager.AddToRoleAsync(user, usuario.permissao);
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));   
-                    var callBack = Url.Action("ConfirmEmail", "Account", new {User = user.Id, code}, Request.Scheme, Request.Host.ToString());
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);   
+                    var callBack = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, code = code}, protocol: Request.Scheme );
 
                     var assunto = _smtpConfig.assunto = "Confirmação de e-mail";
                     _smtpConfig.corpo = $"Por favor, confirme seu e-mail clicando <a href={callBack}>aqui</a>";
@@ -80,26 +78,29 @@ namespace AuthTeste.Controllers
 		public async Task<IActionResult> ConfirmEmail(string userId, string code)
 		{
 
-			var user = await _userManager.FindByIdAsync(userId);
+			var usuario = await _userManager.FindByIdAsync(userId);
 
-			if (user == null)
-			{
-				// Trate o erro, por exemplo, redirecionando para uma página de erro
-				return RedirectToAction("Login", "Auth");
-			}
+            if (usuario == null)
+            {
+                //Trate o erro, por exemplo, redirecionando para uma página de erro
 
-			var result = await _userManager.ConfirmEmailAsync(user, code);
+                return RedirectToAction("Login", "Auth");
+            }
+            else
+            {
+                var result = await _userManager.ConfirmEmailAsync(usuario, code);
 
-			if (result.Succeeded)
-			{
-				// Redirecione para uma página indicando que o e-mail foi confirmado com sucesso
-				return RedirectToAction("ConfirmEmail", "Account");
-			}
-			else
-			{
-				// Trate o erro, por exemplo, redirecionando para uma página de erro
-				return RedirectToAction("Login", "Auth");
-			}
+                if (result.Succeeded == true)
+                {
+                    ViewBag.ConfirmationStatus = true;
+                    return View();
+                }
+                else
+                {
+                    ViewBag.ConfirmationStatus = false;
+                    return RedirectToAction("Login", "Auth");
+                }
+            }
 		}
 
 		[HttpGet]

@@ -1,0 +1,22 @@
+﻿.accountContainer {
+    height: 100vh;
+    background-color: lightgray;
+}
+
+.accountMessageContainer {
+    border: 3px solid #51023B;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: white;
+}
+
+span > h2 {
+    color: #51023B;
+    font-weight: bold;
+}
+
+span > p {
+    color: #51023B;
+    font-weight: 500;
+    font-size: 20px
+}
