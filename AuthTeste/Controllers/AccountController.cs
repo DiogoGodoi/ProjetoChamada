@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 namespace AuthTeste.Controllers
@@ -215,10 +216,57 @@ namespace AuthTeste.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ListAccount()
         {
-
             return View(_userManager.Users.ToList());
+        }
+
+        [HttpGet]
+        [Route("/Auth/ListAccount/{id}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetId(string id)
+        {
+            var usuario = _userManager.Users.FirstOrDefault(i => i.Id == id);
+
+            if (usuario == null)
+            {
+                ModelState.AddModelError("", "Usuário inexistente");
+                return View();
+            }
+            else
+            {
+                return View(usuario);
+            }
+        }
+
+        [HttpDelete]
+        [Route("/Auth/ListAccount/{id}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteAccount(string id)
+        {
+            var usuario = _userManager.Users.FirstOrDefault(i => i.Id == id);
+
+            if(usuario == null)
+            {
+                ModelState.AddModelError("", "Usuário inexistente");
+                return View();
+            }
+            else
+            {
+                var result = _userManager.DeleteAsync(usuario).Result;
+
+                if(result.Succeeded)
+                {
+                    return Redirect("/Account/ListAccount");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Erro interno");
+                    return View();
+                }
+            }
+
         }
     }
 
