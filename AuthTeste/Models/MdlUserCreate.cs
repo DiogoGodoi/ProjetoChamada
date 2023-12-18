@@ -17,9 +17,15 @@ namespace AuthTeste.Models
 		[Display(Name = "Senha")]
 		public string password { get; set; }
 
-		[Required(ErrorMessage = "Campo obrigatorio")]
+        [Required(ErrorMessage = "Campo obrigatorio")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar senha")]
+        public string confirmPassword { get; set; } = "";
+
+        [Required(ErrorMessage = "Campo obrigatorio")]
 		[DataType(DataType.Text)]
 		[Display(Name = "Nível de permissão")]
 		public string permissao { get; set; }
-	}
+
+    }
 }

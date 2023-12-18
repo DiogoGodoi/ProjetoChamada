@@ -36,35 +36,43 @@ namespace AuthTeste.Controllers
             if(ModelState.IsValid)
             {
 
-                var user = new IdentityUser { UserName = usuario.email, Email = usuario.email};
-
-                var resultado = await _userManager.CreateAsync(user, usuario.password);
-
-
-			    if (resultado.Succeeded)
+                if(usuario.password == usuario.confirmPassword)
                 {
 
-                    await _userManager.AddToRoleAsync(user, usuario.permissao);
+                    var user = new IdentityUser { UserName = usuario.email, Email = usuario.email };
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);   
-                    var callBack = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, code = code}, protocol: Request.Scheme );
+                    var resultado = await _userManager.CreateAsync(user, usuario.password);
 
-                    var assunto = _smtpConfig.assunto = "Confirmação de e-mail";
-                    _smtpConfig.corpo = $"Por favor, confirme seu e-mail clicando <a href={callBack}>aqui</a>";
 
-                    await _smtpConfig.EnviarEmail(usuario.email, assunto);
+                    if (resultado.Succeeded)
+                    {
 
-					ViewBag.Mensagem = "Link enviado com sucesso";
+                        await _userManager.AddToRoleAsync(user, usuario.permissao);
 
-					return View();
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callBack = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
 
+                        var assunto = _smtpConfig.assunto = "Confirmação de e-mail";
+                        _smtpConfig.corpo = $"Por favor, confirme seu e-mail clicando <a href={callBack}>aqui</a>";
+
+                        await _smtpConfig.EnviarEmail(usuario.email, assunto);
+
+                        ViewBag.Mensagem = "Link enviado com sucesso";
+
+                        return View();
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Erro 1");
+                        return View(usuario);
+                    }
                 }
                 else
                 {
-					ModelState.AddModelError("", "Erro 1");
-					return View(usuario);
+                    ModelState.AddModelError("", "As senhas não coicidem");
+                    return View(usuario);
                 }
-
             }
             else
             {
