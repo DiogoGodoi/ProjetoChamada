@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+
+<link rel="stylesheet" href="~/css/style/ListAccount.css" />
+ 
+<div class="contentTable col-10 d-flex flex-column p-5 shadow">
+    <div data-aos="fade" class="jumbotron col-12 mb-3">
+        <span><img src="~/css/images/userIcon.png" class="img-fluid iconMenu" /></span>
+        <h1>USUARIOS</h1>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"><h3>Usuario</h3></th>
+                    <th scope="col"><h3>E-mail</h3></th>
+                    <th scope="col" class="text-center"><h3>Ação</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                        <td><h4>@item.UserName</h4></td>
+                        <td><h4>@item.Email</h4></td>
+                        <td>
+                            <button type="button" class="btn btn-danger col-12">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"></path>
+                                </svg>
+                                Deletar
+                            </button>
+                        </td>
+                        </tr> 
+                    }
+            </tbody>
+        </table>
+        <div class="jumbotron">
+            <button class="btn btn-primary">Novo</button>
+        </div>
+    </div>
+</div>

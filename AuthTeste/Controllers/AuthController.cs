@@ -29,7 +29,7 @@ namespace AuthTeste.Controllers
 
             if(ModelState.IsValid)
             {
-                var usuario = await _userManager.FindByNameAsync(user.email);
+                var usuario = await _userManager.FindByEmailAsync(user.email);
 
                 if(usuario != null)
                 {

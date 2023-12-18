@@ -213,5 +213,14 @@ namespace AuthTeste.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult ListAccount()
+        {
+
+            return View(_userManager.Users.ToList());
+        }
     }
+
+      
 }
