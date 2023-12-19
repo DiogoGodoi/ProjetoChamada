@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+﻿@model IEnumerable<AuthTeste.Models.MdlUsuariosRoles>
 
 <link rel="stylesheet" href="~/css/style/ListAccount.css" />
  
@@ -11,9 +11,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center"><h3>Usuario</h3></th>
+                    <th scope="col"><h3>Usuario</h3></th>
                     <th scope="col" class="text-center"><h3>E-mail</h3></th>
-                    <th scope="col" class="text-center"><h3>Confirmação de conta</h3></th>
+                    <th scope="col" class="text-center"><h3>Confirmada</h3></th>
+                    <th scope="col" class="text-center"><h3>Nível</h3></th>
                     <th scope="col" class="text-center"><h3>Ação</h3></th>
                 </tr>
             </thead>
@@ -21,25 +22,19 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                        <td><h4 class ="text-center">@item.UserName</h4></td>
+                        <td><h4>@item.UserName</h4></td>
                         <td><h4 class="text-center">@item.Email</h4></td>
                         @if (item.EmailConfirmed == true)
                         {
-                            <td><h4 class="text-center">Conta confirmada</h4></td>
+                            <td><h4 class="text-center">Sim</h4></td>
                         }
                         else
                         {
-                            <td><h4 class="text-center">Conta não confirmada</h4></td>
+                            <td><h4 class="text-center">Não</h4></td>
                         }
-
-                        <td class="d-flex justify-content-evenly">
-                            <button type="submit" class="btn btn-danger col-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"></path>
-                                </svg>
-                                Deletar
-                            </button>
-                            <a asp-controller="Account" asp-action="GetAccountId" asp-route-id="@item.Id" class="btn btn-info col-5 text-white">
+                        <td><h4 class="text-center">@item.Roles?.First()</h4></td>
+                        <td class="d-flex justify-content-center">
+                            <a asp-controller="Account" asp-action="GetAccountId" asp-route-id="@item.Id" class="btn btn-info col-8 text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
                                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
@@ -48,27 +43,6 @@
                             </a>
                         </td>
                         </tr>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mensagem</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Confirma a exclusão ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form class="d-flex flex-row justify-content-evenly" asp-area="" asp-controller="Account" asp-action="DeleteAccount" asp-route-id="@item.Id" method="post" role="form">
-                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Voltar</button>
-                                            <button type="submit" class="btn btn-outline-primary">Confirmar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     }
             </tbody>
         </table>

@@ -219,7 +219,28 @@ namespace AuthTeste.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ListAccount()
         {
-            return View(_userManager.Users.ToList());
+
+            var usuarios = _userManager.Users.ToList();
+            List<MdlUsuariosRoles> usuariosRolesList = new List<MdlUsuariosRoles>();
+
+            foreach (var idx in usuarios)
+            {
+                var roles = _userManager.GetRolesAsync(idx).Result;
+
+                MdlUsuariosRoles usuariosRoles = new MdlUsuariosRoles
+                {
+                    Id = idx.Id,
+                    UserName = idx.UserName,
+                    Email = idx.Email,
+                    EmailConfirmed = idx.EmailConfirmed,
+                    Roles = roles
+                };
+
+                usuariosRolesList.Add(usuariosRoles);   
+            }
+
+
+            return View(usuariosRolesList);
         }
 
         [HttpGet]
@@ -267,6 +288,5 @@ namespace AuthTeste.Controllers
 
         }
     }
-
-      
+  
 }
