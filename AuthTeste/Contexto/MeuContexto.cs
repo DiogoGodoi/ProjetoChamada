@@ -10,7 +10,5 @@ namespace AuthTeste.Contexto
 
         public MeuContexto(DbContextOptions<MeuContexto> options): base(options) { }
 
-        public DbSet<Produto> produto { get; set; } 
-
     }
 }

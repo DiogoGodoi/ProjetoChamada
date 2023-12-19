@@ -108,23 +108,23 @@ span > h1, a, label {
     align-items: center;
 }
 
-@media only screen and (max-width: 960px) {
-    .loginArea{
+@media only screen and (max-width: 1200px) {
+    .loginArea {
         flex-direction: column;
         width: 100%;
         height: auto;
     }
 
-    .formArea, .formInputs{
+    .formArea, .formInputs {
         height: 70%;
         width: 100%
     }
 
-    .LoginImg{
+    .LoginImg {
         display: none;
     }
 
-    .botaoLogin{
+    .botaoLogin {
         width: 50%;
     }
 }

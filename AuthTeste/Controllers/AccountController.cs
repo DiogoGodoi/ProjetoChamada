@@ -40,7 +40,7 @@ namespace AuthTeste.Controllers
                 if(usuario.password == usuario.confirmPassword)
                 {
 
-                    var user = new IdentityUser { UserName = usuario.email, Email = usuario.email };
+                    var user = new IdentityUser { UserName = usuario.userName, Email = usuario.email };
 
                     var resultado = await _userManager.CreateAsync(user, usuario.password);
 
@@ -239,8 +239,7 @@ namespace AuthTeste.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("/Auth/ListAccount/{id}")]
+        [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteAccount(string id)
         {
