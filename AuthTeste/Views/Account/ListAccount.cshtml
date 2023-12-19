@@ -11,8 +11,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col"><h3>Usuario</h3></th>
-                    <th scope="col"><h3>E-mail</h3></th>
+                    <th scope="col" class="text-center"><h3>Usuario</h3></th>
+                    <th scope="col" class="text-center"><h3>E-mail</h3></th>
+                    <th scope="col" class="text-center"><h3>Confirmação de conta</h3></th>
                     <th scope="col" class="text-center"><h3>Ação</h3></th>
                 </tr>
             </thead>
@@ -20,9 +21,18 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                        <td><h4>@item.UserName</h4></td>
-                        <td><h4>@item.Email</h4></td>
-                        <td>
+                        <td><h4 class ="text-center">@item.UserName</h4></td>
+                        <td><h4 class="text-center">@item.Email</h4></td>
+                        @if (item.EmailConfirmed == true)
+                        {
+                            <td><h4 class="text-center">Conta confirmada</h4></td>
+                        }
+                        else
+                        {
+                            <td><h4 class="text-center">Conta não confirmada</h4></td>
+                        }
+
+                        <td class="d-flex justify-content-evenly">
                             <button type="submit" class="btn btn-danger col-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"></path>
