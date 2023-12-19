@@ -54,7 +54,7 @@ namespace AuthTeste.Controllers
                         var callBack = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
 
                         var assunto = _smtpConfig.assunto = "Confirmação de e-mail";
-                        _smtpConfig.corpo = $"Por favor, confirme seu e-mail clicando <a href={callBack}>aqui</a>";
+                        _smtpConfig.corpo = $"Por favor, confirme seu e-mail clicando <a href=\"{callBack}\">aqui</a>";
 
                         await _smtpConfig.EnviarEmail(usuario.email, assunto);
 

@@ -27,6 +27,12 @@ html, body {
 }
 
 
+.iconMenu {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 5px;
+}
+
 .content{
     height: auto;
     width: 100%;
@@ -34,12 +40,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media only screen and (max-width: 1200px) {
-    html, body {
-        height: 100%;
-    }
 }
 
 .container > h5 {
@@ -120,93 +120,17 @@ a{
     border: white solid 1px
 }
 
-.jumbotron {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #51023B;
-    border: 5px solid #7A0359;
-    color: white;
-    height: 150px;
-    margin: 5px
-}
-
-.MenuList{
-    height: 100%;
-    width: 100%;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-}
-
-.section{
-    height: 100%;
-    padding: 2px
-}
-
-.section1{
-    margin-bottom: 5px;
-}
-
-.subSection1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #7A0359;
-    border: 1px solid #51023B;
-    height: 100%;
-    padding: 20px
-}
-
-.subSection1 > span{
-    color: white;
-    text-align: center;
-    margin: 5px
-}
-
-
-.subSection1:hover {
-    transition: 0.2s;
-    background-color: #51023B;
-    border: 1px solid #7A0359;
-}
-
-.conteudo {
-    margin-top: 110px;
-    margin-bottom: 40px;
-    width: 90%;
-    height: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #51023B;
-}
-
-.iconMenu {
-    height: 30px;
-    width: 30px;
-    margin-bottom: 5px;
-}
-
-
 .iconButton {
     height: 15px;
     width: 15px;
 }
 
 @media only screen and (max-width: 1200px) {
-    .conteudo{
-        width: auto;
-        margin-top: 90px;
-        margin-bottom: 20px;
-        padding: 10px;
-        height: 65%;
+   
+    html, body {
+        height: 100%;
     }
+
     .content{
         height: auto;
     }
