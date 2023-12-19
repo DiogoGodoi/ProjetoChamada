@@ -31,3 +31,32 @@ h4 {
     background-color: darkblue;
     color: white
 }
+
+.modal-content {
+    background-color: #51023B;
+    color: white;
+}
+
+.close-button{
+    color: white;
+}
+
+.modal-header, .modal-footer, .modal-body {
+    border: 3px solid #7A0359;
+}
+
+.modal-header > h1 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.modal-body {
+    background-color: white;
+    color: #51023B;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+}
