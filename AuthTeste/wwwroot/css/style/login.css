@@ -11,34 +11,28 @@
    height: 100%;
 }
 
+.formArea {
+    height: 100%;
+}
+
 .loginArea {
     height: 75%;
     border-radius: 10px;
     border: 1px solid #51023B;
 }
 
-.formArea {
-    height: 100%;
-}
-
 .formInputs {
     height: 80%;
-}
-
-.botaoArea {
-    width: 100%
 }
 
 botaoArea > span {
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
 .botaoLogin {
     background-color: #51023B;
     color: white;
-    width: 35%;
     border-radius: 10px;
 }
 
@@ -92,9 +86,5 @@ span > h1, a, label {
 
     .LoginImg {
         display: none;
-    }
-
-    .botaoLogin {
-        width: 50%;
     }
 }
