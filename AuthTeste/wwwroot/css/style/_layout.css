@@ -42,6 +42,10 @@ html, body {
     align-items: center;
 }
 
+.container{
+    height: 100%;
+}
+
 .container > h5 {
     color: white;
 }

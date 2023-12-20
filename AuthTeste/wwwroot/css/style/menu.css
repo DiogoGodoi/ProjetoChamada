@@ -1,13 +1,8 @@
 ﻿.conteudo {
     margin-top: 110px;
     margin-bottom: 40px;
-    width: 90%;
-    height: auto;
+    height: 100%;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border: 1px solid #51023B;
 }
 
@@ -15,16 +10,9 @@
     height: 100%;
     width: 100%;
     margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .jumbotron {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: #51023B;
     border: 5px solid #7A0359;
     color: white;
