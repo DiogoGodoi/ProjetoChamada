@@ -13,7 +13,7 @@
 
         <!--Header-->
 
-        <header data-aos="fade">
+        <header data-aos="fade" class="col-12">
             <nav class="navbar navbar-dark navbar-expand-lg">
                 <div class="container-fluid p-0">
                     <button class="navbar-toggler mb-1" style="margin-left: 10px" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,10 +48,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-lx-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 d-flex flex-row 
-                                    justify-content-lx-end align-items-lx-center
+                        <div class="col-lg-6 col-12 d-flex flex-row 
                                     justify-content-lg-end align-items-lg-center
-                                    justify-content-md-start align-items-md-center
                                     justify-content-sm-start align-items-sm-center
                                     justify-content-xs-start align-items-xs-center p-2">
                             <form asp-controller="Auth" asp-action="Logout" method="post" role="form">
@@ -77,8 +75,8 @@
 
         <!--Footer-->
 
-        <footer data-aos="fade" class="rodape col-12">
-            <div class="container-fluid">
+    <footer data-aos="fade" class="rodape col-12 d-flex flex-column justify-content-end align-items-end">
+        <div class="container-fluid d-flex flex-column justify-content-center">
                 <h5>&copy; 2023 - AuthTeste</h5>
             </div>
         </footer>

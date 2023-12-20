@@ -16,7 +16,6 @@ html, body {
 }
 
 header {
-    width: 100%;
     position: fixed;
     top: 0;
     z-index: 1;
@@ -56,17 +55,10 @@ a{
 
 .rodape {
     height: 180px;
-    display: flex;
     background-color: #7A0359;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end
 }
 
 footer > div {
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
     color:white;
     background-color: #51023B;
 }
@@ -101,7 +93,6 @@ footer > div {
     src: url('../fonts/roboto/Roboto-Regular.ttf');
 }
 
-@media only screen and (max-width: 1200px) {
 @media only screen and (max-width: 1200px) {
     img{
         display: none;
