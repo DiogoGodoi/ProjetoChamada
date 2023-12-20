@@ -12,24 +12,17 @@
 <body>
 
     <header data-aos="fade">
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-dark navbar-expand-lg">
             <div class="container-fluid p-0">
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler mb-1" style="margin-left: 10px" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse secaoNav col-12 d-flex
-                            flex-lx-row justify-content-lx-start align-items-lx-center 
-                            flex-lg-row justify-content-lg-start align-items-lg-center
-                            flex-column justify-content-start align-items-start" id="navbarNav">
+                <div class="corDeFundoNav collapse navbar-collapse"  id="navbarNav">
 
-                    <div class="col-lx-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 d-flex
-                                justify-content-lx-start align-items-lx-center
-                                justify-content-lg-start align-items-lg-center
-                                justify-content-md-start align-items-md-center
-                                justify-content-sm-start align-items-sm-center
-                                justify-content-xs-start align-items-xs-center">
+                    <div class="col-lg-6 col-12 d-flex
+                                justify-content-start align-items-center">
 
                         <a asp-controller="Home" asp-action="Menu">
                             <img src="~/css/images/logo.png" class="img-fluid" />
@@ -97,8 +90,8 @@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/popperjs/core/dist/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/popperjs/core/dist/umd/popper.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
