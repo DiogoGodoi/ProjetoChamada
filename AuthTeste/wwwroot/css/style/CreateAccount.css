@@ -6,11 +6,11 @@
     border: 1px solid #51023B;
 }
 
+.formInputs {
+    height: 100%;
+}
+
 .jumbotron {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: #51023B;
     border: 5px solid #7A0359;
     color: white;
@@ -18,26 +18,6 @@
     margin: 5px
 }
 
-.formInputs{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100%;
-}
-
-.botaoArea {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-botaoArea > span {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
 
 .botaoCriar {
     background-color: #51023B;
