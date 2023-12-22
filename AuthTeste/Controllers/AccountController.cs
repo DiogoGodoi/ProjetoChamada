@@ -126,7 +126,7 @@ namespace AuthTeste.Controllers
 
             if (ModelState.IsValid)
             {
-                var findUser = await _userManager.FindByNameAsync(forgotUser.email);
+                var findUser = await _userManager.FindByEmailAsync(forgotUser.email);
 
                 if (findUser != null)
                 {
@@ -147,13 +147,13 @@ namespace AuthTeste.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Erro na recuperação da senha");
+                    ModelState.AddModelError("", "Erro 1");
                     return View(forgotUser);
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Erro na recuperação da senha");
+                ModelState.AddModelError("", "Erro 2");
                 return View(forgotUser);
             }
         }
