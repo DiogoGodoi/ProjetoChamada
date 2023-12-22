@@ -12,8 +12,8 @@ namespace AuthTeste.Contexto
 
         public DbSet<MdlEscola> Escola { get; set; }    
         public DbSet<MdlProfessor> Professor { get; set;}
-        public DbSet<MdlEscolaProfessor> Escola_Professor { get; set; }
         public DbSet<MdlTurma> Turma { get; set; }  
+        public DbSet<MdlEscolaProfessor> Escola_Professor { get; set; }
         public DbSet<MdlProfessorTurma> Professor_Turma { get; set; }   
 
     }

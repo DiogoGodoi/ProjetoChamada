@@ -43,7 +43,7 @@ namespace AuthTeste
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
 			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
-			builder.Services.AddTransient<ITurmaRepository, ITurmaRepository>();
+			builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
 			builder.Services.AddTransient<IEscolaProfessorRepository, EscolaProfessorRepository>();
 			builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
 

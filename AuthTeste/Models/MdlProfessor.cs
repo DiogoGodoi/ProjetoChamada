@@ -9,16 +9,19 @@ namespace AuthTeste.Models
 		[Key]
 		public int Id { get; set; }
 
-		[Required]
-		[MaxLength(20)]
-		public string Nome { get; set; }
+		[Required(ErrorMessage = "Campo obrigatório")]
+		[MaxLength(20, ErrorMessage = "Nome muito longo")]
+		[DataType(DataType.Text)]
+		public string Nome { get; set; } = "";
 
-		[Required]
-		[MaxLength(20)]
-		public string Sobrenome { get; set; }
+		[Required(ErrorMessage = "Campo obrigatório")]
+		[MaxLength(20, ErrorMessage = "Sobrenome muito longo")]
+		[DataType(DataType.Text)]
+		public string Sobrenome { get; set; } = "";
 
+		[Required(ErrorMessage = "Campo obrigatório")]
 		public int Cref { get; set; }
 
-		public virtual ICollection<MdlTurma> Turmas { get; set; }
+		public virtual ICollection<MdlTurma>? Turmas { get; set; }
 	}
 }
