@@ -52,7 +52,6 @@ namespace AuthTeste.Controllers
 					return View();
                         
                 }
-
             }
 
             ModelState.AddModelError("", "Erro !!");

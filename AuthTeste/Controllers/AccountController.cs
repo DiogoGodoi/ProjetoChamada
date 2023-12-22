@@ -238,8 +238,6 @@ namespace AuthTeste.Controllers
 
                 usuariosRolesList.Add(usuariosRoles);   
             }
-
-
             return View(usuariosRolesList);
         }
 
@@ -288,5 +286,4 @@ namespace AuthTeste.Controllers
 
         }
     }
-  
 }
