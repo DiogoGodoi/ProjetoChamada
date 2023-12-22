@@ -1,4 +1,4 @@
-﻿using AuthTeste.Models;
+﻿using AuthTeste.Models.ModelsIdentity;
 
 namespace AuthTeste.ViewModels
 {
