@@ -1,4 +1,6 @@
 using AuthTeste.Contexto;
+using AuthTeste.Repository;
+using AuthTeste.Repository.Interfaces;
 using AuthTeste.Services.EmailService;
 using AuthTeste.Services.EmailService.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -39,8 +41,13 @@ namespace AuthTeste
             });
 
             builder.Services.AddTransient<IEmailService, EmailService>();
+            builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
+			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
+			builder.Services.AddTransient<ITurmaRepository, ITurmaRepository>();
+			builder.Services.AddTransient<IEscolaProfessorRepository, EscolaProfessorRepository>();
+			builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

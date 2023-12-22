@@ -2,6 +2,7 @@
 
 namespace AuthTeste.Models
 {
+	[Table("Escola_Professor")]
 	public class MdlEscolaProfessor
 	{
 		[ForeignKey("Professor")]
