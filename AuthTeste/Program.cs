@@ -1,5 +1,6 @@
 using AuthTeste.Contexto;
 using AuthTeste.Services.EmailService;
+using AuthTeste.Services.EmailService.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,7 +38,7 @@ namespace AuthTeste
                 options.SlidingExpiration = true;
             });
 
-            builder.Services.AddTransient<ISmtpConfig, SmtpConfig>();
+            builder.Services.AddTransient<IEmailService, EmailService>();
 
             var app = builder.Build();
 
@@ -46,6 +47,7 @@ namespace AuthTeste
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();

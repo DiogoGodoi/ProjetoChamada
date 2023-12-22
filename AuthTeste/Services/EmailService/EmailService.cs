@@ -1,9 +1,10 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using AuthTeste.Services.EmailService.Interfaces;
 
 namespace AuthTeste.Services.EmailService
 {
-    public class SmtpConfig : ISmtpConfig
+    public class EmailService : IEmailService
     {
         public string remetente { get; set; } = "diogogoddoi@gmail.com";
         public string assunto { get; set; } = "";

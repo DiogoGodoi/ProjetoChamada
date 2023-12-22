@@ -1,5 +1,5 @@
 ﻿using AuthTeste.Models;
-using AuthTeste.Services.EmailService;
+using AuthTeste.Services.EmailService.Interfaces;
 using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,10 +12,10 @@ namespace AuthTeste.Controllers
 
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ISmtpConfig _smtpConfig;
+        private readonly IEmailService _smtpConfig;
 
         public AccountController(UserManager<IdentityUser> _userManager, 
-            SignInManager<IdentityUser> _signInManager, ISmtpConfig _smtpConfig)
+            SignInManager<IdentityUser> _signInManager, IEmailService _smtpConfig)
         {
             this._userManager = _userManager;
             this._signInManager = _signInManager;

@@ -1,6 +1,6 @@
-﻿namespace AuthTeste.Services.EmailService
+﻿namespace AuthTeste.Services.EmailService.Interfaces
 {
-    public interface ISmtpConfig
+    public interface IEmailService
     {
         string remetente { get; set; }
         string assunto { get; set; }
