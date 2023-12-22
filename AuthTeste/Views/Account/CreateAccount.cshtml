@@ -1,4 +1,4 @@
-﻿@model MdlUserCreate;
+﻿@model ViewModelUsuarios;
 
 <link rel="stylesheet" href="~/css/style/CreateAccount.css" />
 
@@ -10,36 +10,36 @@
 			<h1>USUARIO</h1>
 		</div>
 		<div class="form-group col-12">
-			<label asp-for="userName" class="control-label"></label>
-			<input asp-for="userName" class="form-control" placeholder="Digite o nome de usuário" />
-			<span asp-validation-for="userName" class="text-danger"
+			<label asp-for="mdlUserCreate.userName" class="control-label"></label>
+			<input asp-for="mdlUserCreate.userName" class="form-control" placeholder="Digite o nome de usuário" />
+			<span asp-validation-for="mdlUserCreate.userName" class="text-danger"
 				  data-aos-duration="500"></span>
 		</div>
 		<div class="form-group col-12">
-			<label asp-for="email" class="control-label"></label>
-			<input asp-for="email" class="form-control" placeholder="Digite seu e-mail" />
-			<span asp-validation-for="email" class="text-danger"
+			<label asp-for="mdlUserCreate.email" class="control-label"></label>
+			<input asp-for="mdlUserCreate.email" class="form-control" placeholder="Digite seu e-mail" />
+			<span asp-validation-for="mdlUserCreate.email" class="text-danger"
 				  data-aos-duration="500"></span>
 		</div>
 		<div class="form-group col-12">
-			<label asp-for="password" class="control-label"></label>
-			<input asp-for="password" class="form-control" placeholder="Digite a senha" />
-			<span asp-validation-for="password" class="text-danger"
+			<label asp-for="mdlUserCreate.password" class="control-label"></label>
+			<input asp-for="mdlUserCreate.password" class="form-control" placeholder="Digite a senha" />
+			<span asp-validation-for="mdlUserCreate.password" class="text-danger"
 				  data-aos="fade" data-aos-duration="500"></span>
 		</div>
 		<div class="form-group col-12">
-			<label asp-for="confirmPassword" class="control-label"></label>
-			<input asp-for="confirmPassword" class="form-control" placeholder="Confirme a senha" />
-			<span asp-validation-for="confirmPassword" class="text-danger"
+			<label asp-for="mdlUserCreate.confirmPassword" class="control-label"></label>
+			<input asp-for="mdlUserCreate.confirmPassword" class="form-control" placeholder="Confirme a senha" />
+			<span asp-validation-for="mdlUserCreate.confirmPassword" class="text-danger"
 				  data-aos="fade" data-aos-duration="500"></span>
 		</div>
 		<div class="form-group col-12">
-			<label asp-for="permissao" class="control-label"></label>
-			<select asp-for="permissao" class="form-select">
+			<label asp-for="mdlUserCreate.permissao" class="control-label"></label>
+			<select asp-for="mdlUserCreate.permissao" class="form-select">
 				<option selected value="Admin">Administrador</option>
 				<option value="Usuario">Usuario</option>
 			</select>
-			<span asp-validation-for="password" class="text-danger"
+			<span asp-validation-for="mdlUserCreate.password" class="text-danger"
 				  data-aos="fade" data-aos-duration="500"></span>
 
 			@if (ViewBag.Mensagem != null)

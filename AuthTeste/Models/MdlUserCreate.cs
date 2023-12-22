@@ -10,27 +10,27 @@ namespace AuthTeste.Models
 		[Required(ErrorMessage = "Campo obrigatorio")]
 		[DataType(DataType.Text)]
 		[Display(Name = "Nome de usuário")]
-		public string? userName { get; set; }
+		public string userName { get; set; } = "";
 
 		[Required(ErrorMessage = "Campo obrigatorio")]
 		[DataType(DataType.Text)]
 		[Display(Name = "E-mail")]
-		public string? email { get; set; }
+		public string email { get; set; } = "";
 
 		[Required(ErrorMessage = "Campo obrigatorio")]
 		[DataType(DataType.Password)]
 		[Display(Name = "Senha")]
-		public string? password { get; set; }
+		public string password { get; set; } = "";
 
         [Required(ErrorMessage = "Campo obrigatorio")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar senha")]
         public string confirmPassword { get; set; } = "";
 
-        [Required(ErrorMessage = "Campo obrigatorio")]
+		[Required(ErrorMessage = "Campo obrigatorio")]
 		[DataType(DataType.Text)]
 		[Display(Name = "Nível de permissão")]
-		public string? permissao { get; set; }
+		public string permissao { get; set; } = "";
 
     }
 }

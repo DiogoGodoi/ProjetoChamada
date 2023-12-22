@@ -1,4 +1,4 @@
-﻿using AuthTeste.Models;
+﻿using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,16 +24,16 @@ namespace AuthTeste.Controllers
 
         [HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(MdlUserAuth user)
+		public async Task<IActionResult> Login(ViewModelUsuarios user)
         {
 
             if(ModelState.IsValid)
             {
-                var usuario = await _userManager.FindByEmailAsync(user.email);
+                var usuario = await _userManager.FindByEmailAsync(user.mdlUserAuth.email);
 
                 if(usuario != null)
                 {
-                    var resultado = await _signInManager.PasswordSignInAsync(usuario, user.password, false, false);
+                    var resultado = await _signInManager.PasswordSignInAsync(usuario, user.mdlUserAuth.password, false, false);
 
                     if(resultado.Succeeded) {
 
