@@ -1,5 +1,5 @@
 using AuthTeste.Contexto;
-using BoundarySMTP;
+using AuthTeste.Services.EmailService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

@@ -65,6 +65,6 @@ namespace AuthTeste.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Auth");
-        }
+        }  
 	}
 }

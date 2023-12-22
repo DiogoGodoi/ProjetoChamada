@@ -1,6 +1,6 @@
 ﻿using AuthTeste.Models;
+using AuthTeste.Services.EmailService;
 using AuthTeste.ViewModels;
-using BoundarySMTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
