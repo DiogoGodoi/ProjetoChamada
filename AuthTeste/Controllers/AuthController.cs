@@ -1,4 +1,5 @@
-﻿using AuthTeste.ViewModels;
+﻿using AuthTeste.Components;
+using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +37,8 @@ namespace AuthTeste.Controllers
                     var resultado = await _signInManager.PasswordSignInAsync(usuario, user.mdlUserAuth.password, false, false);
 
                     if(resultado.Succeeded) {
+
+                    HttpContext.Session.SetString("UsuarioEmail", usuario.UserName);
 
                     return Redirect("/Home/Menu");
 

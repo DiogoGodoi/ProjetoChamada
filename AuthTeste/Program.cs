@@ -1,4 +1,6 @@
+using AuthTeste.Components;
 using AuthTeste.Contexto;
+using AuthTeste.Models.ModelsIdentity;
 using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.Services.EmailService;
@@ -17,11 +19,7 @@ namespace AuthTeste
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<MeuContexto>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
-            });
-
+            builder.Services.AddDbContext<MeuContexto>();
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {  
                 options.SignIn.RequireConfirmedEmail = true;
@@ -32,14 +30,19 @@ namespace AuthTeste
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 1;
 
-            }).AddEntityFrameworkStores<MeuContexto>().AddDefaultTokenProviders();
-
+            })
+                .AddEntityFrameworkStores<MeuContexto>()
+                .AddDefaultTokenProviders();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                 options.SlidingExpiration = true;
             });
-
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
 			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
@@ -58,6 +61,7 @@ namespace AuthTeste
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
 

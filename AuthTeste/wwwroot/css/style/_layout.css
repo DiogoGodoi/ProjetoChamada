@@ -82,6 +82,13 @@ footer > div {
 }
 
 
+.usuarioSessaoLg {
+     display: block;
+}
+.usuarioSessaoSm{
+    display: none;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -109,4 +116,13 @@ footer > div {
         height: 80%;
     }
 
+   .usuarioSessaoLg{
+        display: none;
+   }
+}
+
+@media only screen and (max-width: 980px){
+    .usuarioSessaoSm{
+        display: block;
+    }
 }

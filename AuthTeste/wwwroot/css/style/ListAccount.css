@@ -5,6 +5,10 @@
     border: 1px solid #51023B;
 }
 
+.botaoInformacao {
+    border: 1px solid #51023B
+}
+
 .jumbotron {
     display: flex;
     flex-direction: column;
