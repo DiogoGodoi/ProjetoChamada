@@ -264,32 +264,32 @@ namespace AuthTeste.Controllers
         {
             var usuario = _userManager.Users.FirstOrDefault(i => i.Id == id);
 
-            if(_userManager.Users.Count() > 1)
-            {
-				if (usuario == null)
-				{
-					ModelState.AddModelError("", "Usuário inexistente");
-					return View();
-				}
-				else
-				{
-					var result = _userManager.DeleteAsync(usuario).Result;
-
-					if (result.Succeeded)
-					{
-						return Redirect("/Account/ListAccount");
-					}
-					else
-					{
-						ModelState.AddModelError("", "Erro interno");
-						return View();
-					}
-				}
-            }
-            else
+            if(_userManager.Users.Count() == 1 )
             {
                 ModelState.AddModelError("", "Você não pode excluir todos os usuários");
                 return View(usuario);
+            }
+            else 
+            {
+                if (usuario == null)
+                {
+                    ModelState.AddModelError("", "Usuário inexistente");
+                    return View();
+                }
+                else
+                {
+                    var result = _userManager.DeleteAsync(usuario).Result;
+
+                    if (result.Succeeded)
+                    {
+                        return Redirect("/Account/ListAccount");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Erro interno");
+                        return View();
+                    }
+                }
             }
         }
     }
