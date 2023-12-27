@@ -19,6 +19,7 @@ namespace AuthTeste.Models
 		public string Periodo { get; set; } = "";
 
 		[ForeignKey("Escola")]
+		[Display(Name = "Escola")]
 		public int Fk_Escola_Id { get; set; }
 		public virtual MdlEscola? Escola { get; set; }
 		public virtual ICollection<MdlProfessor>? Professores { get; set; }

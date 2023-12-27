@@ -19,5 +19,14 @@ namespace AuthTeste.Repository
 
 			return turmas;
 		}
+		public void CreateTurma(MdlTurma turma) {
+
+			if(turma != null)
+			{
+				_context.Add(turma);
+				_context.SaveChanges();
+			}
+
+		}
 	}
 }

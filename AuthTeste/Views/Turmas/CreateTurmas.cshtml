@@ -1,0 +1,86 @@
+﻿@model ViewModelTurmaEscola;
+
+@{
+	ViewData["Title"] = "Cadastrar";
+}
+
+<link rel="stylesheet" href="~/css/style/CreateEscola.css" />
+
+<div class="accountContainer col-lg-5 col-10 d-flex flex-column justify-content-center align-items-center shadow">
+	<form class="formInputs col-12 d-flex flex-column justify-content-center align-items-center"
+		  asp-controller="Turmas" asp-action="CreateTurmas" method="post" role="form">
+		<div data-aos="fade" class="jumbotron col-12 d-flex flex-column justify-content-center align-items-center">
+			<span><img src="~/css/images/turmas.png" class="img-fluid iconMenu" /></span>
+			<h1>TURMA</h1>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="_turma.Nome" class="control-label"></label>
+			<input asp-for="_turma.Nome" class="form-control" placeholder="Digite o nome da escola" />
+			<span asp-validation-for="_turma.Nome" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="_turma.Periodo" class="control-label"></label>
+			<input asp-for="_turma.Periodo" class="form-control" placeholder="Digite o logradouro" />
+			<span asp-validation-for="_turma.Periodo" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		@if(Model._escolas.Count() == 0)
+		{
+			<div class="form-group col-12">
+				<label asp-for="_turma.Fk_Escola_Id" class="control-label"></label>
+				<select asp-for="_turma.Fk_Escola_Id" class="form-select">
+				<option value="">Sem dados</option>
+				</select>
+				<span asp-validation-for="_turma.Fk_Escola_Id" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+
+			<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
+				<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3" disabled>
+					Cadastrar
+				</button>
+				<a asp-controller="Turmas" asp-action="ListTurmas" class="btn botaoVoltar col-lg-3 col-5 mt-3">
+					Voltar
+				</a>
+			</div>
+		}
+		else
+		{
+			<div class="form-group col-12">
+				<label asp-for="_turma.Fk_Escola_Id" class="control-label"></label>
+				<select asp-for="_turma.Fk_Escola_Id" class="form-select">
+					@foreach (var idx in Model._escolas)
+					{
+						<option value="@idx.Id">@idx.Nome</option>
+					}
+				</select>
+				<span asp-validation-for="_turma.Fk_Escola_Id" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+
+				@if (ViewBag.Mensagem != null)
+				{
+					<h5 class="mt-2">@ViewBag.Mensagem</h5>
+				}
+
+			</div>
+		}
+		
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="alert alert-danger mt-4 mb-2">
+				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+			</div>
+
+			<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
+				<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
+					Cadastrar
+				</button>
+				<a asp-controller="Turmas" asp-action="ListTurmas" class="btn botaoVoltar col-lg-3 col-5 mt-3">
+					Voltar
+				</a>
+			</div>
+		}
+
+	</form>
+</div>

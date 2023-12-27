@@ -42,6 +42,7 @@ namespace AuthTeste.Controllers
 
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
+		[ValidateAntiForgeryToken]
 		public IActionResult CreateEscola(MdlEscola escola)
 		{
 			if(!ModelState.IsValid)
@@ -75,6 +76,7 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		[ValidateAntiForgeryToken]
 		public IActionResult UpdateEscola(MdlEscola escola)
 		{
@@ -90,6 +92,7 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		[ValidateAntiForgeryToken]
 		public IActionResult RemoveEscola(int id)
 		{
