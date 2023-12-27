@@ -7,7 +7,6 @@ namespace AuthTeste.Repository
 	public class EscolasRepository : IEscolasRepository
 	{
 		private readonly MeuContexto _contexto;
-
 		public EscolasRepository(MeuContexto _contexto)
 		{
 			this._contexto = _contexto;
@@ -29,6 +28,22 @@ namespace AuthTeste.Repository
 			else
 			{
 				return escola;
+			}
+		}
+		public void UpdateEscola(MdlEscola pmtEscola)
+		{
+			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == pmtEscola.Id);
+
+			if(escola != null)
+			{
+				escola.Nome = pmtEscola.Nome;
+				escola.Logradouro = pmtEscola.Logradouro;
+				escola.Numero = pmtEscola.Numero;
+				escola.Bairro = pmtEscola.Bairro;
+				escola.Cidade = pmtEscola.Cidade;
+				escola.Estado = pmtEscola.Estado;
+
+				_contexto.SaveChanges();	
 			}
 		}
 		public void RemoveEscola(int id)

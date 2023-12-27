@@ -152,21 +152,6 @@ namespace AuthTeste.Migrations
                     b.ToTable("Turma");
                 });
 
-            modelBuilder.Entity("MdlProfessorMdlTurma", b =>
-                {
-                    b.Property<int>("ProfessoresId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TurmasId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProfessoresId", "TurmasId");
-
-                    b.HasIndex("TurmasId");
-
-                    b.ToTable("MdlProfessorMdlTurma");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -414,21 +399,6 @@ namespace AuthTeste.Migrations
                     b.Navigation("Escola");
                 });
 
-            modelBuilder.Entity("MdlProfessorMdlTurma", b =>
-                {
-                    b.HasOne("AuthTeste.Models.MdlProfessor", null)
-                        .WithMany()
-                        .HasForeignKey("ProfessoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AuthTeste.Models.MdlTurma", null)
-                        .WithMany()
-                        .HasForeignKey("TurmasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -484,6 +454,7 @@ namespace AuthTeste.Migrations
                 {
                     b.Navigation("Turmas");
                 });
+
 #pragma warning restore 612, 618
         }
     }

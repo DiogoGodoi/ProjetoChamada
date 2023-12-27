@@ -89,30 +89,6 @@ namespace AuthTeste.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MdlProfessorMdlTurma",
-                columns: table => new
-                {
-                    ProfessoresId = table.Column<int>(type: "int", nullable: false),
-                    TurmasId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MdlProfessorMdlTurma", x => new { x.ProfessoresId, x.TurmasId });
-                    table.ForeignKey(
-                        name: "FK_MdlProfessorMdlTurma_Professor_ProfessoresId",
-                        column: x => x.ProfessoresId,
-                        principalTable: "Professor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MdlProfessorMdlTurma_Turma_TurmasId",
-                        column: x => x.TurmasId,
-                        principalTable: "Turma",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Professor_Turma",
                 columns: table => new
                 {
@@ -146,11 +122,6 @@ namespace AuthTeste.Migrations
                 column: "Fk_Professor_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MdlProfessorMdlTurma_TurmasId",
-                table: "MdlProfessorMdlTurma",
-                column: "TurmasId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Professor_Turma_Fk_Professor_Id",
                 table: "Professor_Turma",
                 column: "Fk_Professor_Id");
@@ -171,9 +142,6 @@ namespace AuthTeste.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Escola_Professor");
-
-            migrationBuilder.DropTable(
-                name: "MdlProfessorMdlTurma");
 
             migrationBuilder.DropTable(
                 name: "Professor_Turma");

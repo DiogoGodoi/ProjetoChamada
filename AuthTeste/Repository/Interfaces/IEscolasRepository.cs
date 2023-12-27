@@ -7,6 +7,7 @@ namespace AuthTeste.Repository.Interfaces
 		IEnumerable<MdlEscola> Escolas { get;}
 		void InsertEscola(MdlEscola escola);
 		MdlEscola GetEscolaId(int id);
+		void UpdateEscola(MdlEscola pmtEscola);
 		void RemoveEscola(int id);
 	}
 }

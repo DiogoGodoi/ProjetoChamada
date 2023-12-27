@@ -66,6 +66,30 @@ namespace AuthTeste.Controllers
 			return View(escola);
 		}
 
+		[HttpGet]
+		[Authorize(Roles = "Admin")]
+		public IActionResult UpdateEscola(int id)
+		{
+			var escola = _escolasRepository.GetEscolaId(id);
+
+			return View(escola);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult UpdateEscola(MdlEscola escola)
+		{
+			if(ModelState.IsValid)
+			{
+				_escolasRepository.UpdateEscola(escola);
+				return Redirect("/Escola/ListEscolas");
+			}
+			else
+			{
+				return View(escola);
+			}
+		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public IActionResult RemoveEscola(int id)
