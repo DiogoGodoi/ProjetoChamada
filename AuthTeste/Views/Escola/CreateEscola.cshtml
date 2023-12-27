@@ -1,0 +1,100 @@
+﻿@model MdlEscola;
+
+<link rel="stylesheet" href="~/css/style/CreateEscola.css" />
+
+<div class="accountContainer col-lg-5 col-10 d-flex flex-column justify-content-center align-items-center shadow">
+	<form class="formInputs col-12 d-flex flex-column justify-content-evenly align-items-center"
+		  asp-controller="Escola" asp-action="CreateEscola" method="post" role="form">
+		<div data-aos="fade" class="jumbotron col-12 d-flex flex-column justify-content-center align-items-center">
+			<span><img src="~/css/images/userIcon.png" class="img-fluid iconMenu" /></span>
+			<h1>ESCOLAS</h1>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="Nome" class="control-label"></label>
+			<input asp-for="Nome" class="form-control" placeholder="Digite o nome da escola" />
+			<span asp-validation-for="Nome" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="Logradouro" class="control-label"></label>
+			<input asp-for="Logradouro" class="form-control" placeholder="Digite o logradouro" />
+			<span asp-validation-for="Logradouro" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="Numero" class="control-label"></label>
+			<input asp-for="Numero" class="form-control" placeholder="Digite o número" />
+			<span asp-validation-for="Numero" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="Bairro" class="control-label"></label>
+			<input asp-for="Bairro" class="form-control" placeholder="Informe o nome do bairro" />
+			<span asp-validation-for="Bairro" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="Cidade" class="control-label"></label>
+			<input asp-for="Cidade" class="form-control" placeholder="Informe o nome do bairro" />
+			<span asp-validation-for="Cidade" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="Estado" class="control-label"></label>
+			<select asp-for="Estado" class="form-select">
+				<option value="" selected>Selecione um estado</option>
+				<option value="AC">Acre</option>
+				<option value="AL">Alagoas</option>
+				<option value="AP">Amapá</option>
+				<option value="AM">Amazonas</option>
+				<option value="BA">Bahia</option>
+				<option value="CE">Ceará</option>
+				<option value="DF">Distrito Federal</option>
+				<option value="ES">Espírito Santo</option>
+				<option value="GO">Goiás</option>
+				<option value="MA">Maranhão</option>
+				<option value="MT">Mato Grosso</option>
+				<option value="MS">Mato Grosso do Sul</option>
+				<option value="MG">Minas Gerais</option>
+				<option value="PA">Pará</option>
+				<option value="PB">Paraíba</option>
+				<option value="PR">Paraná</option>
+				<option value="PE">Pernambuco</option>
+				<option value="PI">Piauí</option>
+				<option value="RJ">Rio de Janeiro</option>
+				<option value="RN">Rio Grande do Norte</option>
+				<option value="RS">Rio Grande do Sul</option>
+				<option value="RO">Rondônia</option>
+				<option value="RR">Roraima</option>
+				<option value="SC">Santa Catarina</option>
+				<option value="SP">São Paulo</option>
+				<option value="SE">Sergipe</option>
+				<option value="TO">Tocantins</option>
+			</select>
+			<span asp-validation-for="Estado" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+
+			@if (ViewBag.Mensagem != null)
+			{
+				<h5 class="mt-2">@ViewBag.Mensagem</h5>
+			}
+
+		</div>
+
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="alert alert-danger mt-4 mb-2">
+				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+			</div>
+		}
+
+		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
+			<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
+				Cadastrar
+			</button>
+			<a asp-controller="Escola" asp-action="ListEscolas" class="btn botaoVoltar col-lg-3 col-5 mt-3">
+				Voltar
+			</a>
+		</div>
+	</form>
+</div>

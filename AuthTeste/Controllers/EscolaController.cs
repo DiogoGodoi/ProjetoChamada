@@ -1,4 +1,7 @@
-﻿using AuthTeste.Repository.Interfaces;
+﻿using AuthTeste.Contexto;
+using AuthTeste.Models;
+using AuthTeste.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthTeste.Controllers
@@ -12,6 +15,7 @@ namespace AuthTeste.Controllers
 			this._escolasRepository = _escolasRepository;
 		}
 
+		[HttpGet]
 		public IActionResult ListEscolas()
 		{
 			var escolas = _escolasRepository.Escolas.ToList();
@@ -28,6 +32,47 @@ namespace AuthTeste.Controllers
 				return View(escolas);
 			}
 
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin")]
+		public IActionResult CreateEscola()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		public IActionResult CreateEscola(MdlEscola escola)
+		{
+			if(!ModelState.IsValid)
+			{
+				ModelState.AddModelError("", "Erro");
+				return View(escola);
+			}
+			else
+			{
+				_escolasRepository.InsertEscola(escola);
+				ViewBag.Mensagem = "Cadastrado com sucesso";
+				return View();
+			}			
+		}
+
+		[HttpGet]
+		public IActionResult GetEscolaId(int id)
+		{
+			var escola = _escolasRepository.GetEscolaId(id);
+
+			return View(escola);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult RemoveEscola(int id)
+		{
+			_escolasRepository.RemoveEscola(id);
+
+			return Redirect("/Escola/ListEscolas");
 		}
 	}
 }

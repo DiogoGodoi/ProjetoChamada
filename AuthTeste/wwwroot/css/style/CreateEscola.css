@@ -1,0 +1,37 @@
+﻿.accountContainer {
+    margin-top: 110px;
+    margin-bottom: 40px;
+    height: 100%;
+    padding: 30px;
+    border: 1px solid #51023B;
+}
+
+.formInputs {
+    height: 100%;
+}
+
+.jumbotron {
+    background-color: #51023B;
+    border: 5px solid #7A0359;
+    color: white;
+    height: 120px;
+    margin: 5px
+}
+
+
+.botaoCriar {
+    background-color: #51023B;
+    color: white;
+    border-radius: 10px;
+}
+
+.botaoVoltar {
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+}
+
+label {
+    color: #51023B;
+    font-weight: 600;
+}

@@ -12,7 +12,34 @@ namespace AuthTeste.Repository
 		{
 			this._contexto = _contexto;
 		}
-		public IEnumerable<MdlEscola> Escolas => _contexto.Escola;
+		public IEnumerable<MdlEscola> Escolas => _contexto.Escola.ToList();
+		public void InsertEscola(MdlEscola escola)
+		{
+			_contexto.Add(escola);
+			_contexto.SaveChanges();
+		}
+		public MdlEscola GetEscolaId(int id)
+		{
+			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
+
+			if(escola == null)
+			{
+				return null;
+			}
+			else
+			{
+				return escola;
+			}
+		}
+		public void RemoveEscola(int id)
+		{
+			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
+			if(escola != null)
+			{
+				_contexto.Remove(escola);
+				_contexto.SaveChanges();
+			}
 
 		}
+	}
 }
