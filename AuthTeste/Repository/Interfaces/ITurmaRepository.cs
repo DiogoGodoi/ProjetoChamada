@@ -4,6 +4,6 @@ namespace AuthTeste.Repository.Interfaces
 {
 	public interface ITurmaRepository
 	{
-		IEnumerable<MdlTurma> Turmas { get; }
+		IEnumerable<MdlTurma> Turmas();
 	}
 }

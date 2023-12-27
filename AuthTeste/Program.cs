@@ -1,12 +1,9 @@
-using AuthTeste.Components;
 using AuthTeste.Contexto;
-using AuthTeste.Models.ModelsIdentity;
 using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.Services.EmailService;
 using AuthTeste.Services.EmailService.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste
 {
@@ -33,16 +30,13 @@ namespace AuthTeste
             })
                 .AddEntityFrameworkStores<MeuContexto>()
                 .AddDefaultTokenProviders();
+
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.HttpOnly = true;
             });
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                options.SlidingExpiration = true;
-            });
+
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
 			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
@@ -61,6 +55,7 @@ namespace AuthTeste
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseSession();
 
             app.UseAuthentication();

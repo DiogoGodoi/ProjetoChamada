@@ -1,5 +1,4 @@
-﻿using AuthTeste.Contexto;
-using AuthTeste.Models;
+﻿using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

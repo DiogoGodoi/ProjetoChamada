@@ -1,6 +1,7 @@
 ﻿using AuthTeste.Contexto;
 using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
 {
@@ -12,6 +13,11 @@ namespace AuthTeste.Repository
 		{
 			this._context = _context;
 		}
-		public IEnumerable<MdlTurma> Turmas => _context.Turma;
+		public IEnumerable<MdlTurma> Turmas()
+		{
+			var turmas = _context.Turma.Include(i => i.Escola).ToList();
+
+			return turmas;
+		}
 	}
 }
