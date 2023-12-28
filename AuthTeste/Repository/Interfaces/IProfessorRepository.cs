@@ -1,9 +1,11 @@
 ﻿using AuthTeste.Models;
+using AuthTeste.ViewModels;
 
 namespace AuthTeste.Repository.Interfaces
 {
-	public class IProfessorRepository
+	public interface IProfessorRepository
 	{
-		IEnumerable<MdlProfessor> Professores { get; }
+		ViewModelProfessoresEscolasTurmas GetProfessores();
+		void CreateProfessor(ViewModelProfessoresEscolasTurmas professor);
 	}
 }

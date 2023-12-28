@@ -10,7 +10,6 @@ namespace AuthTeste.Controllers
     {
         private readonly ITurmaRepository _turmaRepository;
         private readonly IEscolasRepository _escolasRepository;  
-
         public TurmasController(ITurmaRepository _turmaRepository, IEscolasRepository _escolasRepository)
         {
             this._turmaRepository = _turmaRepository;
