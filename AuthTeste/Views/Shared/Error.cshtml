@@ -3,23 +3,37 @@
     ViewData["Title"] = "Erro";
 }
 
-<h1 class="text-danger">Erro.</h1>
-<h2 class="text-danger">Ocorreu um erro ao processar sua solicitação.</h2>
+<link rel="stylesheet" href="~/css/style/Error.css" />
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>ID da Solicitação:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+<div class="contentErro col-8 p-4 d-flex flex-column justify-content-center align-items-center">
 
-<h3>Modo de Desenvolvimento</h3>
-<p>
-    Trocar para o ambiente <strong>Desenvolvimento</strong> exibirá informações mais detalhadas sobre o erro que ocorreu.
-</p>
-<p>
-    <strong>O ambiente de Desenvolvimento não deve ser ativado para aplicativos implantados.</strong>
-    Isso pode resultar na exibição de informações sensíveis, desde exceções até usuários finais.
-    Para depuração local, ative o ambiente <strong>Desenvolvimento</strong> configurando a variável de ambiente <strong>ASPNETCORE_ENVIRONMENT</strong> como <strong>Desenvolvimento</strong>
-    e reinicie o aplicativo.
-</p>
+    <span><h1 class="text-danger">Erro.</h1></span>
+    <span><h2 class="text-danger">Ocorreu um erro ao processar sua solicitação.</h2></span>
+
+    @if (Model.ShowRequestId)
+    {
+        <span>
+            <p>
+                <strong>ID da Solicitação:</strong> <code>@Model.RequestId</code>
+            </p>
+        </span>
+        
+    }
+    <span class="mt-4">
+        <h3>Modo de Desenvolvimento</h3>
+    </span>
+        
+        <span>
+            <p>
+                Trocar para o ambiente <strong>Desenvolvimento</strong> exibirá informações mais detalhadas sobre o erro que ocorreu.
+            </p>
+        </span>
+        <span class="mt-4">
+            <p>
+                <strong>O ambiente de Desenvolvimento não deve ser ativado para aplicativos implantados.</strong>
+                Isso pode resultar na exibição de informações sensíveis, desde exceções até usuários finais.
+                Para depuração local, ative o ambiente <strong>Desenvolvimento</strong> configurando a variável de ambiente <strong>ASPNETCORE_ENVIRONMENT</strong> como <strong>Desenvolvimento</strong>
+                e reinicie o aplicativo.
+            </p>
+        </span>
+</div>
