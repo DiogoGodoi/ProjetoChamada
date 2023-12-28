@@ -30,6 +30,25 @@ namespace AuthTeste.Repository
 			return _professorEscolaTurma;
 			
 		}
+		public ViewModelProfessoresEscolasTurmas GetProfessorId(int id)
+		{
+			var professorEscola = _context.Escola_Professor.Include(i => i.Professor)
+													 .Include(i => i.Escola)
+													 .FirstOrDefault(i => i.Professor.Id == id);
+			
+			var professorTurma = _context.Professor_Turma.Include(i => i.Professor)
+														 .Include(i => i.Turma)
+														 .FirstOrDefault(i => i.Professor.Id == id);
+
+			ViewModelProfessoresEscolasTurmas _mdlProfessorEscolaTurma = new ViewModelProfessoresEscolasTurmas
+			{
+				_mdlEscolaProfessor = professorEscola,
+				_mdlProfessorTurma = professorTurma
+			};
+
+			return _mdlProfessorEscolaTurma;
+
+		}
 		public void CreateProfessor(ViewModelProfessoresEscolasTurmas professor)
 		{
 			if(professor._professor != null 
