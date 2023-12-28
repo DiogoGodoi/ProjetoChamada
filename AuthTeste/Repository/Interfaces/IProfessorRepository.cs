@@ -7,7 +7,8 @@ namespace AuthTeste.Repository.Interfaces
 		ViewModelProfessoresEscolasTurmas GetProfessores();
 		ViewModelProfessoresEscolasTurmas GetProfessorId(int id);
 		void CreateProfessor(ViewModelProfessoresEscolasTurmas professor);
-		void Update(ViewModelProfessoresEscolasTurmas pmtProfessor);
+		void UpdateProfessor(ViewModelProfessoresEscolasTurmas pmtProfessor);
+		void RemoveProfessor(int id);
 
 	}
 }

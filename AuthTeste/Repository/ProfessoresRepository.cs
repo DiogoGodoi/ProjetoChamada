@@ -60,7 +60,7 @@ namespace AuthTeste.Repository
 			_context.SaveChanges();
 			}
 		}
-		public void Update(ViewModelProfessoresEscolasTurmas pmtProfessor)
+		public void UpdateProfessor(ViewModelProfessoresEscolasTurmas pmtProfessor)
 		{
 
 			var professor = _context.Professor.FirstOrDefault(i => i.Id == pmtProfessor._professor.Id);
@@ -84,5 +84,26 @@ namespace AuthTeste.Repository
 			}
 
         }
+		public void RemoveProfessor(int id)
+		{
+			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
+
+			var professorEscola = _context.Escola_Professor.Include(i => i.Professor)
+														   .FirstOrDefault(i => i.Professor.Id == id);
+
+			var professorTurma = _context.Professor_Turma.Include(i => i.Professor)
+														 .FirstOrDefault(i => i.Professor.Id == id);
+
+
+			if (professor != null && professorEscola != null && professorTurma != null)
+			{
+				_context.Professor.Remove(professor);
+				_context.Escola_Professor.Remove(professorEscola);
+				_context.Professor_Turma.Remove(professorTurma);
+
+				_context.SaveChanges();
+			}
+
+		}
 	}
 }
