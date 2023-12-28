@@ -11,7 +11,10 @@ namespace AuthTeste.Repository
 		{
 			this._contexto = _contexto;
 		}
-		public IEnumerable<MdlEscola> Escolas => _contexto.Escola.ToList();
+		public IEnumerable<MdlEscola> GetEscolas()
+		{
+			return _contexto.Escola.ToList();
+		}  
 		public void InsertEscola(MdlEscola escola)
 		{
 			_contexto.Add(escola);

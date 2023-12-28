@@ -13,7 +13,7 @@ namespace AuthTeste.Repository
 		{
 			this._context = _context;
 		}
-		public IEnumerable<MdlTurma> Turmas()
+		public IEnumerable<MdlTurma> GetTurmas()
 		{
 			var turmas = _context.Turma.Include(i => i.Escola).ToList();
 

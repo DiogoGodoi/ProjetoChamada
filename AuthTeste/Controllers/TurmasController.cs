@@ -21,7 +21,7 @@ namespace AuthTeste.Controllers
         [HttpGet]
         public IActionResult ListTurmas()
         {
-            var turmas = _turmaRepository.Turmas();
+            var turmas = _turmaRepository.GetTurmas();
             return View(turmas);
         }
 
@@ -42,7 +42,7 @@ namespace AuthTeste.Controllers
             ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
             {
                 _turma = turma,
-                _escolas = _escolasRepository.Escolas
+                _escolas = _escolasRepository.GetEscolas()
             };
 
             return View(_turmaEscola);
@@ -74,7 +74,7 @@ namespace AuthTeste.Controllers
 		    ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
 			{
 				_turma = turma,
-				_escolas = _escolasRepository.Escolas
+				_escolas = _escolasRepository.GetEscolas()
 			};
 
 			return View(_turmaEscola);

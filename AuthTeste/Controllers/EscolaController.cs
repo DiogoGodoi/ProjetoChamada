@@ -17,9 +17,9 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult ListEscolas()
 		{
-			var escolas = _escolasRepository.Escolas.ToList();
+			var escolas = _escolasRepository.GetEscolas();
 
-			if(escolas.Count == 0)
+			if(escolas.Count() == 0)
 			{
 
 				ModelState.AddModelError("", "Sem dados a exibir");
