@@ -1,5 +1,4 @@
 ﻿using AuthTeste.Contexto;
-using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -61,5 +60,29 @@ namespace AuthTeste.Repository
 			_context.SaveChanges();
 			}
 		}
+		public void Update(ViewModelProfessoresEscolasTurmas pmtProfessor)
+		{
+
+			var professor = _context.Professor.FirstOrDefault(i => i.Id == pmtProfessor._professor.Id);
+			var professorEscola = _context.Escola_Professor.Include(i => i.Professor)
+														   .FirstOrDefault(i => i.Professor.Id == pmtProfessor._professor.Id);
+
+			var professorTurma = _context.Professor_Turma.Include(i => i.Professor)
+														 .FirstOrDefault(i => i.Professor.Id == pmtProfessor._professor.Id);
+
+            if (professor != null && professorEscola != null && professorTurma != null)
+            {
+				professor.Nome = pmtProfessor._professor.Nome;
+				professor.Sobrenome = pmtProfessor._professor.Sobrenome;
+				professor.Cref = pmtProfessor._professor.Cref;
+				professorEscola.Fk_Escola_Id = pmtProfessor._mdlEscolaProfessor.Fk_Escola_Id;
+				professorEscola.Fk_Professor_Id = pmtProfessor._mdlEscolaProfessor.Fk_Professor_Id;
+				professorTurma.Fk_Turma_Id = pmtProfessor._mdlProfessorTurma.Fk_Turma_Id;
+				professorTurma.Fk_Professor_Id = pmtProfessor._mdlProfessorTurma.Fk_Professor_Id;
+
+				_context.SaveChanges();
+			}
+
+        }
 	}
 }
