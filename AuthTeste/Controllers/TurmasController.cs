@@ -26,6 +26,14 @@ namespace AuthTeste.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetTurmasId(int id)
+        {
+            var turma = _turmaRepository.GetById(id);
+
+            return View(turma);
+        }
+
+        [HttpGet]
 		[Authorize(Roles = "Admin")]
 		public IActionResult CreateTurmas() {
 
@@ -34,7 +42,7 @@ namespace AuthTeste.Controllers
             ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
             {
                 _turma = turma,
-                _escolas = _escolasRepository.Escolas.ToList()
+                _escolas = _escolasRepository.Escolas
             };
 
             return View(_turmaEscola);
@@ -55,6 +63,53 @@ namespace AuthTeste.Controllers
                 ModelState.AddModelError("", "Erro");
                 return View(_turmaEscola);
             }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult UpdateTurmas(int id)
+        {
+            var turma =  _turmaRepository.GetById(id);
+
+		    ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
+			{
+				_turma = turma,
+				_escolas = _escolasRepository.Escolas
+			};
+
+			return View(_turmaEscola);
+        }
+
+        [HttpPost]
+		[Authorize(Roles = "Admin")]
+		[ValidateAntiForgeryToken]
+        public IActionResult UpdateTurmas(ViewModelTurmaEscola _turmaEscola)
+        {
+            if (ModelState.IsValid)
+            {
+                if(_turmaEscola._turma == null)
+                {
+					ModelState.AddModelError("", "Erro");
+					return View(_turmaEscola._turma);
+				}
+                _turmaRepository.UpdateTurma(_turmaEscola._turma);
+                return Redirect("/Turmas/ListTurmas");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Erro");
+                return View(_turmaEscola._turma);
+            }
+        }
+
+		[HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteTurmas(int id)
+        {
+            _turmaRepository.DeleteTurma(id);
+
+            return Redirect("/Turmas/ListTurmas");
         }
     }
 }

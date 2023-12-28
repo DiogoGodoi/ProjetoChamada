@@ -1,0 +1,59 @@
+﻿@model ViewModelTurmaEscola;
+
+@{
+	ViewData["Title"] = "Atualizar";
+}
+
+<link rel="stylesheet" href="~/css/style/UpdateTurma.css" />
+
+<div class="accountContainer col-lg-5 col-10 d-flex flex-column justify-content-center align-items-center shadow">
+	<form class="formInputs col-12 d-flex flex-column justify-content-center align-items-center"
+		  asp-controller="Turmas" asp-action="UpdateTurmas" asp-route-_turma.Id="@Model._turma.Id" method="post" role="form">
+		<div data-aos="fade" class="jumbotron col-12 d-flex flex-column justify-content-center align-items-center">
+			<span><img src="~/css/images/turmas.png" class="img-fluid iconMenu" /></span>
+			<h1>TURMA</h1>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="_turma.Nome" class="control-label"></label>
+			<input asp-for="_turma.Nome" class="form-control" value="@Model._turma.Nome" />
+			<span asp-validation-for="_turma.Nome" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="_turma.Periodo" class="control-label"></label>
+			<input asp-for="_turma.Periodo" class="form-control" value="@Model._turma.Periodo" />
+			<span asp-validation-for="_turma.Periodo" class="text-danger"
+				  data-aos-duration="500"></span>
+		</div>
+		<div class="form-group col-12">
+			<label asp-for="_turma.Fk_Escola_Id" class="control-label"></label>
+			<select asp-for="_turma.Fk_Escola_Id" class="form-select">
+				@foreach (var idx in Model._escolas)
+				{
+				<option value="@idx.Id">@idx.Nome</option>
+				}
+			</select>
+			<span asp-validation-for="_turma.Fk_Escola_Id" class="text-danger"
+					 data-aos="fade" data-aos-duration="500"></span>
+
+			</div>
+
+			<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
+				<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
+					Atualizar
+				</button>
+				<a asp-controller="Turmas" asp-action="ListTurmas" class="btn botaoVoltar col-lg-3 col-5 mt-3">
+					Voltar
+				</a>
+			</div>
+
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="alert alert-danger mt-4 mb-2">
+				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+			</div>
+
+		}
+
+	</form>
+</div>
