@@ -40,8 +40,7 @@
 				<thead>
 					<tr>
 						<th scope="col"><h3>Nome</h3></th>
-						<th scope="col" class="text-right"><h3>Sobrenome</h3></th>
-						<th scope="col" class="text-right"><h3>Cref</h3></th>
+						<th scope="col"><h3>Cref</h3></th>
 						<th scope="col" class="text-center"><h3>Ação</h3></th>
 					</tr>
 				</thead>
@@ -49,9 +48,8 @@
 					@foreach (var item in Model)
 					{
 						<tr>
-							<td><h4>@item.Nome</h4></td>
-							<td><h4>@item.Sobrenome</h4></td>
-							<td><h4 class="text-right">@item.Cref</h4></td>
+							<td><h4>@item.Nome @item.Sobrenome</h4></td>
+							<td><h4>@item.Cref</h4></td>
 							<td class="d-flex justify-content-center">
 								<a asp-controller="Professor" asp-action="GetProfessoresId" asp-route-id="@item.Id" class="btn botaoInformacao
 											col-lx-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 text-white">

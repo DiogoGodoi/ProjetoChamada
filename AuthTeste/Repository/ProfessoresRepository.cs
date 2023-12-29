@@ -26,7 +26,7 @@ namespace AuthTeste.Repository
 
 			var professorTurma = _context.Professor_Turma.Where(i => i.Professor.Id == id)
 														 .Include(i => i.Turma)
-														 .Include(i => i.Turma.Escola.Nome)
+														 .Include(i => i.Turma.Escola)
 														 .ToList();
 
 			ViewModelProfessorTurma _mdlProfessorEscolaTurma = new ViewModelProfessorTurma
