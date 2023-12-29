@@ -13,5 +13,6 @@ namespace AuthTeste.Models
 		public int Fk_Escola_Id { get; set; }
 		public virtual MdlProfessor? Professor { get; set; }
 		public virtual MdlEscola? Escola { get; set; }
+
 	}
 }

@@ -1,5 +1,5 @@
 ﻿.contentTable {
-    height: 100vh;
+    min-height: 100vh;
     margin-top: 110px;
     margin-bottom: 40px;
     border: 1px solid #51023B;

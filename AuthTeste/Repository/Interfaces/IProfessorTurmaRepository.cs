@@ -2,8 +2,9 @@
 
 namespace AuthTeste.Repository.Interfaces
 {
-	public class IProfessorTurmaRepository
+	public interface IProfessorTurmaRepository
 	{
-		IEnumerable<MdlProfessorTurma> ProfessorTurmas  { get; }
+		IEnumerable<MdlProfessorTurma> ListProfessoresTurmas();
+		IEnumerable<MdlProfessorTurma> GetProfessoresTurmasId(int id);
 	}
 }

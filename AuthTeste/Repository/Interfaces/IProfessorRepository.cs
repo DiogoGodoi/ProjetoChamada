@@ -1,14 +1,12 @@
-﻿using AuthTeste.ViewModels;
+﻿using AuthTeste.Models;
+using AuthTeste.ViewModels;
 
 namespace AuthTeste.Repository.Interfaces
 {
 	public interface IProfessorRepository
 	{
-		ViewModelProfessoresEscolasTurmas GetProfessores();
-		ViewModelProfessoresEscolasTurmas GetProfessorId(int id);
-		void CreateProfessor(ViewModelProfessoresEscolasTurmas professor);
-		void UpdateProfessor(ViewModelProfessoresEscolasTurmas pmtProfessor);
-		void RemoveProfessor(int id);
-
+		IEnumerable<MdlProfessor> GetProfessor();
+		ViewModelProfessorTurma GetProfessorId(int id);
+		void CreateProfessor(MdlProfessor professor);
 	}
 }

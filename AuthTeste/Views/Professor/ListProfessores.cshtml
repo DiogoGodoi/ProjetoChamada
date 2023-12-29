@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ViewModelProfessoresEscolasTurmas>;
+﻿@model IEnumerable<MdlProfessor>;
 
 @{
 	ViewData["Title"] = "Escolas";
@@ -31,7 +31,7 @@
 	else
 	{
 		<div data-aos="fade" class="jumbotron col-12 mb-3">
-			<span><img src="~/css/images/escolas.png" class="img-fluid iconMenu" /></span>
+			<span><img src="~/css/images/teacher.png" class="img-fluid iconMenu" /></span>
 			<h1>PROFESSORES</h1>
 		</div>
 
@@ -40,9 +40,8 @@
 				<thead>
 					<tr>
 						<th scope="col"><h3>Nome</h3></th>
-						<th scope="col" class="text-center"><h3>Cref</h3></th>
-						<th scope="col" class="text-center"><h3>Cidade</h3></th>
-						<th scope="col" class="text-center"><h3>Estado</h3></th>
+						<th scope="col" class="text-right"><h3>Sobrenome</h3></th>
+						<th scope="col" class="text-right"><h3>Cref</h3></th>
 						<th scope="col" class="text-center"><h3>Ação</h3></th>
 					</tr>
 				</thead>
@@ -50,14 +49,12 @@
 					@foreach (var item in Model)
 					{
 						<tr>
-							<td><h4>@item._professor.Nome</h4></td>
-							<td><h4 class="text-center">@item._professor.Sobrenome</h4></td>
-							<td><h4 class="text-center">@item._professor.Cref</h4></td>
-							<td><h4 class="text-center">@item._mdlEscolaProfessor.Escola.Nome</h4></td>
-							<td><h4 class="text-center">@item._mdlEscolaProfessor.Escola.Turmas</h4></td>
+							<td><h4>@item.Nome</h4></td>
+							<td><h4>@item.Sobrenome</h4></td>
+							<td><h4 class="text-right">@item.Cref</h4></td>
 							<td class="d-flex justify-content-center">
-								<a asp-controller="Escola" asp-action="GetEscolaId" asp-route-id="@item._professor.Id" class="btn botaoInformacao
-									col-lx-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 text-white">
+								<a asp-controller="Professor" asp-action="GetProfessoresId" asp-route-id="@item.Id" class="btn botaoInformacao
+											col-lx-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="botaoInformacao" class="bi bi-info-circle" viewBox="0 0 16 16">
 										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
 										<path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
