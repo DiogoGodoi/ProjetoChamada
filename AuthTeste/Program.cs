@@ -41,7 +41,7 @@ namespace AuthTeste
             builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
 			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
 			builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
-			builder.Services.AddTransient<IProfessorTurmaRepository, IProfessorTurmaRepository>();
+			builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
 
 			var app = builder.Build();
 

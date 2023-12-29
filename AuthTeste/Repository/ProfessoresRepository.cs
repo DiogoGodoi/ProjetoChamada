@@ -2,17 +2,16 @@
 using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
 {
 	public class ProfessoresRepository: IProfessorRepository
 	{
 		private readonly MeuContexto _context;
-		private readonly ProfessorTurmaRepository _professorTurmaRepository;
-		public ProfessoresRepository(MeuContexto _context, ProfessorTurmaRepository _professorTurmaRepository)
+		public ProfessoresRepository(MeuContexto _context)
 		{
 			this._context = _context;
-			this._professorTurmaRepository = _professorTurmaRepository;
 		}
 		public IEnumerable<MdlProfessor> GetProfessor()
 		{
@@ -25,7 +24,10 @@ namespace AuthTeste.Repository
 		{
 			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
 
-			var professorTurma = _professorTurmaRepository.GetProfessoresTurmasId(id);
+			var professorTurma = _context.Professor_Turma.Where(i => i.Professor.Id == id)
+														 .Include(i => i.Turma)
+														 .Include(i => i.Turma.Escola.Nome)
+														 .ToList();
 
 			ViewModelProfessorTurma _mdlProfessorEscolaTurma = new ViewModelProfessorTurma
 			{

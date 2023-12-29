@@ -1,7 +1,6 @@
 ﻿using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthTeste.Controllers
@@ -34,7 +33,6 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = "Admin")]
 		public IActionResult CreateProfessor()
 		{
 			MdlProfessor professor = new MdlProfessor();
