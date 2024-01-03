@@ -18,8 +18,10 @@ namespace AuthTeste.Controllers
 		public IActionResult ListEscolas()
 		{
 			var escolas = _escolasRepository.GetEscolas();
+			ViewBag.CaminhoImg = "/css/images/escolas.png";
+			ViewBag.TitleJumbotron = "ESCOLAS";
 
-			if(escolas.Count() == 0)
+			if (escolas.Count() == 0)
 			{
 
 				ModelState.AddModelError("", "Sem dados a exibir");

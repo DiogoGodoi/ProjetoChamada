@@ -20,6 +20,8 @@ namespace AuthTeste.Controllers
 		public IActionResult ListProfessores()
 		{
 			var professores = _professorRepository.GetProfessor();
+			ViewBag.CaminhoImg = "/css/images/teacher.png";
+			ViewBag.TitleJumbotron = "PROFESSORES";
 
 			return View(professores);
 		}

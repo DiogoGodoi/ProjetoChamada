@@ -220,8 +220,10 @@ namespace AuthTeste.Controllers
         {
 
             var usuarios = _userManager.Users.ToList();
+			ViewBag.CaminhoImg = "/css/images/userIcon.png";
+			ViewBag.TitleJumbotron = "USUÁRIOS";
 
-            List<MdlUsuariosRoles> usuariosRolesList = new List<MdlUsuariosRoles>();
+			List<MdlUsuariosRoles> usuariosRolesList = new List<MdlUsuariosRoles>();
 
             foreach (var idx in usuarios)
             {

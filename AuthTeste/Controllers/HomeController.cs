@@ -18,7 +18,10 @@ namespace AuthTeste.Controllers
         [Authorize]
         public IActionResult Menu()
         {
-            return View();
+            ViewBag.CaminhoImg = "/css/images/home.png";
+            ViewBag.TitleJumbotron = "HOME";
+
+			return View();
         }
 
         public IActionResult Privacy()

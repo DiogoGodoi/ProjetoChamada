@@ -21,7 +21,9 @@ namespace AuthTeste.Controllers
         public IActionResult ListTurmas()
         {
             var turmas = _turmaRepository.GetTurmas();
-            return View(turmas);
+			ViewBag.CaminhoImg = "/css/images/turmas.png";
+			ViewBag.TitleJumbotron = "TURMAS";
+			return View(turmas);
         }
 
         [HttpGet]

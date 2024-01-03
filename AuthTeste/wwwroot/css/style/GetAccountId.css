@@ -1,6 +1,5 @@
 ﻿.contentDetails {
-    height: 100vh !important;
-    z-index: 0;
+    height: 100%
 }
 
 .card {
