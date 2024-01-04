@@ -22,6 +22,6 @@ namespace AuthTeste.Models
 		[Required(ErrorMessage = "Campo obrigatório")]
 		public int Cref { get; set; }
 
-		public virtual ICollection<MdlTurma>? Turmas { get; set; }
+		public virtual ICollection<MdlTurma> Turmas { get; set; }
 	}
 }

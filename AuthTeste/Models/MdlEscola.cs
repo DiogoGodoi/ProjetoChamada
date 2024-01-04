@@ -37,6 +37,6 @@ namespace AuthTeste.Models
 		[DataType(DataType.Text)]
 		public string Estado { get; set; } = "";
 
-		public virtual ICollection<MdlTurma>? Turmas { get; set; }
+		public virtual ICollection<MdlTurma> Turmas { get; set; }
 	}
 }

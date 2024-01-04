@@ -12,15 +12,22 @@ namespace AuthTeste.Repository
 		{
 			this._context = context;
 		}
+		public void CreateProfessorTurma(MdlProfessorTurma professorTurma)
+		{
+			_context.Professor_Turma.Add(professorTurma);
+			_context.SaveChanges();	
+		}
 		public IEnumerable<MdlProfessorTurma> ListProfessoresTurmas()
 		{
-			var professoresTurmas = _context.Professor_Turma.ToList();
-
+			var professoresTurmas = _context.Professor_Turma.Include(i => i.Turma)
+															.Include(i => i.Turma.Escola)
+															.ToList();
 			return professoresTurmas;
 		}
 		public IEnumerable<MdlProfessorTurma> GetProfessoresTurmasId(int id)
 		{
 			var professoresTurmas = _context.Professor_Turma.Where(i => i.Professor.Id == id)
+															.Include(i => i.Professor)
 															.Include(i => i.Turma)
 															.Include(i => i.Turma.Escola).ToList();
 			return professoresTurmas;

@@ -1,8 +1,6 @@
 ﻿using AuthTeste.Contexto;
 using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
-using AuthTeste.ViewModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
 {
@@ -20,22 +18,11 @@ namespace AuthTeste.Repository
 			return professores;
 			
 		}
-		public ViewModelProfessorTurma GetProfessorId(int id)
+		public MdlProfessor GetProfessorId(int id)
 		{
 			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
 
-			var professorTurma = _context.Professor_Turma.Where(i => i.Professor.Id == id)
-														 .Include(i => i.Turma)
-														 .Include(i => i.Turma.Escola)
-														 .ToList();
-
-			ViewModelProfessorTurma _mdlProfessorEscolaTurma = new ViewModelProfessorTurma
-			{
-				_mdlProfessor = professor,
-				_mdlProfessorTurmaList = professorTurma
-			};
-
-			return _mdlProfessorEscolaTurma;
+			return professor;
 
 		}
 		public void CreateProfessor(MdlProfessor professor)

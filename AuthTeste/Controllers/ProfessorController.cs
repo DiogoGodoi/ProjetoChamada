@@ -9,11 +9,14 @@ namespace AuthTeste.Controllers
 	{
 		private readonly IProfessorRepository _professorRepository;
 		private readonly IProfessorTurmaRepository _professorTurmaRepository;
+		private readonly ITurmaRepository _turmaRepository;
 
-		public ProfessorController(IProfessorRepository _professorRepository, IProfessorTurmaRepository _professorTurmaRepository) { 
+		public ProfessorController(IProfessorRepository _professorRepository, 
+			IProfessorTurmaRepository _professorTurmaRepository, ITurmaRepository _turmaRepository) { 
 
 			this._professorRepository = _professorRepository;
 			this._professorTurmaRepository = _professorTurmaRepository;
+			this._turmaRepository = _turmaRepository;
 		}
 
 		[HttpGet]
@@ -29,7 +32,7 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult GetProfessoresId(int id)
 		{
-			var professor = _professorRepository.GetProfessorId(id);
+			var professor = _professorTurmaRepository.GetProfessoresTurmasId(id);
 
 			return View(professor);
 		}
@@ -39,14 +42,31 @@ namespace AuthTeste.Controllers
 		{
 			MdlProfessor professor = new MdlProfessor();
 
+			var turmas = _turmaRepository.GetTurmas();
+
 			ViewModelProfessorTurma professorTurma = new ViewModelProfessorTurma
 			{
 				_mdlProfessor = professor,
-				_mdlProfessorTurmaList = _professorTurmaRepository.ListProfessoresTurmas()
+				_mdlTurmaList = turmas
 			};
 
 			return View(professorTurma);
 
+		}
+
+		[HttpPost]
+		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int>turmaIds)
+		{
+			_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
+
+			foreach (var id in turmaIds)
+			{
+				professorTurma._professorTurma.Fk_Professor_Id = professorTurma._mdlProfessor.Id;
+				professorTurma._professorTurma.Fk_Turma_Id = id;
+				_professorTurmaRepository.CreateProfessorTurma(professorTurma._professorTurma);
+			}	
+
+			return Redirect("/Professor/ListProfessores");
 		}
 	}
 }

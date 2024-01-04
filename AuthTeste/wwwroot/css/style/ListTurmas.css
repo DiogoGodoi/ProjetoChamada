@@ -1,4 +1,7 @@
-﻿.contentTable {
+﻿.container-fluid{
+    height: 100%;
+}
+.contentTable {
     height: 100%;
     margin-top: 140px;
     margin-bottom: 70px;

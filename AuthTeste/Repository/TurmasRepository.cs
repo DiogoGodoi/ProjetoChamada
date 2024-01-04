@@ -14,7 +14,7 @@ namespace AuthTeste.Repository
 		}
 		public IEnumerable<MdlTurma> GetTurmas()
 		{
-			var turmas = _context.Turma.Include(i => i.Escola).ToList();
+			var turmas = _context.Turma.Include(i => i.Escola).OrderBy(i => i.Nome).ToList();
 
 			return turmas;
 		}
