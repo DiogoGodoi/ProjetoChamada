@@ -7,67 +7,84 @@
 <link rel="stylesheet" href="~/css/style/GetTurmaId.css" />
 
 <div class="contentDetails col-12 d-flex flex-column justify-content-center align-items-center">
-	<div class="card col-lg-4 col-10">
-		<div class="card-header d-flex justify-content-center">
-			<h3>DETALHES</h3>
-		</div>
-		<div class="d-flex justify-content-center p-3">
-			<img src="~/css/images/EscolaPink.png" class="iconMenuCard card-img-top">
-		</div>
-		<div class="card-body d-flex flex-column justify-content-evenly align-items-center">
-			<span><h4>Nome: @Model.Nome</h4></span>
-			<span><h4>Período: @Model.Periodo</h4></span>
-			<span><h4>Escola: @Model.Escola.Nome</h4></span>
-		</div>
-		<div class="card-footer d-flex justify-content-evenly">
-			<a asp-controller="Turmas" asp-action="UpdateTurmas" asp-route-id="@Model.Id" class="btn btn-outline-primary">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-					<path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5" />
-				</svg>
-				Atualizar
-			</a>
-			<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-					<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"></path>
-				</svg>
-				Remover
-			</button>
-			<a asp-controller="Escola" asp-action="ListEscolas" class="btn btn-outline-primary">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-					<path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
-				</svg>
-				Voltar
-			</a>
-		</div>
-	</div>
-</div>
+	<div class="col-12 d-flex flex-lg-row justify-content-lg-evenly
+		flex-column justify-content-evenly align-items-stretch">
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header d-flex justify-content-center">
-				<h5 class="modal-title">MENSAGEM</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		<div class="card col-lg-3 col-12">
+			<div class="card-header text-center">
+				<h3>TURMA</h3>
 			</div>
-			<div class="modal-body">
-				<h4>Deseja confirmar a remoção ?</h4>
+			<div class="card-body d-flex flex-column justify-content-evenly align-items-center">
+				<span><h4>Nome: @Model.Nome</h4></span>
+				<span><h4>Período: @Model.Periodo</h4></span>
+				<span><h4>Escola: @Model.Escola.Nome</h4></span>
 			</div>
-			<div class="modal-footer">
-				<form asp-area="" asp-controller="Turmas" asp-action="DeleteTurmas" asp-route-id="@Model.Id" method="post" role="form">
-					<button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-							<path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"></path>
-						</svg>
-						Voltar
-					</button>
-					<button type="submit" class="btn btn-outline-primary">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-							<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
-						</svg>
-						Confirmar
-					</button>
-				</form>
+			<div class="card-footer d-flex justify-content-evenly">
+				<a asp-controller="Turmas" asp-action="UpdateTurmas" asp-route-id="@Model.Id" class="btn btn-outline-primary">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5" />
+					</svg>
+					Atualizar
+				</a>
+				<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"></path>
+					</svg>
+					Remover
+				</button>
+				<a asp-controller="Turmas" asp-action="ListTurmas" class="btn btn-outline-primary">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
+					</svg>
+					Voltar
+				</a>
 			</div>
 		</div>
+
+		<div class="card col-lg-8 col-12">
+			<div class="card-header text-center">
+				<h3>ESCOLA</h3>
+			</div>
+			<div class="d-flex justify-content-center p-3">
+				<img src="~/css/images/escolaPink.png" class="iconMenuCard card-img-top">
+			</div>
+			<div class="card-body d-flex flex-column justify-content-evenly align-items-center">
+				<span><h4>Nome: @Model.Escola.Nome</h4></span>
+				<span><h4>Logradouro: @Model.Escola.Logradouro, @Model.Escola.Numero</h4></span>
+				<span><h4>Bairro: @Model.Escola.Bairro</h4></span>
+				<span><h4>Bairro: @Model.Escola.Cidade - @Model.Escola.Estado</h4></span>
+			</div>
+		</div>
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header d-flex justify-content-center">
+						<h5 class="modal-title">MENSAGEM</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<h4>Deseja confirmar a remoção ?</h4>
+					</div>
+					<div class="modal-footer">
+						<form asp-area="" asp-controller="Turmas" asp-action="DeleteTurmas" asp-route-id="@Model.Id" method="post" role="form">
+							<button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+									<path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"></path>
+								</svg>
+								Voltar
+							</button>
+							<button type="submit" class="btn btn-outline-primary">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+								</svg>
+								Confirmar
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>

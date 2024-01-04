@@ -1,4 +1,7 @@
-﻿.contentDetails {
+﻿.container-fluid {
+    height: 100%;
+}
+.contentDetails {
     height: 100%;
 }
 
@@ -44,7 +47,7 @@
 
 @media only screen and (max-width: 1200px) {
     .card {
-        height: 40%;
+        margin-top: 30px;
     }
 
     span > h4 {

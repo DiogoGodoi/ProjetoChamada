@@ -1,22 +1,13 @@
-﻿.contentDetails {
+﻿.container-fluid{
+    height: 100%;
+}
+.contentDetails {
     height: 100%
 }
 
 .card {
     border: 1px solid #7A0359;
 }
-
-/*.jumbotron {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #51023B;
-    border: 5px solid #7A0359;
-    color: white;
-    height: 120px;
-    margin: 5px
-}*/
 
 .iconMenuCard {
     height: 50px;

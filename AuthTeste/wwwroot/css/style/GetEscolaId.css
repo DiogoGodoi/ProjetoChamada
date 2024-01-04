@@ -1,4 +1,7 @@
-﻿.contentDetails {
+﻿.container-fluid{
+    height: 100%;
+}
+.contentDetails {
     height: 100%;
 }
 
