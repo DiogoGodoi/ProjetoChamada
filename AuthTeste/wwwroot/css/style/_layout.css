@@ -54,18 +54,31 @@ a{
 }
 
 .rodape {
+    margin-top: 80px;
     height: 180px;
     background-color: #7A0359;
 }
 
 footer > div {
-    color:white;
-    background-color: #51023B;
+    color: white;
+    background-color: #7A0359;
 }
 
-/* - BOTOES - GLOBAIS - */
+footer > a {
+    cursor: pointer;
+    text-decoration: none;
+}
 
-.btn-outline-primary{
+.iconContato {
+    height: 80px;
+    background-color: #610146;
+}
+
+.copyColor {
+    background-color: #51023B;
+}
+/* - BOTOES - GLOBAIS - */
+.btn-outline-primary {
     border: white solid 1px;
     color: white;
 }
