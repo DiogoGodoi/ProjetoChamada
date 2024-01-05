@@ -30,6 +30,19 @@ namespace AuthTeste.Repository
 			_context.Professor.Add(professor);
 			_context.SaveChanges();
 		}
+		public void UpdateProfessor(MdlProfessor professor)
+		{
+			var _professor = _context.Professor.FirstOrDefault(i => i.Id == professor.Id);
+
+			if(_professor != null)
+			{
+				_professor.Nome = professor.Nome;
+				_professor.Sobrenome = professor.Nome;
+				_professor.Cref = professor.Cref;
+
+				_context.SaveChanges();
+			}
+		}
 		public void RemoveProfessor(int id)
 		{
 			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);

@@ -1,7 +1,7 @@
 ﻿using AuthTeste.Models;
-using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthTeste.Controllers
@@ -40,6 +40,7 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
 		public IActionResult CreateProfessor()
 		{
 			MdlProfessor professor = new MdlProfessor();
@@ -57,30 +58,91 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[ValidateAntiForgeryToken]
 		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
-			_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
 
-			foreach (var idx in turmaIds)
+			if (ModelState.IsValid)
 			{
-				MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+
+				_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
+
+				foreach (var idx in turmaIds)
 				{
-					Fk_Professor_Id = professorTurma._mdlProfessor.Id,
-					Fk_Turma_Id = idx
-				};
+					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+					{
+						Fk_Professor_Id = professorTurma._mdlProfessor.Id,
+						Fk_Turma_Id = idx
+					};
 
-				_professorTurmaRepository.CreateProfessorTurma(_professorTurma);
+					_professorTurmaRepository.CreateProfessorTurma(_professorTurma);
+				}
+
+				return Redirect("/Professor/ListProfessores");
+
 			}
-
-			return Redirect("/Professor/ListProfessores");
+			else
+			{
+				ModelState.AddModelError("", "Erro");
+				return View(professorTurma);
+			}
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[ValidateAntiForgeryToken]
 		public IActionResult DeleteProfessor(int id)
 		{
 			_professorRepository.RemoveProfessor(id);
 
 			return Redirect("/Professor/ListProfessores");
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin")]
+		public IActionResult UpdateProfessor(int id)
+		{
+			var professor = _professorRepository.GetProfessorId(id);
+			var turmas = _turmaRepository.GetTurmas();
+
+			ViewModelProfessorTurma _professorTurma = new ViewModelProfessorTurma
+			{
+				_mdlProfessor = professor,
+				_mdlTurmaList = turmas
+			};
+
+			return View(_professorTurma);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[ValidateAntiForgeryToken]
+		public IActionResult UpdateProfessor(ViewModelProfessorTurma professorTurma, List<int> turmaIds)
+		{
+			if (ModelState.IsValid)
+			{
+				_professorRepository.UpdateProfessor(professorTurma._mdlProfessor);
+
+				foreach (var idx in turmaIds)
+				{
+					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+					{
+						Fk_Professor_Id = professorTurma._mdlProfessor.Id,
+						Fk_Turma_Id = idx
+					};
+
+					_professorTurmaRepository.UpdateProfesorTurma(_professorTurma);
+				}
+
+				return Redirect("/Professor/ListProfessores");
+
+			}
+			else
+			{
+				ModelState.AddModelError("", "Erro");
+				return View(professorTurma);
+			}
 		}
 	}
 }

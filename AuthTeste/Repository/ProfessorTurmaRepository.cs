@@ -32,6 +32,18 @@ namespace AuthTeste.Repository
 															.Include(i => i.Turma.Escola).ToList();
 			return professoresTurmas;
 		}
+		public void UpdateProfesorTurma(MdlProfessorTurma professorTurma)
+		{
+			var _professorTurma = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == professorTurma.Fk_Professor_Id);	
+
+			if(_professorTurma != null)
+			{
+				_professorTurma.Fk_Professor_Id = professorTurma.Fk_Professor_Id;
+				_professorTurma.Fk_Turma_Id = professorTurma.Fk_Turma_Id;
+
+				_context.SaveChanges();
+			}
+		}
 		public void DeleteProfessorTurma(int id)
 		{
 			var professorTurma = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == id);
