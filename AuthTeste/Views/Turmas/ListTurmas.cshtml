@@ -4,14 +4,13 @@
 	ViewData["Title"] = "Turmas";
 }
 
-
 <link rel="stylesheet" href="~/css/style/ListTurmas.css" />
 
-<div class="contentTable col-10 d-flex flex-column justify-content-center p-5 shadow">
-	
-	@if (Model.Count() == 0)
-	{
-		<span class="text-center"><h1>Sem dados a exibir</h1>
+@if (Model.Count() == 0)
+{
+	<div class="contentTable col-10 d-flex flex-column justify-content-center p-5 shadow" style="height: 100vh">
+		<span class="text-center">
+			<h1>Sem dados a exibir</h1>
 			<a asp-controller="Turmas" asp-action="CreateTurmas" class="btn botaoInformacao mx-4">
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="botaoInformacao" class="bi bi-plus-circle" viewBox="0 0 16 16">
 					<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
@@ -26,9 +25,11 @@
 				Voltar
 			</a>
 		</span>
-	}
-	else
-	{
+	</div>
+}
+else
+{
+	<div class="contentTable col-10 d-flex flex-column justify-content-center p-5 shadow">
 		<partial name="_jumbotron" />
 
 		<div class="table-responsive">
@@ -62,7 +63,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<div class="jumbotron d-flex flex-row justify-content-center">
 			<a asp-controller="Turmas" asp-action="CreateTurmas" class="btn btn-outline-primary mx-4">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -78,6 +79,6 @@
 				Voltar
 			</a>
 		</div>
-	}
-	
-</div>
+	</div>
+}
+
