@@ -1,4 +1,5 @@
 ﻿using AuthTeste.Models;
+using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,9 @@ namespace AuthTeste.Controllers
 		private readonly IProfessorTurmaRepository _professorTurmaRepository;
 		private readonly ITurmaRepository _turmaRepository;
 
-		public ProfessorController(IProfessorRepository _professorRepository, 
-			IProfessorTurmaRepository _professorTurmaRepository, ITurmaRepository _turmaRepository) { 
+		public ProfessorController(IProfessorRepository _professorRepository,
+			IProfessorTurmaRepository _professorTurmaRepository, ITurmaRepository _turmaRepository)
+		{
 
 			this._professorRepository = _professorRepository;
 			this._professorTurmaRepository = _professorTurmaRepository;
@@ -55,16 +57,20 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int>turmaIds)
+		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
 			_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
 
-			foreach (var id in turmaIds)
+			foreach (var idx in turmaIds)
 			{
-				professorTurma._professorTurma.Fk_Professor_Id = professorTurma._mdlProfessor.Id;
-				professorTurma._professorTurma.Fk_Turma_Id = id;
-				_professorTurmaRepository.CreateProfessorTurma(professorTurma._professorTurma);
-			}	
+				MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+				{
+					Fk_Professor_Id = professorTurma._mdlProfessor.Id,
+					Fk_Turma_Id = idx
+				};
+
+				_professorTurmaRepository.CreateProfessorTurma(_professorTurma);
+			}
 
 			return Redirect("/Professor/ListProfessores");
 		}
