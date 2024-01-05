@@ -8,7 +8,7 @@
 
 <div class="accountContainer col-lg-5 col-10 d-flex flex-column justify-content-center align-items-center shadow">
 	<form class="formInputs col-12 d-flex flex-column justify-content-center align-items-center"
-		  asp-controller="Professor" asp-action="UpdateProfessor" method="post" role="form">
+		  asp-controller="Professor" asp-action="UpdateProfessor" asp-route-id="@Model._mdlProfessor.Id" method="post" role="form">
 		<div data-aos="fade" class="jumbotron col-12 d-flex flex-column justify-content-center align-items-center">
 			<span><img src="~/css/images/teacher.png" class="img-fluid iconMenu" /></span>
 			<h1>PROFESSOR</h1>
