@@ -37,7 +37,7 @@ namespace AuthTeste.Repository
 			if(_professor != null)
 			{
 				_professor.Nome = professor.Nome;
-				_professor.Sobrenome = professor.Nome;
+				_professor.Sobrenome = professor.Sobrenome;
 				_professor.Cref = professor.Cref;
 
 				_context.SaveChanges();
