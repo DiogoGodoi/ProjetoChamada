@@ -74,5 +74,13 @@ namespace AuthTeste.Controllers
 
 			return Redirect("/Professor/ListProfessores");
 		}
+
+		[HttpPost]
+		public IActionResult DeleteProfessor(int id)
+		{
+			_professorRepository.RemoveProfessor(id);
+
+			return Redirect("/Professor/ListProfessores");
+		}
 	}
 }
