@@ -21,7 +21,7 @@ namespace AuthTeste.Models
 		[ForeignKey("Escola")]
 		[Display(Name = "Escola")]
 		public int Fk_Escola_Id { get; set; }
-		public virtual MdlEscola? Escola { get; set; }
-		public virtual ICollection<MdlProfessor>? Professores { get; set; }
+		public virtual MdlEscola Escola { get; set; }
+		public virtual ICollection<MdlProfessor> Professores { get; set; }
 	}
 }
