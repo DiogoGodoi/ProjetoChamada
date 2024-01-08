@@ -123,12 +123,13 @@ namespace AuthTeste.Controllers
 			if (ModelState.IsValid)
 			{
 				_professorRepository.UpdateProfessor(professorTurma._mdlProfessor);
+				professorTurma._mdlProfessor.Id = id;
 
 				foreach (var idx in turmaIds)
 				{
 					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
 					{
-						Fk_Professor_Id = id,
+						Fk_Professor_Id = professorTurma._mdlProfessor.Id,
 						Fk_Turma_Id = idx
 					};
 

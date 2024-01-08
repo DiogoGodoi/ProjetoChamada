@@ -43,9 +43,10 @@ namespace AuthTeste.Repository
 		}
 		public void AdcionarTurmaAoProfessor(MdlProfessorTurma professorTurma)
 		{
-			var professor = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == professorTurma.Fk_Professor_Id);
+			var professor = _context.Professor_Turma
+				.FirstOrDefault(i => i.Fk_Professor_Id == professorTurma.Fk_Professor_Id && i.Fk_Turma_Id == professorTurma.Fk_Turma_Id);
 
-			if (professor.Fk_Turma_Id != professorTurma.Fk_Turma_Id)
+			if (professor == null)
 			{
 				_context.Professor_Turma.Add(professorTurma);
 				_context.SaveChanges();
