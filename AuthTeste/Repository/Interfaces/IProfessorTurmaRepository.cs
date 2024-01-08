@@ -7,7 +7,7 @@ namespace AuthTeste.Repository.Interfaces
 		void CreateProfessorTurma(MdlProfessorTurma professorTurma);
 		IEnumerable<MdlProfessorTurma> ListProfessoresTurmas();
 		IEnumerable<MdlProfessorTurma> GetProfessoresTurmasId(int id);
-		void UpdateProfesorTurma(MdlProfessorTurma professorTurma);
-		void DeleteProfessorTurma(int id);
+		void AdcionarTurmaAoProfessor(MdlProfessorTurma professorTurma);
+		void RemoverTurmaDoProfessor(int id);
 	}
 }

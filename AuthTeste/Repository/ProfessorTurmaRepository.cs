@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
 {
-	public class ProfessorTurmaRepository: IProfessorTurmaRepository
+	public class ProfessorTurmaRepository : IProfessorTurmaRepository
 	{
 		private readonly MeuContexto _context;
 		public ProfessorTurmaRepository(MeuContexto context)
@@ -15,7 +15,7 @@ namespace AuthTeste.Repository
 		public void CreateProfessorTurma(MdlProfessorTurma professorTurma)
 		{
 			_context.Professor_Turma.Add(professorTurma);
-			_context.SaveChanges();	
+			_context.SaveChanges();
 		}
 		public IEnumerable<MdlProfessorTurma> ListProfessoresTurmas()
 		{
@@ -32,19 +32,7 @@ namespace AuthTeste.Repository
 															.Include(i => i.Turma.Escola).ToList();
 			return professoresTurmas;
 		}
-		public void UpdateProfesorTurma(MdlProfessorTurma professorTurma)
-		{
-			var _professorTurma = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == professorTurma.Fk_Professor_Id);	
-
-			if(_professorTurma != null)
-			{
-				_professorTurma.Fk_Professor_Id = professorTurma.Fk_Professor_Id;
-				_professorTurma.Fk_Turma_Id = professorTurma.Fk_Turma_Id;
-
-				_context.SaveChanges();
-			}
-		}
-		public void DeleteProfessorTurma(int id)
+		public void RemoverTurmaDoProfessor(int id)
 		{
 			var professorTurma = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == id);
 
@@ -52,6 +40,16 @@ namespace AuthTeste.Repository
 
 			_context.SaveChanges();
 
+		}
+		public void AdcionarTurmaAoProfessor(MdlProfessorTurma professorTurma)
+		{
+			var professor = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == professorTurma.Fk_Professor_Id);
+
+			if (professor.Fk_Turma_Id != professorTurma.Fk_Turma_Id)
+			{
+				_context.Professor_Turma.Add(professorTurma);
+				_context.SaveChanges();
+			}
 		}
 	}
 }
