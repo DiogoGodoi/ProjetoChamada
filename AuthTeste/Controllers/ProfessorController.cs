@@ -181,7 +181,7 @@ namespace AuthTeste.Controllers
 
 					};
 
-					_professorTurmaRepository.RemoverTurmaDoProfessor(_professorTurma.Fk_Professor_Id);
+					_professorTurmaRepository.RemoverTurmaDoProfessor(_professorTurma);
 				}
 				return Redirect("/Professor/ListProfessores");
 

@@ -1,4 +1,5 @@
 ﻿using AuthTeste.Models;
+using AuthTeste.ViewModels;
 
 namespace AuthTeste.Repository.Interfaces
 {
@@ -6,8 +7,8 @@ namespace AuthTeste.Repository.Interfaces
 	{
 		void CreateProfessorTurma(MdlProfessorTurma professorTurma);
 		IEnumerable<MdlProfessorTurma> ListProfessoresTurmas();
-		IEnumerable<MdlProfessorTurma> GetProfessoresTurmasId(int id);
+		ViewModelProfessorTurma GetProfessoresTurmasId(int id);
 		void AdcionarTurmaAoProfessor(MdlProfessorTurma professorTurma);
-		void RemoverTurmaDoProfessor(int id);
+		void RemoverTurmaDoProfessor(MdlProfessorTurma professorTurma);
 	}
 }

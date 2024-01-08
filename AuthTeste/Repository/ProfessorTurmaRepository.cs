@@ -1,6 +1,7 @@
 ﻿using AuthTeste.Contexto;
 using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
+using AuthTeste.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
@@ -24,22 +25,34 @@ namespace AuthTeste.Repository
 															.ToList();
 			return professoresTurmas;
 		}
-		public IEnumerable<MdlProfessorTurma> GetProfessoresTurmasId(int id)
+		public ViewModelProfessorTurma GetProfessoresTurmasId(int id)
 		{
-			var professoresTurmas = _context.Professor_Turma.Where(i => i.Professor.Id == id)
-															.Include(i => i.Professor)
+			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
+
+			var professoresTurmasId = _context.Professor_Turma.Where(i => i.Professor.Id == id)
 															.Include(i => i.Turma)
 															.Include(i => i.Turma.Escola).ToList();
-			return professoresTurmas;
+
+			ViewModelProfessorTurma professorTurma = new ViewModelProfessorTurma
+			{
+				_mdlProfessor = professor,
+				_professorTurmaList = professoresTurmasId
+			};
+
+			return professorTurma;
 		}
-		public void RemoverTurmaDoProfessor(int id)
+		public void RemoverTurmaDoProfessor(MdlProfessorTurma professorTurma)
 		{
-			var professorTurma = _context.Professor_Turma.FirstOrDefault(i => i.Fk_Professor_Id == id);
+			var _professorTurma = _context.Professor_Turma
+				.FirstOrDefault(i => i.Fk_Professor_Id == professorTurma.Fk_Professor_Id && i.Fk_Turma_Id == professorTurma.Fk_Turma_Id);
 
-			_context.Professor_Turma.Remove(professorTurma);
-
-			_context.SaveChanges();
-
+			if (_professorTurma != null)
+			{
+				MdlProfessorTurma _mdlProfessorTurma = new MdlProfessorTurma();
+				_mdlProfessorTurma = _professorTurma;
+				_context.Professor_Turma.Remove(_mdlProfessorTurma);
+				_context.SaveChanges();
+			}
 		}
 		public void AdcionarTurmaAoProfessor(MdlProfessorTurma professorTurma)
 		{

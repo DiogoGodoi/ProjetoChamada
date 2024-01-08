@@ -6,6 +6,7 @@ namespace AuthTeste.ViewModels
 	{
 		public MdlProfessor _mdlProfessor { get; set; }
 		public MdlProfessorTurma _professorTurma { get; set; }
+		public IEnumerable<MdlProfessorTurma> _professorTurmaList { get; set; }
 		public IEnumerable<MdlTurma> _mdlTurmaList { get; set; }
 
 	}
