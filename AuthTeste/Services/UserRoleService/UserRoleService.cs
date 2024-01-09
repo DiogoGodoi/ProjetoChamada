@@ -7,7 +7,23 @@ namespace AuthTeste.Services.UserRoleService
 
 		private readonly UserManager<IdentityUser> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
-
+		public void CreateRole()
+		{
+			if (!_roleManager.RoleExistsAsync("Admin").Result)
+			{
+				IdentityRole role = new IdentityRole();
+				role.Name = "Admin";
+				role.NormalizedName = "ADMIN";
+				IdentityResult result = _roleManager.CreateAsync(role).Result;
+			}
+			if (!_roleManager.RoleExistsAsync("User").Result)
+			{
+				IdentityRole role = new IdentityRole();
+				role.Name = "User";
+				role.NormalizedName = "USER";
+				IdentityResult result = _roleManager.CreateAsync(role).Result;
+			}
+		}
 		public void CreateUser()
 		{
 
@@ -31,24 +47,6 @@ namespace AuthTeste.Services.UserRoleService
 			}
 
 
-		}
-
-		public void CreateRole()
-		{
-			if (!_roleManager.RoleExistsAsync("Admin").Result)
-			{
-				IdentityRole role = new IdentityRole();
-				role.Name = "Admin";
-				role.NormalizedName = "ADMIN";
-				IdentityResult result = _roleManager.CreateAsync(role).Result;
-			}
-			if (!_roleManager.RoleExistsAsync("User").Result)
-			{
-				IdentityRole role = new IdentityRole();
-				role.Name = "User";
-				role.NormalizedName = "USER";
-				IdentityResult result = _roleManager.CreateAsync(role).Result;
-			}
 		}
 
 	}
