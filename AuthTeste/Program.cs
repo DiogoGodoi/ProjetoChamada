@@ -58,9 +58,9 @@ namespace AuthTeste
 
             app.UseRouting();
 
-            userService.CreateRole();
+            //userService.CreateRole();
 
-            userService.CreateUser();
+            //userService.CreateUser();
 
             app.UseSession();
 
