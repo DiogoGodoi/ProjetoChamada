@@ -38,3 +38,21 @@ h4 {
     background-color: darkblue;
     color: white
 }
+
+.table-hover tbody tr:hover .botaoInformacao {
+    border: 1px solid white;
+    background-color: white;
+}
+
+.table-hover {
+    cursor: pointer;
+}
+
+    .table-hover tbody tr:hover {
+        background-color: #7A0359;
+        transition-duration: 0.4s;
+    }
+
+tr:hover h4 {
+    color: white;
+}
