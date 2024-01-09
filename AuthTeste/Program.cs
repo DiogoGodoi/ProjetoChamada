@@ -3,6 +3,7 @@ using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.Services.EmailService;
 using AuthTeste.Services.EmailService.Interfaces;
+using AuthTeste.Services.UserRoleService;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthTeste
@@ -42,11 +43,13 @@ namespace AuthTeste
 			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
 			builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
 			builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
+            builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
 			var app = builder.Build();
+			var userService = app.Services.GetRequiredService<IUserRoleService>();  
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
             }
@@ -54,6 +57,10 @@ namespace AuthTeste
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            userService.CreateRole();
+
+            userService.CreateUser();
 
             app.UseSession();
 
