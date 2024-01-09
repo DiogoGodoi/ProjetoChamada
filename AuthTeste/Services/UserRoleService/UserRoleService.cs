@@ -4,7 +4,6 @@ namespace AuthTeste.Services.UserRoleService
 {
 	public class UserRoleService: IUserRoleService
 	{
-
 		private readonly UserManager<IdentityUser> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
 		public void CreateRole()
