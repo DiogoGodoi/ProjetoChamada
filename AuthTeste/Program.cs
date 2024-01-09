@@ -19,7 +19,7 @@ namespace AuthTeste
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MeuContexto>();
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {  
+            {
                 options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
@@ -40,16 +40,16 @@ namespace AuthTeste
 
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
-			builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
-			builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
-			builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
+            builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
+            builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
+            builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
             builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
-			var app = builder.Build();
-			var userService = app.Services.GetRequiredService<IUserRoleService>();  
+            var app = builder.Build();
+            var userService = app.Services.GetRequiredService<IUserRoleService>();
 
-			// Configure the HTTP request pipeline.
-			if (!app.Environment.IsDevelopment())
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
             }
@@ -58,9 +58,9 @@ namespace AuthTeste
 
             app.UseRouting();
 
-            //userService.CreateRole();
+            userService.CreateRole();
 
-            //userService.CreateUser();
+            userService.CreateUser();
 
             app.UseSession();
 
