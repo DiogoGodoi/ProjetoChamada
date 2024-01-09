@@ -294,5 +294,10 @@ namespace AuthTeste.Controllers
                 }
             }
         }
-    }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+	}
 }
