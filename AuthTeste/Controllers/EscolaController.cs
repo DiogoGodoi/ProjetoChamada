@@ -102,5 +102,11 @@ namespace AuthTeste.Controllers
 
 			return Redirect("/Escola/ListEscolas");
 		}
-	}
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
 }

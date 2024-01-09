@@ -192,5 +192,11 @@ namespace AuthTeste.Controllers
 				return View(turmaIds);
 			}
 		}
-	}
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
 }

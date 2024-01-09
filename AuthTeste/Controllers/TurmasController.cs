@@ -112,5 +112,11 @@ namespace AuthTeste.Controllers
 
             return Redirect("/Turmas/ListTurmas");
         }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
