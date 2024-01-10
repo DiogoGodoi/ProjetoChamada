@@ -9,31 +9,47 @@ namespace AuthTeste.Models
 		[Key]
 		public int Id { get; set; }
 
+		[Required(ErrorMessage = "Campo obrigatório")]
+		[StringLength(14, MinimumLength = 14, ErrorMessage = "Cnpj Inválido")]
+		[Display(Name = "Cnpj")]
+		[DataType(DataType.Text)]
+		public string Cnpj { get; set; }
+
 		[Required(ErrorMessage = "Campo Obrigatório")]
-		[MaxLength(50, ErrorMessage = "Nome muito longo")]
+		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 50 caracteres")]
+		[Display(Name = "Nome")]
 		[DataType(DataType.Text)]
 		public string Nome { get; set; } = "";
 
-		[MaxLength(100, ErrorMessage = "Caminho inválido ou muito longa")]
+		[StringLength(100, ErrorMessage = "Caminho inválido")]
+		[Display(Name = "Imagem")]
 		[DataType(DataType.ImageUrl)]
 		public string UrlImage { get; set; } = "";
 
-		[MaxLength(50, ErrorMessage = "Endereço muito longo")]
+		[Required]
+		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 50 caracteres")]
+		[Display(Name = "Logradouro")]
 		[DataType(DataType.Text)]
 		public string Logradouro { get; set; } = "";
 
-		[DataType(DataType.Text)]
+		[Required]
 		public int Numero { get; set; }
 
-		[MaxLength(30, ErrorMessage = "Bairro muito longo")]
+		[Required]
+		[StringLength(30, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 30 caracteres")]
+		[Display(Name = "Bairro")]
 		[DataType(DataType.Text)]
 		public string Bairro { get; set; } = "";
 
-		[MaxLength(30, ErrorMessage = "Cidade muito longa")]
+		[Required]
+		[StringLength(30, MinimumLength = 5, ErrorMessage = "Cidade muito longa")]
+		[Display(Name = "Cidade")]
 		[DataType(DataType.Text)]
 		public string Cidade { get; set; } = "";
 
-		[MaxLength(20)]
+		[Required]
+		[StringLength(20, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 20 caracteres")]
+		[Display(Name = "Estado")]
 		[DataType(DataType.Text)]
 		public string Estado { get; set; } = "";
 

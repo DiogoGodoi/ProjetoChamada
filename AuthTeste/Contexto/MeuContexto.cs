@@ -25,5 +25,13 @@ namespace AuthTeste.Contexto
 			optionsBuilder.UseSqlServer(defaultConnection);
 
 		}
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+            builder.Entity<MdlEscola>(i =>
+            {
+                i.HasIndex(i => i.UrlImage).IsUnique();
+            });
+		}
 	}
 }
