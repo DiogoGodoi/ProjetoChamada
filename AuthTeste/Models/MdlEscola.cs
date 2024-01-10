@@ -33,6 +33,7 @@ namespace AuthTeste.Models
 		public string Logradouro { get; set; } = "";
 
 		[Required]
+		[DataType(DataType.Text)]
 		public int Numero { get; set; }
 
 		[Required]
@@ -48,9 +49,8 @@ namespace AuthTeste.Models
 		public string Cidade { get; set; } = "";
 
 		[Required]
-		[StringLength(20, MinimumLength = 5, ErrorMessage = "Tamanho do campo de 5 a 20 caracteres")]
+		[StringLength(20, MinimumLength = 2, ErrorMessage = "Tamanho do campo de 5 a 20 caracteres")]
 		[Display(Name = "Estado")]
-		[DataType(DataType.Text)]
 		public string Estado { get; set; } = "";
 
 		public virtual ICollection<MdlTurma> Turmas { get; set; }

@@ -3,6 +3,7 @@ using AuthTeste.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
 {
     [DbContext(typeof(MeuContextoChamada))]
-    partial class MeuContextoChamadaModelSnapshot : ModelSnapshot
+    [Migration("20240110194822_Atualizacao")]
+    partial class Atualizacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -31,9 +31,10 @@ namespace AuthTeste.Models
 		public int Cref { get; set; }
 
 		[Required(ErrorMessage = "Campo obrigatório")]
+		[StringLength(11, MinimumLength = 11, ErrorMessage = "Telefone Inválido")]
 		[Display(Name = "Contato")]
 		[DataType(DataType.Text)]
-		public int Contato { get; set; }
+		public string Contato { get; set; }
 
 		public virtual ICollection<MdlTurma> Turmas { get; set; }
 	}
