@@ -37,7 +37,6 @@ namespace AuthTeste.Services.UserRoleService
         }
         public void CreateUser()
         {
-
             if (_userManager.FindByEmailAsync("admin@localhost.com").Result == null)
             {
                 IdentityUser user = new IdentityUser();
@@ -56,9 +55,6 @@ namespace AuthTeste.Services.UserRoleService
                     _userManager.AddToRoleAsync(user, "Master").Wait();
                 }
             }
-
-
         }
-
     }
 }

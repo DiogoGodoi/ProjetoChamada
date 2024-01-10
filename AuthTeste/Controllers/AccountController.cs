@@ -1,4 +1,5 @@
-﻿using AuthTeste.Models.ModelsIdentity;
+﻿using AuthTeste.Models;
+using AuthTeste.Models.ModelsIdentity;
 using AuthTeste.Services.EmailService.Interfaces;
 using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -7,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthTeste.Controllers
 {
-	[Authorize(Roles = "Master")]
-	public class AccountController : Controller
+    public class AccountController : Controller
 	{
 
 		private readonly UserManager<IdentityUser> _userManager;
@@ -24,30 +24,40 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Master")]
 		public IActionResult CreateAccount()
 		{
 			return View();
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Master")]
 		[AutoValidateAntiforgeryToken]
-		public async Task<IActionResult> CreateAccount(ViewModelUsuarios usuario)
+		public async Task<IActionResult> CreateAccount(MdlUsuario usuario)
 		{
 			if (ModelState.IsValid)
 			{
 
-				if (usuario.mdlUserCreate?.password == usuario.mdlUserCreate?.confirmPassword)
+				if (usuario.password == usuario.confirmPassword)
 				{
 
-					var user = new IdentityUser { UserName = usuario.mdlUserCreate?.userName, Email = usuario.mdlUserCreate?.email };
+					var user = new IdentityUser {
+						UserName = usuario.userName,
+						Email = usuario.email,
+						NormalizedUserName = usuario.userName.ToUpper(),
+						NormalizedEmail = usuario.email.ToUpper(),
+						LockoutEnabled = false,
+						SecurityStamp = Guid.NewGuid().ToString()
 
-					var resultado = await _userManager.CreateAsync(user, usuario.mdlUserCreate.password);
+					};
+
+					IdentityResult resultado = await _userManager.CreateAsync(user, usuario.password);
 
 
 					if (resultado.Succeeded)
 					{
 
-						await _userManager.AddToRoleAsync(user, usuario.mdlUserCreate.permissao);
+						await _userManager.AddToRoleAsync(user, usuario.permissao);
 
 						var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 						var callBack = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
@@ -55,7 +65,7 @@ namespace AuthTeste.Controllers
 						var assunto = _smtpConfig.assunto = "Confirmação de e-mail";
 						_smtpConfig.corpo = $"Por favor, confirme seu e-mail clicando <a href=\"{callBack}\">aqui</a>";
 
-						await _smtpConfig.EnviarEmail(usuario.mdlUserCreate.email, assunto);
+						await _smtpConfig.EnviarEmail(usuario.email, assunto);
 
 						ViewBag.Mensagem = "Link enviado com sucesso";
 
@@ -90,13 +100,11 @@ namespace AuthTeste.Controllers
 
 			if (usuario == null)
 			{
-				//Trate o erro, por exemplo, redirecionando para uma página de erro
-
 				return RedirectToAction("Login", "Auth");
 			}
 			else
 			{
-				var result = await _userManager.ConfirmEmailAsync(usuario, code);
+				IdentityResult result = await _userManager.ConfirmEmailAsync(usuario, code);
 
 				if (result.Succeeded == true)
 				{
@@ -120,26 +128,26 @@ namespace AuthTeste.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ForgotPassword(ViewModelUsuarios forgotUser)
+		public async Task<IActionResult> ForgotPassword(MdlUsuario usuario)
 		{
 
-			if (ModelState.IsValid)
+			if (!String.IsNullOrEmpty(usuario.email))
 			{
-				var findUser = await _userManager.FindByEmailAsync(forgotUser.mdlForgotPassword.email);
+				var findUser = await _userManager.FindByEmailAsync(usuario.email);
 
 				if (findUser != null)
 				{
 					string code = await _userManager.GeneratePasswordResetTokenAsync(findUser);
-					var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = forgotUser.mdlForgotPassword.id }, protocol: HttpContext.Request.Scheme);
+					var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = usuario.id }, protocol: HttpContext.Request.Scheme);
 
 					_smtpConfig.corpo = $"Por favor, redefina sua senha clicando <a href='{callbackUrl}'>aqui</a>";
 					var assunto = _smtpConfig.assunto = "Redefinição de senha";
 
-					await _smtpConfig.EnviarEmail(forgotUser.mdlForgotPassword.email, assunto);
+					await _smtpConfig.EnviarEmail(usuario.email, assunto);
 
 
 					TempData["TokenGerado"] = code;
-					TempData["Email"] = forgotUser.mdlForgotPassword.email;
+					TempData["Email"] = usuario.email;
 					ViewBag.Sucesso = "Link enviado";
 
 					return View();
@@ -147,13 +155,13 @@ namespace AuthTeste.Controllers
 				else
 				{
 					ModelState.AddModelError("", "Erro 1");
-					return View(forgotUser);
+					return View(usuario);
 				}
 			}
 			else
 			{
 				ModelState.AddModelError("", "Erro 2");
-				return View(forgotUser);
+				return View(usuario);
 			}
 		}
 
@@ -166,24 +174,26 @@ namespace AuthTeste.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ResetPassword(ViewModelUsuarios resetPassword)
+		public async Task<IActionResult> ResetPassword(MdlUsuario usuario)
 		{
 
-			if (ModelState.IsValid)
+			if (!String.IsNullOrEmpty(usuario.email) 
+				&& !String.IsNullOrEmpty(usuario.password) 
+				&& !String.IsNullOrEmpty(usuario.confirmPassword))
 			{
-				var userFind = await _userManager.FindByEmailAsync(resetPassword.mdlResetPassword.email);
+				var userFind = await _userManager.FindByEmailAsync(usuario.email);
 
 				if (userFind != null)
 				{
-
-					if (resetPassword.mdlResetPassword.password == resetPassword.mdlResetPassword.confirmPassword)
+					if (usuario.password == usuario.confirmPassword)
 					{
-						var resultado = await _userManager.ResetPasswordAsync(userFind, resetPassword.mdlResetPassword.token, resetPassword.mdlResetPassword.confirmPassword);
+						var resultado = await _userManager.ResetPasswordAsync(userFind, usuario.token, usuario.confirmPassword);
 
 						if (resultado.Succeeded)
 						{
 
 							await _signInManager.RefreshSignInAsync(userFind);
+							await _signInManager.SignOutAsync();
 
 							ViewBag.Sucesso = "Alterado com sucesso";
 							return View();
@@ -191,30 +201,31 @@ namespace AuthTeste.Controllers
 						else
 						{
 							ModelState.AddModelError("", "Erro na redefinição");
-							return View(resetPassword);
+							return View(usuario);
 						}
 					}
 					else
 					{
 						ModelState.AddModelError("", "Erro na redefinição");
-						return View(resetPassword);
+						return View(usuario);
 					}
 				}
 				else
 				{
 					ModelState.AddModelError("", "Erro na redefinição");
-					return View(resetPassword);
+					return View(usuario);
 				}
 			}
 			else
 			{
 				ModelState.AddModelError("", "Erro na redefinição");
-				return View(resetPassword);
+				return View(usuario);
 			}
 
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Master")]
 		public IActionResult ListAccount()
 		{
 
@@ -243,6 +254,7 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Master")]
 		public IActionResult GetAccountId(string id)
 		{
 			var usuario = _userManager.Users.FirstOrDefault(i => i.Id == id);
@@ -259,6 +271,7 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Master")]
 		public IActionResult DeleteAccount(string id)
 		{
 			var usuario = _userManager.Users.FirstOrDefault(i => i.Id == id);
