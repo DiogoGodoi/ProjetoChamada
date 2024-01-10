@@ -33,7 +33,7 @@ namespace AuthTeste.Controllers
             {
                 var userFind = await _userManager.FindByEmailAsync(usuario.email);
 
-                if(usuario != null)
+                if(userFind != null)
                 {
                     var resultado = await _signInManager.PasswordSignInAsync(userFind, usuario.password, false, false);
 
