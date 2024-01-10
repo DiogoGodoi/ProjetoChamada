@@ -17,7 +17,8 @@ namespace AuthTeste
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<MeuContexto>();
+            builder.Services.AddDbContext<MeuContextoChamada>();    
+            builder.Services.AddDbContext<MeuContextoIdentity>();
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedEmail = true;
@@ -29,7 +30,7 @@ namespace AuthTeste
                 options.Password.RequiredUniqueChars = 1;
 
             })
-                .AddEntityFrameworkStores<MeuContexto>()
+                .AddEntityFrameworkStores<MeuContextoIdentity>()
                 .AddDefaultTokenProviders();
 
             builder.Services.AddSession(options =>
@@ -37,7 +38,6 @@ namespace AuthTeste
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.HttpOnly = true;
             });
-
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddTransient<IEscolasRepository, EscolasRepository>();
             builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();

@@ -8,8 +8,12 @@ namespace AuthTeste.Models
 	{
 		[Key]
 		public int Id { get; set; }
+
+		[Required(ErrorMessage = "Campo Obrigatório")]
 		[ForeignKey("Professor")]
 		public int Fk_Professor_Id { get; set; }
+
+		[Required(ErrorMessage = "Campo Obrigatório")]
 		[ForeignKey("Escola")]
 		public int Fk_Escola_Id { get; set; }
 		public virtual MdlProfessor Professor { get; set; }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthTeste.Migrations
 {
-    [DbContext(typeof(MeuContexto))]
+    [DbContext(typeof(MeuContextoIdentity))]
     [Migration("20240104134107_UpdateDatabase")]
     partial class UpdateDatabase
     {

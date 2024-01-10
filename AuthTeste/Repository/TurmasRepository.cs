@@ -7,8 +7,8 @@ namespace AuthTeste.Repository
 {
 	public class TurmasRepository: ITurmaRepository
 	{
-		private readonly MeuContexto _context;
-		public TurmasRepository(MeuContexto _context)
+		private readonly MeuContextoChamada _context;
+		public TurmasRepository(MeuContextoChamada _context)
 		{
 			this._context = _context;
 		}
@@ -48,7 +48,6 @@ namespace AuthTeste.Repository
 			if(turma != null)
 			{
 				turma.Nome = pmtTurma.Nome;
-				turma.Periodo = pmtTurma.Periodo;	
 				turma.Fk_Escola_Id = pmtTurma.Fk_Escola_Id;
 
 				_context.SaveChanges();

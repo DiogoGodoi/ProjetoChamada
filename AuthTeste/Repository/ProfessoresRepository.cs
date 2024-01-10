@@ -6,8 +6,8 @@ namespace AuthTeste.Repository
 {
 	public class ProfessoresRepository: IProfessorRepository
 	{
-		private readonly MeuContexto _context;
-		public ProfessoresRepository(MeuContexto _context)
+		private readonly MeuContextoChamada _context;
+		public ProfessoresRepository(MeuContextoChamada _context)
 		{
 			this._context = _context;
 		}

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthTeste.Migrations
 {
-    [DbContext(typeof(MeuContexto))]
+    [DbContext(typeof(MeuContextoIdentity))]
     [Migration("20231211164459_criacaoBanco")]
     partial class criacaoBanco
     {

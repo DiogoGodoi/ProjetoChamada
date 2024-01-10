@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthTeste.Migrations
 {
-    [DbContext(typeof(MeuContexto))]
+    [DbContext(typeof(MeuContextoIdentity))]
     partial class MeuContextoModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

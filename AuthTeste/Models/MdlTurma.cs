@@ -10,14 +10,12 @@ namespace AuthTeste.Models
 		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Campo obrigatório")]
-		[MaxLength(20, ErrorMessage = "Nome muito longo")]
+		[StringLength(20, MinimumLength = 5, ErrorMessage = "Nome muito longo")]
 		[DataType(DataType.Text)]
+		[Display(Name = "Nome")]
 		public string Nome { get; set; } = "";
 
-		[MaxLength(15, ErrorMessage = "Período muito longo")]
-		[DataType(DataType.Text)]
-		public string Periodo { get; set; } = "";
-
+		[Required(ErrorMessage = "Campo obrigatório")]
 		[ForeignKey("Escola")]
 		[Display(Name = "Escola")]
 		public int Fk_Escola_Id { get; set; }

@@ -16,7 +16,7 @@ namespace AuthTeste.Models
 		public string Cnpj { get; set; }
 
 		[Required(ErrorMessage = "Campo Obrigatório")]
-		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 50 caracteres")]
+		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho do campo de 5 a 50 caracteres")]
 		[Display(Name = "Nome")]
 		[DataType(DataType.Text)]
 		public string Nome { get; set; } = "";
@@ -27,7 +27,7 @@ namespace AuthTeste.Models
 		public string UrlImage { get; set; } = "";
 
 		[Required]
-		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 50 caracteres")]
+		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho do campo de 5 a 50 caracteres")]
 		[Display(Name = "Logradouro")]
 		[DataType(DataType.Text)]
 		public string Logradouro { get; set; } = "";
@@ -36,7 +36,7 @@ namespace AuthTeste.Models
 		public int Numero { get; set; }
 
 		[Required]
-		[StringLength(30, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 30 caracteres")]
+		[StringLength(30, MinimumLength = 5, ErrorMessage = "Tamanho do campo de 5 a 30 caracteres")]
 		[Display(Name = "Bairro")]
 		[DataType(DataType.Text)]
 		public string Bairro { get; set; } = "";
@@ -48,7 +48,7 @@ namespace AuthTeste.Models
 		public string Cidade { get; set; } = "";
 
 		[Required]
-		[StringLength(20, MinimumLength = 5, ErrorMessage = "Tamanho maximo do campo de 5 a 20 caracteres")]
+		[StringLength(20, MinimumLength = 5, ErrorMessage = "Tamanho do campo de 5 a 20 caracteres")]
 		[Display(Name = "Estado")]
 		[DataType(DataType.Text)]
 		public string Estado { get; set; } = "";
