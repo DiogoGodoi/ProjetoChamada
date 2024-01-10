@@ -33,5 +33,5 @@ namespace AuthTeste.Models
         public string permissao { get; set; } = "";
         public string token { get; set; } = "";
 
-    }
+	}
 }

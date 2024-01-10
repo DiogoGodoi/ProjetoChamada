@@ -1,4 +1,5 @@
 ﻿using AuthTeste.Components;
+using AuthTeste.Models;
 using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,20 +26,20 @@ namespace AuthTeste.Controllers
 
         [HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(ViewModelUsuarios user)
+		public async Task<IActionResult> Login(MdlUsuario usuario)
         {
 
-            if(ModelState.IsValid)
+            if(!String.IsNullOrEmpty(usuario.email) && !String.IsNullOrEmpty(usuario.password))
             {
-                var usuario = await _userManager.FindByEmailAsync(user.mdlUserAuth.email);
+                var userFind = await _userManager.FindByEmailAsync(usuario.email);
 
                 if(usuario != null)
                 {
-                    var resultado = await _signInManager.PasswordSignInAsync(usuario, user.mdlUserAuth.password, false, false);
+                    var resultado = await _signInManager.PasswordSignInAsync(userFind, usuario.password, false, false);
 
                     if(resultado.Succeeded) {
 
-                    HttpContext.Session.SetString("UsuarioEmail", usuario.UserName);
+                    HttpContext.Session.SetString("UsuarioEmail", userFind.UserName);
 
                     return Redirect("/Home/Menu");
 
@@ -46,7 +47,7 @@ namespace AuthTeste.Controllers
                     else
                     {
 						ModelState.AddModelError("", "Erro !!");
-						return View(user);
+						return View(usuario);
 					}
                 }
                 else
@@ -58,7 +59,7 @@ namespace AuthTeste.Controllers
             }
 
             ModelState.AddModelError("", "Erro !!");
-            return View(user);
+            return View(usuario);
         }
 
         [HttpPost]
