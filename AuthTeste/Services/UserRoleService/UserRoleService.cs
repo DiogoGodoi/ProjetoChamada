@@ -13,18 +13,25 @@ namespace AuthTeste.Services.UserRoleService
         }
         public void CreateRole()
         {
-            if (!_roleManager.RoleExistsAsync("Admin").Result)
+			if (!_roleManager.RoleExistsAsync("Master").Result)
+			{
+				IdentityRole role = new IdentityRole();
+				role.Name = "Master";
+				role.NormalizedName = "MASTER";
+				IdentityResult result = _roleManager.CreateAsync(role).Result;
+			}
+			if (!_roleManager.RoleExistsAsync("Admin").Result)
             {
                 IdentityRole role = new IdentityRole();
                 role.Name = "Admin";
                 role.NormalizedName = "ADMIN";
                 IdentityResult result = _roleManager.CreateAsync(role).Result;
             }
-            if (!_roleManager.RoleExistsAsync("User").Result)
+            if (!_roleManager.RoleExistsAsync("Usuario").Result)
             {
                 IdentityRole role = new IdentityRole();
-                role.Name = "User";
-                role.NormalizedName = "USER";
+                role.Name = "Usuario";
+                role.NormalizedName = "USUARIO";
                 IdentityResult result = _roleManager.CreateAsync(role).Result;
             }
         }
@@ -46,7 +53,7 @@ namespace AuthTeste.Services.UserRoleService
 
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    _userManager.AddToRoleAsync(user, "Master").Wait();
                 }
             }
 

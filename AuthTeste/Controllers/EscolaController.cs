@@ -36,15 +36,15 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = "Admin")]
+		[Authorize(Roles = "Admin, Master")]
 		public IActionResult CreateEscola()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult CreateEscola(MdlEscola escola)
 		{
 			if(!ModelState.IsValid)
@@ -69,8 +69,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = "Admin")]
-		public IActionResult UpdateEscola(int id)
+        [Authorize(Roles = "Admin, Master")]
+        public IActionResult UpdateEscola(int id)
 		{
 			var escola = _escolasRepository.GetEscolaId(id);
 
@@ -78,8 +78,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult UpdateEscola(MdlEscola escola)
 		{
 			if(ModelState.IsValid)
@@ -94,8 +94,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult RemoveEscola(int id)
 		{
 			_escolasRepository.RemoveEscola(id);

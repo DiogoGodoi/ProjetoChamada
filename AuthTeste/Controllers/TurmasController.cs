@@ -35,8 +35,8 @@ namespace AuthTeste.Controllers
         }
 
         [HttpGet]
-		[Authorize(Roles = "Admin")]
-		public IActionResult CreateTurmas() {
+        [Authorize(Roles = "Admin, Master")]
+        public IActionResult CreateTurmas() {
 
             MdlTurma turma = new MdlTurma();
 
@@ -50,7 +50,7 @@ namespace AuthTeste.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Master")]
         [ValidateAntiForgeryToken]
         public IActionResult CreateTurmas(ViewModelTurmaEscola _turmaEscola) {
 
@@ -67,7 +67,7 @@ namespace AuthTeste.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Master")]
         public IActionResult UpdateTurmas(int id)
         {
             var turma =  _turmaRepository.GetById(id);
@@ -82,8 +82,8 @@ namespace AuthTeste.Controllers
         }
 
         [HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateTurmas(ViewModelTurmaEscola _turmaEscola)
         {
             if (ModelState.IsValid)
@@ -104,7 +104,7 @@ namespace AuthTeste.Controllers
         }
 
 		[HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Master")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteTurmas(int id)
         {

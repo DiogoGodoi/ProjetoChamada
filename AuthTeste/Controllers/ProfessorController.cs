@@ -40,8 +40,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = "Admin")]
-		public IActionResult CreateProfessor()
+        [Authorize(Roles = "Admin, Master")]
+        public IActionResult CreateProfessor()
 		{
 			MdlProfessor professor = new MdlProfessor();
 
@@ -58,8 +58,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
 
@@ -90,8 +90,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult DeleteProfessor(int id)
 		{
 			_professorRepository.RemoveProfessor(id);
@@ -100,8 +100,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = "Admin")]
-		public IActionResult AdcionarTurma(int id)
+        [Authorize(Roles = "Admin, Master")]
+        public IActionResult AdcionarTurma(int id)
 		{
 			var professor = _professorRepository.GetProfessorId(id);
 			var turmas = _turmaRepository.GetTurmas();
@@ -116,8 +116,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult AdcionarTurma(int id, ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
 			if (ModelState.IsValid)
@@ -149,8 +149,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = "Admin")]
-		public IActionResult RemoverTurma(int id)
+        [Authorize(Roles = "Admin, Master")]
+        public IActionResult RemoverTurma(int id)
 		{
 			var professor = _professorRepository.GetProfessorId(id);
 			var turmas = _turmaRepository.GetTurmas();
@@ -165,8 +165,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Master")]
+        [ValidateAntiForgeryToken]
 		public IActionResult RemoverTurma(int id, List<int> turmaIds)
 		{
 			if (ModelState.IsValid)
