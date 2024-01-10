@@ -20,12 +20,16 @@ namespace AuthTeste.Controllers
 			var escolas = _escolasRepository.GetEscolas();
 			ViewBag.CaminhoImg = "/css/images/escolas.png";
 			ViewBag.TitleJumbotron = "ESCOLAS";
+			ViewBag.Controller = "Escola";
+			ViewBag.Action = "CreateEscola";
+			ViewBag.Home = "Home";
+			ViewBag.Menu = "Menu";
 
 			if (escolas.Count() == 0)
 			{
 
 				ModelState.AddModelError("", "Sem dados a exibir");
-				return View();
+				return View(escolas);
 
 			}
 			else

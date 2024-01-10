@@ -4,31 +4,11 @@
 	ViewData["Title"] = "Escolas";
 }
 
-
 <link rel="stylesheet" href="~/css/style/ListEscolas.css" />
-
-
 
 @if (Model.Count() == 0)
 {
-	<div class="contentTable col-10 d-flex flex-column justify-content-center p-5 shadow" style="height: 100vh">
-		<span class="text-center">
-			<h1>Sem dados a exibir</h1>
-			<a asp-controller="Escola" asp-action="CreateEscola" class="btn botaoInformacao mx-4">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="botaoInformacao" class="bi bi-plus-circle" viewBox="0 0 16 16">
-					<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
-					<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
-				</svg>
-				Novo
-			</a>
-			<a asp-controller="Home" asp-action="Menu" class="btn botaoInformacao">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="botaoInformacao" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-					<path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
-				</svg>
-				Voltar
-			</a>
-		</span>
-	</div>
+	<partial name="_ListEmpty" />
 }
 else
 {

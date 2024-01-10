@@ -27,6 +27,10 @@ namespace AuthTeste.Controllers
 			var professores = _professorRepository.GetProfessor();
 			ViewBag.CaminhoImg = "/css/images/teacher.png";
 			ViewBag.TitleJumbotron = "PROFESSORES";
+			ViewBag.Controller = "Professor";
+			ViewBag.Action = "CreateProfessor";
+			ViewBag.Home = "Home";
+			ViewBag.Menu = "Menu";
 
 			return View(professores);
 		}

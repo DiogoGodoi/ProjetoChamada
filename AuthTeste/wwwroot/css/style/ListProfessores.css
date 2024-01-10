@@ -1,5 +1,16 @@
-﻿.contentTable {
-    min-height: 100%;
+﻿.container-fluid {
+    height: 100%;
+}
+
+.contentTable {
+    height: 100%;
+    margin-top: 140px;
+    margin-bottom: 70px;
+    border: 1px solid #51023B;
+}
+
+.listEmpty {
+    height: 70%;
     margin-top: 140px;
     margin-bottom: 70px;
     border: 1px solid #51023B;

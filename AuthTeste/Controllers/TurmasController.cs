@@ -23,6 +23,10 @@ namespace AuthTeste.Controllers
             var turmas = _turmaRepository.GetTurmas();
 			ViewBag.CaminhoImg = "/css/images/turmas.png";
 			ViewBag.TitleJumbotron = "TURMAS";
+			ViewBag.Controller = "Turmas";
+			ViewBag.Action = "CreateTurmas";
+			ViewBag.Home = "Home";
+			ViewBag.Menu = "Menu";
 			return View(turmas);
         }
 
