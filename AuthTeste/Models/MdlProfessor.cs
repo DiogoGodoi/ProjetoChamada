@@ -27,7 +27,7 @@ namespace AuthTeste.Models
 
 		[Required(ErrorMessage = "Campo obrigatório")]
 		[Display(Name = "Cref")]
-		[DataType(DataType.Text)]
+		[Range(1, 999999, ErrorMessage = "Campo obrigatório")]
 		public int Cref { get; set; }
 
 		[Required(ErrorMessage = "Campo obrigatório")]

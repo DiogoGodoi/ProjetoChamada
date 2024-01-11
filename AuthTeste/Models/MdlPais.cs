@@ -26,7 +26,7 @@ namespace AuthTeste.Models
 		[Display(Name = "Sexo")]
 		public string Sexo { get; set; }
 
-		[StringLength(11, MinimumLength = 11, ErrorMessage = "O campo CPF deve ter 11 caracteres.")]
+		[StringLength(11, MinimumLength = 0, ErrorMessage = "O campo CPF deve ter 11 caracteres.")]
 		[Display(Name = "Cpf")]
 		[DataType(DataType.Text)]
 		public string Cpf { get; set; }
@@ -42,7 +42,6 @@ namespace AuthTeste.Models
 		[DataType(DataType.Text)]
 		public string Logradouro { get; set; }
 
-		[Range(1, 999999, ErrorMessage = "Número inválido")]
 		[Display(Name = "Numero")]
 		public int Numero { get; set; }
 
