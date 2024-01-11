@@ -43,10 +43,11 @@ namespace AuthTeste
             builder.Services.AddTransient<IProfessorRepository, ProfessoresRepository>();
             builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
             builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
-            builder.Services.AddTransient<IPaisRepository, IPaisRepository>();
+            builder.Services.AddTransient<IPaisRepository, PaisRepository>();
             builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
             var app = builder.Build();
+
             var userService = app.Services.GetRequiredService<IUserRoleService>();
 
             // Configure the HTTP request pipeline.
