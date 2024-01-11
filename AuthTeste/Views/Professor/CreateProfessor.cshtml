@@ -46,23 +46,11 @@
 			</div>
 		</div>
 		<div class="mt-2 col-12 d-flex flex-row flex-wrap justify-content-center align-items-center">
-			@foreach (var turma in Model._mdlTurmaList)
-			{
-				<div class="col-5 mt-2 px-1">
-					<label class="control-label">@turma.Escola.Nome - @turma.Nome</label>
-					<input type="checkbox" value="@turma.Id" name="turmaIds">
-				</div>
-			}
-			<span asp-validation-for="@Model._professorTurma.Fk_Turma_Id" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
+			<label asp-for="@Model._professorTurma.Turma.Nome" class="control-label">Turmas</label>
+            <select asp-for="_professorTurma.Fk_Turma_Id" asp-items="ViewBag.Turmas" name="turmaIds" multiple class="form-control"></select>
+			<span asp-validation-for="_professorTurma.Fk_Turma_Id" class="text-danger"
+			data-aos="fade" data-aos-duration="500"></span>
 		</div>
-		@if (!ViewData.ModelState.IsValid)
-		{
-			<div class="alert alert-danger mt-4 mb-2">
-				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
-			</div>
-		}
-
 		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
 			<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
 				Cadastrar

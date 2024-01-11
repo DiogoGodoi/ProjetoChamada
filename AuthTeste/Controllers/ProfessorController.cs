@@ -3,6 +3,7 @@ using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AuthTeste.Controllers
 {
@@ -56,6 +57,8 @@ namespace AuthTeste.Controllers
 				_mdlProfessor = professor,
 				_mdlTurmaList = turmas
 			};
+
+			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
 
 			return View(professorTurma);
 
@@ -116,6 +119,7 @@ namespace AuthTeste.Controllers
 				_mdlTurmaList = turmas
 			};
 
+			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
 			return View(_professorTurma);
 		}
 
@@ -164,6 +168,8 @@ namespace AuthTeste.Controllers
 				_mdlProfessor = professor,
 				_mdlTurmaList = turmas
 			};
+
+			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
 
 			return View(_professorTurma);
 		}

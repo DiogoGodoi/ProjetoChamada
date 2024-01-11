@@ -3,6 +3,8 @@ using AuthTeste.Repository.Interfaces;
 using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AuthTeste.Controllers
 {
@@ -44,29 +46,25 @@ namespace AuthTeste.Controllers
 
             MdlTurma turma = new MdlTurma();
 
-            ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
-            {
-                _turma = turma,
-                _escolas = _escolasRepository.GetEscolas()
-            };
+            ViewBag.Escolas = new SelectList(_escolasRepository.GetEscolas(), "Id", "Nome");
 
-            return View(_turmaEscola);
+            return View(turma);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin, Master")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateTurmas(ViewModelTurmaEscola _turmaEscola) {
+        public IActionResult CreateTurmas(MdlTurma turma) {
 
             if (ModelState.IsValid)
             {
-                _turmaRepository.CreateTurma(_turmaEscola._turma);
+                _turmaRepository.CreateTurma(turma);
                 return Redirect("/Turmas/ListTurmas");
             }
             else
             {
                 ModelState.AddModelError("", "Erro");
-                return View(_turmaEscola);
+                return View(turma);
             }
         }
 

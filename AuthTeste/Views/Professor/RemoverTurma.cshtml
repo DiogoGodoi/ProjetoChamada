@@ -32,12 +32,14 @@
 				  data-aos="fade" data-aos-duration="500"></span>
 		</div>
 		<div class="mt-2 col-12 d-flex flex-row flex-wrap align-items-center">
-			@foreach (var turma in Model._mdlTurmaList)
+			<label asp-for="@Model._professorTurma.Turma" class="control-label"></label>
+			<select asp-for="@Model._professorTurma.Fk_Turma_Id" asp-items="ViewBag.Turmas" name="turmaIds" multiple class="form-select">
+			</select>
+			<span asp-validation-for="@Model._professorTurma.Fk_Turma_Id" class="text-danger"
+				  data-aos="fade" data-aos-duration="500"></span>
+			@if (ViewBag.Mensagem != null)
 			{
-				<div class="col-5">
-					<label class="control-label">@turma.Escola.Nome - @turma.Nome</label>
-					<input type="checkbox" value="@turma.Id" name="turmaIds">
-				</div>
+				<h5 class="mt-2 text-start">@ViewBag.Mensagem</h5>
 			}
 			<span asp-validation-for="_professorTurma.Fk_Turma_Id" class="text-danger"
 				  data-aos="fade" data-aos-duration="500"></span>
@@ -51,7 +53,7 @@
 
 		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
 			<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
-				Atualizar
+				Remover
 			</button>
 			<a asp-controller="Professor" asp-action="ListProfessores" class="btn botaoVoltar col-lg-3 col-5 mt-3">
 				Voltar

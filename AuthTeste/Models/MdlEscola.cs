@@ -33,6 +33,8 @@ namespace AuthTeste.Models
 		public string Logradouro { get; set; } = "";
 
 		[Required(ErrorMessage = "Campo obrigatorio")]
+		[Range(1, 10000, ErrorMessage = "Campo obrigatório")]
+		[Display(Name = "Numero")]
 		public int Numero { get; set; }
 
 		[Required(ErrorMessage = "Campo obrigatorio")]
@@ -44,7 +46,6 @@ namespace AuthTeste.Models
 		[Required(ErrorMessage = "Campo obrigatorio")]
 		[StringLength(30, MinimumLength = 5, ErrorMessage = "Cidade muito longa")]
 		[Display(Name = "Cidade")]
-		[DataType(DataType.Text)]
 		public string Cidade { get; set; } = "";
 
 		[Required(ErrorMessage = "Campo obrigatorio")]

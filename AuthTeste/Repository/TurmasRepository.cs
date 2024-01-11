@@ -36,7 +36,7 @@ namespace AuthTeste.Repository
 
 			if(turma != null)
 			{
-				_context.Add(turma);
+				_context.Turma.Add(turma);
 				_context.SaveChanges();
 			}
 
