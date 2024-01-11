@@ -8,7 +8,7 @@
 	<div class="col-12 contentMenu d-flex flex-column p-4 shadow">
 		<partial name="_jumbotron" />
 		<div class="menu d-flex flex-lg-row flex-column mt-2">
-			<div class="subSection1 col-lg-4 col-md-12 col-xs-12">
+			<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
 				<span><img src="~/css/images/userIcon.png" class="img-fluid iconMenu" /></span>
 				<h5>PROFESSORES</h5>
 				<p>Gerencie os professores que farão uso do sistema</p>
@@ -20,13 +20,15 @@
 					Gerenciar
 				</a>
 			</div>
-			<div class="subSection1 col-lg-4 col-md-12 col-xs-12">
+			<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
 				<span><img src="~/css/images/child.png" class="img-fluid iconMenu" /></span>
 				<h5>ALUNOS</h5>
 				<p>Cadastre novos alunos para servir de base no sistema</p>
 				<a class="btn btn-outline-primary nav-link">Cadastrar</a>
 			</div>
-			<div class="subSection1 col-lg-4 col-md-12 col-xs-12">
+		</div>
+		<div class="menu d-flex flex-lg-row flex-column">
+			<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
 				<span><img src="~/css/images/escolas.png" class="img-fluid iconMenu" /></span>
 				<h5>ESCOLAS</h5>
 				<p>Cadastre as escolas em que você trabalha atualmente</p>
@@ -38,9 +40,7 @@
 					Gerenciar
 				</a>
 			</div>
-		</div>
-		<div class="menu d-flex flex-lg-row flex-column">
-			<div class="subSection1 col-lg-4 col-md-12 col-xs-12">
+			<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
 				<span><img src="~/css/images/turmas.png" class="img-fluid iconMenu" /></span>
 				<h5>TURMAS</h5>
 				<p>Cadastre as turmas que você aplica suas aulas no dia a dia</p>
@@ -52,13 +52,15 @@
 					Gerenciar
 				</a>
 			</div>
-			<div class="subSection1 col-lg-4 col-md-12 col-xs-12">
-				<span><img src="~/css/images/horario.png" class="img-fluid iconMenu" /></span>
-				<h5>HORARIOS</h5>
-				<p>Cadastre os horarios de cada aula durante o dia de trabalho</p>
+		</div>
+		<div class="menu d-flex flex-lg-row flex-column">
+			<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
+				<span><img src="~/css/images/phone.png" class="img-fluid iconMenu" /></span>
+				<h5>PAIS E CONTATOS</h5>
+				<p>Cadastre os dados dos pais dos alunos assim como seus contatos</p>
 				<a class="btn btn-outline-primary nav-link">Cadastrar</a>
 			</div>
-			<div class="subSection1 col-lg-4 col-md-12 col-xs-12">
+			<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
 				<span><img src="~/css/images/chamada.png" class="img-fluid iconMenu" /></span>
 				<h5>CHAMADA</h5>
 				<p>Realize as chamadas e registre as presenças dos alunos</p>
@@ -68,7 +70,7 @@
 		<div class="menu d-flex flex-lg-row flex-column">
 			@if (User.IsInRole("Master"))
 			{
-				<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
+				<div class="subSection1 col-lg-12 col-md-12 col-xs-12">
 					<span><img src="~/css/images/engrenagem.png" class="img-fluid iconMenu" /></span>
 					<h5>USUÁRIOS</h5>
 					<p>Cadastre novos, ou remova um usuário existente no sistema</p>
@@ -80,23 +82,7 @@
 						Gerenciar
 					</a>
 				</div>
-				<div class="subSection1 col-lg-6 col-md-12 col-xs-12">
-					<span><img src="~/css/images/phone.png" class="img-fluid iconMenu" /></span>
-					<h5>PAIS E CONTATOS</h5>
-					<p>Cadastre os dados dos pais dos alunos e os contatos</p>
-					<a class="btn btn-outline-primary nav-link">Cadastrar</a>
-				</div>
 			}
-			else
-			{
-				<div class="subSection1 col-12">
-					<span><img src="~/css/images/phone.png" class="img-fluid iconMenu" /></span>
-					<h5>PAIS E CONTATOS</h5>
-					<p>Cadastre os dados dos pais dos alunos e os contatos</p>
-					<a class="btn btn-outline-primary nav-link">Cadastrar</a>
-				</div>
-			}
-
 		</div>
 	</div>
 </div>
