@@ -57,12 +57,6 @@
 				<span asp-validation-for="_professorTurma.Fk_Turma_Id" class="text-danger"
 					  data-aos="fade" data-aos-duration="500"></span>
 			</div>
-			@if (!ViewData.ModelState.IsValid)
-			{
-				<div class="alert alert-danger mt-4 mb-2">
-					<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
-				</div>
-			}
 		</div>
 		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
 			<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
