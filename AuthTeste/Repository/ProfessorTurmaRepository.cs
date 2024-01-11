@@ -41,6 +41,23 @@ namespace AuthTeste.Repository
 
 			return professorTurma;
 		}
+		public ViewModelProfessorTurma GetTurmaProfessoresId(int id)
+		{
+			var turma = _context.Turma.Include(i => i.Escola).
+				FirstOrDefault(i => i.Id == id);
+
+			var turmaProfessoresId = _context.Professor_Turma.Where(i => i.Turma.Id == id)
+															.Include(i => i.Turma.Escola)
+															.Include(i => i.Professor).ToList();
+
+			ViewModelProfessorTurma turmaProfessor = new ViewModelProfessorTurma
+			{
+				_mdlTurma = turma,
+				_professorTurmaList = turmaProfessoresId
+			};
+
+			return turmaProfessor;
+		}
 		public void RemoverTurmaDoProfessor(MdlProfessorTurma professorTurma)
 		{
 			var _professorTurma = _context.Professor_Turma

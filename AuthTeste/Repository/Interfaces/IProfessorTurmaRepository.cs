@@ -8,6 +8,7 @@ namespace AuthTeste.Repository.Interfaces
 		void CreateProfessorTurma(MdlProfessorTurma professorTurma);
 		IEnumerable<MdlProfessorTurma> ListProfessoresTurmas();
 		ViewModelProfessorTurma GetProfessoresTurmasId(int id);
+		ViewModelProfessorTurma GetTurmaProfessoresId(int id);
 		void AdcionarTurmaAoProfessor(MdlProfessorTurma professorTurma);
 		void RemoverTurmaDoProfessor(MdlProfessorTurma professorTurma);
 	}

@@ -4,18 +4,20 @@ using AuthTeste.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AuthTeste.Controllers
 {
     public class TurmasController : Controller
     {
         private readonly ITurmaRepository _turmaRepository;
-        private readonly IEscolasRepository _escolasRepository;  
-        public TurmasController(ITurmaRepository _turmaRepository, IEscolasRepository _escolasRepository)
+		private readonly IProfessorTurmaRepository _professorTurmaRepository;
+		private readonly IEscolasRepository _escolasRepository;  
+        public TurmasController(ITurmaRepository _turmaRepository, IEscolasRepository _escolasRepository,
+			IProfessorTurmaRepository _professorTurmaRepository)
         {
             this._turmaRepository = _turmaRepository;
             this._escolasRepository = _escolasRepository;
+            this._professorTurmaRepository = _professorTurmaRepository;
 
 		}
         
@@ -35,9 +37,9 @@ namespace AuthTeste.Controllers
         [HttpGet]
         public IActionResult GetTurmasId(int id)
         {
-            var turma = _turmaRepository.GetById(id);
+            var turmaProfessores = _professorTurmaRepository.GetTurmaProfessoresId(id);
 
-            return View(turma);
+            return View(turmaProfessores);
         }
 
         [HttpGet]

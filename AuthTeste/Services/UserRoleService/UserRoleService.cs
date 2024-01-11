@@ -40,9 +40,9 @@ namespace AuthTeste.Services.UserRoleService
             if (_userManager.FindByEmailAsync("admin@localhost.com").Result == null)
             {
                 IdentityUser user = new IdentityUser();
-                user.UserName = "Administrador";
+                user.UserName = "Admin";
                 user.Email = "admin@localhost.com";
-                user.NormalizedUserName = "ADMINISTRADOR";
+                user.NormalizedUserName = "ADMIN";
                 user.NormalizedEmail = "ADMIN@LOCALHOST.COM";
                 user.EmailConfirmed = true;
                 user.LockoutEnabled = false;
