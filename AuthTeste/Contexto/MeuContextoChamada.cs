@@ -10,6 +10,7 @@ namespace AuthTeste.Contexto
 		public DbSet<MdlTurma> Turma { get; set; }
 		public DbSet<MdlEscolaProfessor> Escola_Professor { get; set; }
 		public DbSet<MdlProfessorTurma> Professor_Turma { get; set; }
+		public DbSet<MdlPais> Pais { get; set; }
 		public MeuContextoChamada(DbContextOptions<MeuContextoChamada> options) : base(options) { }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -37,6 +38,12 @@ namespace AuthTeste.Contexto
 				i.HasIndex(i => i.Cref).IsUnique();
 				i.HasIndex(i => i.Cpf).IsUnique();	
 			});
+
+			builder.Entity<MdlPais>(i =>
+			{
+				i.HasIndex(I => I.Cpf).IsUnique();
+			});
+
 		}
 	}
 }
