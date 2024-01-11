@@ -1,5 +1,6 @@
 ﻿using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,9 +11,9 @@ namespace AuthTeste.Controllers
 
 		private readonly IPaisRepository _paisRepository;
 
-		public PaisController(IPaisRepository paisRepository)
+		public PaisController(IPaisRepository _paisRepository)
 		{
-			_paisRepository = paisRepository;
+			this._paisRepository = _paisRepository;
 		}
 
 		[HttpGet]
@@ -22,6 +23,7 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "Master, Admin")]
 		public IActionResult CreatePais()
 		{
 			List<SelectListItem> sexos = new List<SelectListItem> {
@@ -30,7 +32,6 @@ namespace AuthTeste.Controllers
 				new SelectListItem { Value = "F", Text = "Feminino" }
 
 			};
-
 			List<SelectListItem> estados = new List<SelectListItem> {
 
 				new SelectListItem { Value = "AC", Text = "Acre" },
@@ -69,10 +70,22 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Master, Admin")]
+		[ValidateAntiForgeryToken]
 		public IActionResult CreatePais(MdlPais pais)
 		{
-			_paisRepository.CreatePais(pais);
-			return View();
+			if (ModelState.IsValid)
+			{
+				_paisRepository.CreatePais(pais);
+				return View();
+			}
+			else
+			{
+				ModelState.AddModelError(" ", "Erro");
+				return View();
+			}
+
+			
 		}
 	}
 }
