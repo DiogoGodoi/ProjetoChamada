@@ -36,13 +36,10 @@
 					Voltar
 				</a>
 			</div>
-		</div>
+		</div>A
 		<div class="card col-lg-8 col-12">
 			<div class="card-header d-flex justify-content-center">
 				<h3>RESPONSÁVEIS</h3>
-			</div>
-			<div class="d-flex justify-content-center p-3">
-				<img src="~/css/images/teacherPink.png" class="iconMenuCard card-img-top">
 			</div>
 			<div class="card-body d-flex flex-column justify-content-evenly align-items-center">
 				@if (Model._professorTurmaList.Count() == 0)
@@ -51,8 +48,8 @@
 				}
 				else
 				{
-					<div class="table-responsive col-11">
-						<table class="table">
+					<div class="table-responsive py-3 col-11">
+						<table id="tabela-jquery" class="table">
 							<thead>
 								<tr>
 									<th scope="col"><h3>Nome</h3></th>
