@@ -53,7 +53,6 @@ namespace AuthTeste.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
-				ModelState.AddModelError("", "Erro");
 				return View(escola);
 			}
 			else

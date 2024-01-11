@@ -89,7 +89,7 @@ namespace AuthTeste.Controllers
 			else
 			{
 				ModelState.AddModelError("", "Erro");
-				return View(professorTurma);
+				return View();
 			}
 		}
 

@@ -13,96 +13,89 @@
 			<span><img src="~/css/images/userIcon.png" class="img-fluid iconMenu" /></span>
 			<h1>ESCOLAS</h1>
 		</div>
-		<div class="form-group col-12">
-			<label asp-for="Cnpj" class="control-label"></label>
-			<input asp-for="Cnpj" class="form-control" placeholder="Digite o nome da escola" />
-			<span asp-validation-for="Cnpj" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="Nome" class="control-label"></label>
-			<input asp-for="Nome" class="form-control" placeholder="Digite o nome da escola" />
-			<span asp-validation-for="Nome" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="UrlImage" class="control-label"></label>
-			<input asp-for="UrlImage" class="form-control" placeholder="Digite o nome da escola" />
-			<span asp-validation-for="UrlImage" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="Logradouro" class="control-label"></label>
-			<input asp-for="Logradouro" class="form-control" placeholder="Digite o logradouro" />
-			<span asp-validation-for="Logradouro" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="Numero" class="control-label"></label>
-			<input asp-for="Numero" class="form-control" placeholder="Digite o número" />
-			<span asp-validation-for="Numero" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="Bairro" class="control-label"></label>
-			<input asp-for="Bairro" class="form-control" placeholder="Informe o nome do bairro" />
-			<span asp-validation-for="Bairro" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="Cidade" class="control-label"></label>
-			<input asp-for="Cidade" class="form-control" placeholder="Informe o nome do bairro" />
-			<span asp-validation-for="Cidade" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="Estado" class="control-label"></label>
-			<select asp-for="Estado" class="form-select">
-				<option value="" selected>Selecione um estado</option>
-				<option value="Acre">Acre</option>
-				<option value="Alagoas">Alagoas</option>
-				<option value="Amapá">Amapá</option>
-				<option value="Amazonas">Amazonas</option>
-				<option value="Bahia">Bahia</option>
-				<option value="Ceará">Ceará</option>
-				<option value="Distrito Federal">Distrito Federal</option>
-				<option value="Espírito Santo">Espírito Santo</option>
-				<option value="Goiás">Goiás</option>
-				<option value="Maranhão">Maranhão</option>
-				<option value="Mato Grosso">Mato Grosso</option>
-				<option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-				<option value="Minas Gerais">Minas Gerais</option>
-				<option value="Pará">Pará</option>
-				<option value="Paraíba">Paraíba</option>
-				<option value="Paraná">Paraná</option>
-				<option value="Pernambuco">Pernambuco</option>
-				<option value="PIiauí">Piauí</option>
-				<option value="Rio de Janeiro">Rio de Janeiro</option>
-				<option value="Rio Grande do Norte">Rio Grande do Norte</option>
-				<option value="RS">Rio Grande do Sul</option>
-				<option value="RO">Rondônia</option>
-				<option value="RR">Roraima</option>
-				<option value="SC">Santa Catarina</option>
-				<option value="SP">São Paulo</option>
-				<option value="SE">Sergipe</option>
-				<option value="TO">Tocantins</option>
-			</select>
-
-			@if (ViewBag.Mensagem != null)
-			{
-				<h5 class="mt-2">@ViewBag.Mensagem</h5>
-			}
-			<span asp-validation-for="Estado" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-
-		@if (!ViewData.ModelState.IsValid)
-		{
-			<div class="alert alert-danger mt-4 mb-2">
-				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+		<div class="row">
+			<div class="form-group col-6">
+				<label asp-for="Cnpj" class="control-label"></label>
+				<input asp-for="Cnpj" class="form-control" placeholder="Digite o nome da escola" />
+				<span asp-validation-for="Cnpj" class="text-danger"
+					  data-aos-duration="500"></span>
 			</div>
+			<div class="form-group col-6">
+				<label asp-for="Nome" class="control-label"></label>
+				<input asp-for="Nome" class="form-control" placeholder="Digite o nome da escola" />
+				<span asp-validation-for="Nome" class="text-danger"
+					  data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-8">
+				<label asp-for="Logradouro" class="control-label"></label>
+				<input asp-for="Logradouro" class="form-control" placeholder="Digite o logradouro" />
+				<span asp-validation-for="Logradouro" class="text-danger"
+					  data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-4">
+				<label asp-for="Numero" class="control-label"></label>
+				<input asp-for="Numero" class="form-control" placeholder="Digite o número" />
+				<span asp-validation-for="Numero" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-6">
+				<label asp-for="Bairro" class="control-label"></label>
+				<input asp-for="Bairro" class="form-control" placeholder="Informe o nome do bairro" />
+				<span asp-validation-for="Bairro" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-6">
+				<label asp-for="Cidade" class="control-label"></label>
+				<input asp-for="Cidade" class="form-control" placeholder="Informe o nome do bairro" />
+				<span asp-validation-for="Cidade" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-4">
+				<label asp-for="Estado" class="control-label"></label>
+				<select asp-for="Estado" class="form-select">
+					<option value="" selected>Selecione</option>
+					<option value="Acre">Acre</option>
+					<option value="Alagoas">Alagoas</option>
+					<option value="Amapá">Amapá</option>
+					<option value="Amazonas">Amazonas</option>
+					<option value="Bahia">Bahia</option>
+					<option value="Ceará">Ceará</option>
+					<option value="Distrito Federal">Distrito Federal</option>
+					<option value="Espírito Santo">Espírito Santo</option>
+					<option value="Goiás">Goiás</option>
+					<option value="Maranhão">Maranhão</option>
+					<option value="Mato Grosso">Mato Grosso</option>
+					<option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+					<option value="Minas Gerais">Minas Gerais</option>
+					<option value="Pará">Pará</option>
+					<option value="Paraíba">Paraíba</option>
+					<option value="Paraná">Paraná</option>
+					<option value="Pernambuco">Pernambuco</option>
+					<option value="PIiauí">Piauí</option>
+					<option value="Rio de Janeiro">Rio de Janeiro</option>
+					<option value="Rio Grande do Norte">Rio Grande do Norte</option>
+					<option value="RS">Rio Grande do Sul</option>
+					<option value="RO">Rondônia</option>
+					<option value="RR">Roraima</option>
+					<option value="SC">Santa Catarina</option>
+					<option value="SP">São Paulo</option>
+					<option value="SE">Sergipe</option>
+					<option value="TO">Tocantins</option>
+				</select>
+				<span asp-validation-for="Estado" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-8">
+				<label asp-for="UrlImage" class="control-label"></label>
+				<input asp-for="UrlImage" class="form-control" placeholder="Digite o nome da escola" />
+				<span asp-validation-for="UrlImage" class="text-danger"
+					  data-aos-duration="500"></span>
+			</div>
+		</div>
+		@if (ViewBag.Mensagem != null)
+		{
+			<h5 class="mt-2">@ViewBag.Mensagem</h5>
 		}
-
 		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
 			<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
 				Cadastrar

@@ -4,7 +4,7 @@
 	ViewData["Title"] = "Cadastrar";
 }
 
-<link rel="stylesheet" href="~/css/style/CreateEscola.css" />
+<link rel="stylesheet" href="~/css/style/CreateProfessor.css" />
 
 <div class="accountContainer col-lg-5 col-10 d-flex flex-column justify-content-center align-items-center shadow">
 	<form class="formInputs col-12 d-flex flex-column justify-content-center align-items-center"
@@ -13,45 +13,47 @@
 			<span><img src="~/css/images/teacher.png" class="img-fluid iconMenu" /></span>
 			<h1>PROFESSOR</h1>
 		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Nome" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Nome" class="form-control" placeholder="Digite o nome do professor" />
-			<span asp-validation-for="_mdlProfessor.Nome" class="text-danger"
-				  data-aos-duration="500"></span>
+		<div class="row col-12">
+			<div class="form-group col-6">
+				<label asp-for="_mdlProfessor.Nome" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Nome" class="form-control" placeholder="Informe seu nome" />
+				<span asp-validation-for="_mdlProfessor.Nome" class="text-danger"
+					  data-aos-duration="500"></span>
+			</div>
+			<div class="form-group col-6">
+				<label asp-for="_mdlProfessor.Sobrenome" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Sobrenome" class="form-control" placeholder="Informe seu sobrenome" />
+				<span asp-validation-for="_mdlProfessor.Sobrenome" class="text-danger"
+					  data-aos-duration="500"></span>
+			</div>
+			<div class="form-group mt-2 col-4">
+				<label asp-for="_mdlProfessor.Cpf" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Cpf" class="form-control" placeholder="___.___.___-__" />
+				<span asp-validation-for="_mdlProfessor.Cpf" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group mt-2 col-4">
+				<label asp-for="_mdlProfessor.Cref" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Cref" class="form-control" placeholder="Cref" />
+				<span asp-validation-for="_mdlProfessor.Cref" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group mt-2 col-4">
+				<label asp-for="_mdlProfessor.Contato" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Contato" class="form-control" placeholder="( ) _____ - ____" />
+				<span asp-validation-for="_mdlProfessor.Contato" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
 		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Sobrenome" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Sobrenome" class="form-control" placeholder="Digite o sobrenome do professor" />
-			<span asp-validation-for="_mdlProfessor.Sobrenome" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Cpf" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Cpf" class="form-control" placeholder="Digite o número do cref" />
-			<span asp-validation-for="_mdlProfessor.Cpf" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Cref" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Cref" class="form-control" placeholder="Digite o número do cref" />
-			<span asp-validation-for="_mdlProfessor.Cref" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Contato" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Contato" class="form-control" placeholder="Digite o número do cref" />
-			<span asp-validation-for="_mdlProfessor.Contato" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="mt-2 col-12 d-flex flex-row flex-wrap justify-content-evenly align-items-center">
+		<div class="mt-2 col-12 d-flex flex-row flex-wrap justify-content-center align-items-center">
 			@foreach (var turma in Model._mdlTurmaList)
 			{
-				<div class="col-5">
+				<div class="col-5 mt-2 px-1">
 					<label class="control-label">@turma.Escola.Nome - @turma.Nome</label>
 					<input type="checkbox" value="@turma.Id" name="turmaIds">
 				</div>
 			}
-			<span asp-validation-for="_professorTurma.Fk_Turma_Id" class="text-danger"
+			<span asp-validation-for="@Model._professorTurma.Fk_Turma_Id" class="text-danger"
 				  data-aos="fade" data-aos-duration="500"></span>
 		</div>
 		@if (!ViewData.ModelState.IsValid)
