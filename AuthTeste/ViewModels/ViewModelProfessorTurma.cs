@@ -8,6 +8,5 @@ namespace AuthTeste.ViewModels
 		public MdlProfessorTurma _professorTurma { get; set; }
 		public IEnumerable<MdlProfessorTurma> _professorTurmaList { get; set; }
 		public IEnumerable<MdlTurma> _mdlTurmaList { get; set; }
-
 	}
 }

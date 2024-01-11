@@ -13,44 +13,57 @@
 			<span><img src="~/css/images/teacher.png" class="img-fluid iconMenu" /></span>
 			<h1>PROFESSOR</h1>
 		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Nome" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Nome" class="form-control" value="@Model._mdlProfessor.Nome" />
-			<span asp-validation-for="_mdlProfessor.Nome" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Sobrenome" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Sobrenome" class="form-control" value="@Model._mdlProfessor.Sobrenome" />
-			<span asp-validation-for="_mdlProfessor.Sobrenome" class="text-danger"
-				  data-aos-duration="500"></span>
-		</div>
-		<div class="form-group col-12">
-			<label asp-for="_mdlProfessor.Cref" class="control-label"></label>
-			<input asp-for="_mdlProfessor.Cref" class="form-control" value="@Model._mdlProfessor.Cref" />
-			<span asp-validation-for="_mdlProfessor.Cref" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		<div class="mt-2 col-12 d-flex flex-row flex-wrap align-items-center">
-			<label asp-for="@Model._professorTurma.Turma" class="control-label"></label>
-			<select asp-for="@Model._professorTurma.Fk_Turma_Id" asp-items="ViewBag.Turmas" name="turmaIds" multiple class="form-select">
-			</select>
-			<span asp-validation-for="@Model._professorTurma.Fk_Turma_Id" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-			@if (ViewBag.Mensagem != null)
-			{
-				<h5 class="mt-2 text-start">@ViewBag.Mensagem</h5>
-			}
-			<span asp-validation-for="_professorTurma.Fk_Turma_Id" class="text-danger"
-				  data-aos="fade" data-aos-duration="500"></span>
-		</div>
-		@if (!ViewData.ModelState.IsValid)
-		{
-			<div class="alert alert-danger mt-4 mb-2">
-				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+		<div class="row">
+			<div class="form-group col-6">
+				<label asp-for="_mdlProfessor.Nome" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Nome" class="form-control" value="@Model._mdlProfessor.Nome" />
+				<span asp-validation-for="_mdlProfessor.Nome" class="text-danger"
+					  data-aos-duration="500"></span>
 			</div>
-		}
-
+			<div class="form-group col-6">
+				<label asp-for="_mdlProfessor.Sobrenome" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Sobrenome" class="form-control" value="@Model._mdlProfessor.Sobrenome" />
+				<span asp-validation-for="_mdlProfessor.Sobrenome" class="text-danger"
+					  data-aos-duration="500"></span>
+			</div>
+			<div class="form-group mt-2 col-4">
+				<label asp-for="_mdlProfessor.Cpf" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Cpf" class="form-control" value="@Model._mdlProfessor.Cpf" />
+				<span asp-validation-for="_mdlProfessor.Cpf" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group mt-2 col-4">
+				<label asp-for="_mdlProfessor.Cref" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Cref" class="form-control" value="@Model._mdlProfessor.Cref" />
+				<span asp-validation-for="_mdlProfessor.Cref" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="form-group mt-2 col-4">
+				<label asp-for="_mdlProfessor.Contato" class="control-label"></label>
+				<input asp-for="_mdlProfessor.Contato" class="form-control" value="@Model._mdlProfessor.Contato" />
+				<span asp-validation-for="_mdlProfessor.Contato" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			<div class="mt-2 col-12 d-flex flex-row flex-wrap align-items-center">
+				<label asp-for="@Model._professorTurma.Turma" class="control-label"></label>
+				<select asp-for="@Model._professorTurma.Fk_Turma_Id" asp-items="ViewBag.Turmas" name="turmaIds" multiple class="form-select">
+				</select>
+				<span asp-validation-for="@Model._professorTurma.Fk_Turma_Id" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+				@if (ViewBag.Mensagem != null)
+				{
+					<h5 class="mt-2 text-start">@ViewBag.Mensagem</h5>
+				}
+				<span asp-validation-for="_professorTurma.Fk_Turma_Id" class="text-danger"
+					  data-aos="fade" data-aos-duration="500"></span>
+			</div>
+			@if (!ViewData.ModelState.IsValid)
+			{
+				<div class="alert alert-danger mt-4 mb-2">
+					<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+				</div>
+			}
+		</div>
 		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
 			<button type="submit" class="btn botaoCriar col-lg-3 col-5 mt-3">
 				Remover
