@@ -28,7 +28,7 @@ namespace AuthTeste.Contexto
 		{
 			builder.Entity<MdlEscola>(i =>
 			{
-				i.HasIndex(i => i.UrlImage).IsUnique();
+				i.HasIndex(i => i.urlImagem).IsUnique();
 				i.HasIndex(i => i.Cnpj).IsUnique();
 				i.HasIndex(i => i.Nome).IsUnique();
 			});

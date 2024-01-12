@@ -78,7 +78,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
                         .IsUnique()
                         .HasFilter("[UrlImage] IS NOT NULL");
 
-                    b.ToTable("Escola");
+                    b.ToTable("Escola", (string)null);
                 });
 
             modelBuilder.Entity("AuthTeste.Models.MdlEscolaProfessor", b =>
@@ -101,7 +101,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
 
                     b.HasIndex("Fk_Professor_Id");
 
-                    b.ToTable("Escola_Professor");
+                    b.ToTable("Escola_Professor", (string)null);
                 });
 
             modelBuilder.Entity("AuthTeste.Models.MdlPais", b =>
@@ -161,7 +161,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
                         .IsUnique()
                         .HasFilter("[Cpf] IS NOT NULL");
 
-                    b.ToTable("Pais");
+                    b.ToTable("Pais", (string)null);
                 });
 
             modelBuilder.Entity("AuthTeste.Models.MdlProfessor", b =>
@@ -203,7 +203,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
                     b.HasIndex("Cref")
                         .IsUnique();
 
-                    b.ToTable("Professor");
+                    b.ToTable("Professor", (string)null);
                 });
 
             modelBuilder.Entity("AuthTeste.Models.MdlProfessorTurma", b =>
@@ -226,7 +226,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
 
                     b.HasIndex("Fk_Turma_Id");
 
-                    b.ToTable("Professor_Turma");
+                    b.ToTable("Professor_Turma", (string)null);
                 });
 
             modelBuilder.Entity("AuthTeste.Models.MdlTurma", b =>
@@ -249,7 +249,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
 
                     b.HasIndex("Fk_Escola_Id");
 
-                    b.ToTable("Turma");
+                    b.ToTable("Turma", (string)null);
                 });
 
             modelBuilder.Entity("MdlProfessorMdlTurma", b =>
@@ -264,7 +264,7 @@ namespace AuthTeste.Migrations.MeuContextoChamadaMigrations
 
                     b.HasIndex("TurmasId");
 
-                    b.ToTable("MdlProfessorMdlTurma");
+                    b.ToTable("MdlProfessorMdlTurma", (string)null);
                 });
 
             modelBuilder.Entity("AuthTeste.Models.MdlEscolaProfessor", b =>
