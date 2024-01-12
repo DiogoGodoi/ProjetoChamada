@@ -24,7 +24,7 @@ namespace AuthTeste.Models
 		[StringLength(100, ErrorMessage = "Caminho muito longo")]
 		[DataType(DataType.ImageUrl)]
 		[Display(Name = "Imagem")]
-		public string urlImagem { get; set; }
+		public string UrlImage { get; set; }
 
 		[Required(ErrorMessage ="Campo obrigatorio")]
 		[StringLength(50, MinimumLength = 5, ErrorMessage = "Tamanho do campo de 5 a 50 caracteres")]
