@@ -49,13 +49,19 @@ namespace AuthTeste.Repository
 				_contexto.SaveChanges();	
 			}
 		}
-		public void RemoveEscola(int id)
+		public bool RemoveEscola(int id)
 		{
 			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
+
 			if(escola != null)
 			{
 				_contexto.Remove(escola);
 				_contexto.SaveChanges();
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 
 		}

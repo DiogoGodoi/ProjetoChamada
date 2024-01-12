@@ -8,6 +8,6 @@ namespace AuthTeste.Repository.Interfaces
 		void InsertEscola(MdlEscola escola);
 		MdlEscola GetEscolaId(int id);
 		void UpdateEscola(MdlEscola pmtEscola);
-		void RemoveEscola(int id);
+		bool RemoveEscola(int id);
 	}
 }

@@ -85,7 +85,7 @@ namespace AuthTeste.Controllers
 				}
 				else
 				{
-					ModelState.AddModelError("", "Extensão da imagem não permitida");
+					ViewBag.Mensagem = "Somente arquivos com extensões .png e .jpg são permitidas";
 					return View(escola);
 				}
 			}
@@ -129,7 +129,26 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult RemoveEscola(int id)
 		{
-			_escolasRepository.RemoveEscola(id);
+
+			var escola = _escolasRepository.GetEscolaId(id);
+
+			var result = _escolasRepository.RemoveEscola(id);
+
+			if(result == true)
+			{
+
+				var caminhoImagem = Path.Combine(caminhoServer, "imagemData", escola.UrlImage);
+
+				if (System.IO.File.Exists(caminhoImagem))
+				{
+					System.IO.File.Delete(caminhoImagem);
+				}
+
+			}
+			else
+			{
+				ModelState.AddModelError("", "Erro");
+			}
 
 			return Redirect("/Escola/ListEscolas");
 		}
