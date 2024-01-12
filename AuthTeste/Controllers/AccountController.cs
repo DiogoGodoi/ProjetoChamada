@@ -1,4 +1,5 @@
 ﻿using AuthTeste.Models;
+using AuthTeste.Repository;
 using AuthTeste.Services.EmailService.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

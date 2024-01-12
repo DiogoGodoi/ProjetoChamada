@@ -8,10 +8,12 @@ namespace AuthTeste.Controllers
 	public class EscolaController : Controller
 	{
 		private readonly IEscolasRepository _escolasRepository;
+		private string caminhoServer { get; set; }
 
-		public EscolaController(IEscolasRepository _escolasRepository)
+		public EscolaController(IEscolasRepository _escolasRepository, IWebHostEnvironment sistema)
 		{
 			this._escolasRepository = _escolasRepository;
+			caminhoServer = sistema.WebRootPath;
 		}
 
 		[HttpGet]
@@ -47,20 +49,46 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
-		public IActionResult CreateEscola(MdlEscola escola)
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
+		public IActionResult CreateEscola(MdlEscola escola, IFormFile arquivo)
 		{
-			if(!ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
 				return View(escola);
 			}
 			else
 			{
-				_escolasRepository.InsertEscola(escola);
-				ViewBag.Mensagem = "Cadastrado com sucesso";
-				return View();
-			}			
+				var extensoesPermitidas = new List<string> { ".png", ".jpg" };
+				var extensao = Path.GetExtension(arquivo.FileName).ToLower();
+
+				if (extensoesPermitidas.Contains(extensao))
+				{
+					string caminhoSave = caminhoServer + "\\imagemData\\";
+					string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
+
+					if (!Directory.Exists(caminhoSave))
+					{
+						Directory.CreateDirectory(caminhoSave);
+					}
+
+					using (var stream = System.IO.File.Create(caminhoSave + nomeArquivo))
+					{
+						arquivo.CopyTo(stream);
+
+						escola.UrlImage = nomeArquivo;
+
+						_escolasRepository.InsertEscola(escola);
+						ViewBag.Mensagem = "Cadastrado com sucesso";
+						return View();
+					}
+				}
+				else
+				{
+					ModelState.AddModelError("", "Extensão da imagem não permitida");
+					return View(escola);
+				}
+			}
 		}
 
 		[HttpGet]
@@ -72,8 +100,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-        [Authorize(Roles = "Admin, Master")]
-        public IActionResult UpdateEscola(int id)
+		[Authorize(Roles = "Admin, Master")]
+		public IActionResult UpdateEscola(int id)
 		{
 			var escola = _escolasRepository.GetEscolaId(id);
 
@@ -81,11 +109,11 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
 		public IActionResult UpdateEscola(MdlEscola escola)
 		{
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
 				_escolasRepository.UpdateEscola(escola);
 				return Redirect("/Escola/ListEscolas");
@@ -97,8 +125,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
 		public IActionResult RemoveEscola(int id)
 		{
 			_escolasRepository.RemoveEscola(id);
@@ -106,10 +134,10 @@ namespace AuthTeste.Controllers
 			return Redirect("/Escola/ListEscolas");
 		}
 
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-    }
+		[HttpGet]
+		public IActionResult AccessDenied()
+		{
+			return View();
+		}
+	}
 }
