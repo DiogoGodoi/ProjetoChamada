@@ -14,12 +14,12 @@ namespace AuthTeste.Repository
 		}
 		public void CreatePais(MdlPais pais)
 		{
-			_context.AddAsync(pais);
+			_context.Add(pais);
 			_context.SaveChanges();	
 		}
 		public void DeletePais(int id)
 		{
-			var pais = _context.Pais.FirstOrDefaultAsync(i => i.Id == id);
+			var pais = _context.Pais.FirstOrDefault(i => i.Id == id);
 			_context.Remove(pais);
 		    _context.SaveChanges();
 
