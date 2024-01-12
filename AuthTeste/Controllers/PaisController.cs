@@ -1,4 +1,5 @@
 ﻿using AuthTeste.Models;
+using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,15 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult ListPais()
 		{
-			return View();
+			var pais = _paisRepository.ListPais();
+			ViewBag.CaminhoImg = "/css/images/phone.png";
+			ViewBag.TitleJumbotron = "PAIS";
+			ViewBag.Controller = "Pais";
+			ViewBag.Action = "CreatePais";
+			ViewBag.Home = "Home";
+			ViewBag.Menu = "Menu";
+
+			return View(pais);
 		}
 
 		[HttpGet]
@@ -82,7 +91,7 @@ namespace AuthTeste.Controllers
 			else
 			{
 				ModelState.AddModelError(" ", "Erro");
-				return View();
+				return View(pais);
 			}
 
 			

@@ -42,6 +42,7 @@ namespace AuthTeste.Models
 		[DataType(DataType.Text)]
 		public string Logradouro { get; set; }
 
+		[Range(0, 9999999)]
 		[Display(Name = "Numero")]
 		public int Numero { get; set; }
 
