@@ -1,5 +1,4 @@
 ﻿using AuthTeste.Models;
-using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +27,13 @@ namespace AuthTeste.Controllers
 			ViewBag.Home = "Home";
 			ViewBag.Menu = "Menu";
 
+			return View(pais);
+		}
+
+		[HttpGet]
+		public IActionResult GetPaisId(int id)
+		{
+			var pais = _paisRepository.GetPaisId(id);
 			return View(pais);
 		}
 
@@ -95,6 +101,21 @@ namespace AuthTeste.Controllers
 			}
 
 			
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Master, Admin")]
+		[ValidateAntiForgeryToken]
+		public IActionResult RemovePais(int id)
+		{
+			_paisRepository.DeletePais(id);
+			return Redirect("/Pais/ListPais");
+		}
+
+		[HttpGet]
+		public IActionResult AccessDenied()
+		{
+			return View(StatusCode(404));
 		}
 	}
 }

@@ -12,16 +12,16 @@ namespace AuthTeste.Repository
 		{
 			this._context = _context;	
 		}
-		public async void CreatePais(MdlPais pais)
+		public void CreatePais(MdlPais pais)
 		{
-			await _context.AddAsync(pais);
-			await _context.SaveChangesAsync();	
+			_context.AddAsync(pais);
+			_context.SaveChanges();	
 		}
-		public async void DeletePais(int id)
+		public void DeletePais(int id)
 		{
-			var pais = await _context.Pais.FirstOrDefaultAsync(i => i.Id == id);
+			var pais = _context.Pais.FirstOrDefaultAsync(i => i.Id == id);
 			_context.Remove(pais);
-			await _context.SaveChangesAsync();
+		    _context.SaveChanges();
 
 		}
 		public MdlPais GetPaisId(int id)
@@ -36,9 +36,9 @@ namespace AuthTeste.Repository
 			var pais = _context.Pais.ToList();
 			return pais;
 		}
-		public async void UpdatePais(MdlPais pais)
+		public void UpdatePais(MdlPais pais)
 		{
-			var pai = await _context.Pais.FirstOrDefaultAsync(i => i.Id == pais.Id);
+			var pai = _context.Pais.FirstOrDefault(i => i.Id == pais.Id);
 
 			if(pai != null)
 			{
@@ -53,7 +53,7 @@ namespace AuthTeste.Repository
 				pai.Cidade = pais.Cidade;
 				pai.Estado = pais.Estado;
 
-				await _context.SaveChangesAsync();
+				_context.SaveChanges();
 			}
 
 		}
