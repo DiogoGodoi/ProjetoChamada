@@ -19,27 +19,50 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult ListPais()
 		{
-			var pais = _paisRepository.ListPais();
-			ViewBag.CaminhoImg = "/css/images/phone.png";
-			ViewBag.TitleJumbotron = "PAIS";
-			ViewBag.Controller = "Pais";
-			ViewBag.Action = "CreatePais";
-			ViewBag.Home = "Home";
-			ViewBag.Menu = "Menu";
+			try
+			{
+				ViewBag.CaminhoImg = "/css/images/phone.png";
+				ViewBag.TitleJumbotron = "PAIS";
+				ViewBag.Controller = "Pais";
+				ViewBag.Action = "CreatePais";
+				ViewBag.Home = "Home";
+				ViewBag.Menu = "Menu";
 
-			return View(pais);
+				var pais = _paisRepository.ListPais();
+
+				return View(pais);	
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]
 		public IActionResult GetPaisId(int id)
 		{
-			var pais = _paisRepository.GetPaisId(id);
+			try
+			{
+				var pais = _paisRepository.GetPaisId(id);
 
-			ViewBag.Controller = "Pais";
-			ViewBag.Action = "RemovePais";
-			ViewBag.RouteId = pais.Id;
+				ViewBag.Controller = "Pais";
+				ViewBag.Action = "RemovePais";
+				ViewBag.RouteId = pais.Id;
 
-			return View(pais);
+				if (pais != null)
+				{
+					return View(pais);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]
@@ -94,33 +117,41 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult CreatePais(MdlPais pais)
 		{
-			if (ModelState.IsValid)
+			try
 			{
-				_paisRepository.CreatePais(pais);
-				return Redirect("/Pais/ListPais");
-			}
-			else
-			{
-				ModelState.AddModelError(" ", "Erro");
-				return View(pais);
-			}
+				if (ModelState.IsValid)
+				{
+					_paisRepository.CreatePais(pais);
+					TempData["Mensagem"] = "Cadastrado com sucesso";
+					return Redirect("/Pais/ListPais");
+				}
+				else
+				{
+					ModelState.AddModelError(" ", "Erro");
+					TempData["Mensagem"] = "Erro no cadastro";
+					return View(pais);
+				}
 
-			
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]
 		[Authorize(Roles = "Master, Admin")]
 		public IActionResult UpdatePais(int id)
 		{
-			var pais = _paisRepository.GetPaisId(id);
-
-			List<SelectListItem> sexos = new List<SelectListItem> {
+			try
+			{
+				List<SelectListItem> sexos = new List<SelectListItem> {
 
 				new SelectListItem { Value = "M", Text = "Masculino" },
 				new SelectListItem { Value = "F", Text = "Feminino" }
 
 			};
-			List<SelectListItem> estados = new List<SelectListItem> {
+				List<SelectListItem> estados = new List<SelectListItem> {
 
 				new SelectListItem { Value = "AC", Text = "Acre" },
 				new SelectListItem { Value = "AL", Text = "Alagoas" },
@@ -151,26 +182,50 @@ namespace AuthTeste.Controllers
 				new SelectListItem { Value = "TO", Text = "Tocantins" }
 			};
 
-			ViewBag.Estado = new SelectList(estados, "Value", "Text");
-			ViewBag.Sexo = new SelectList(sexos, "Value", "Text");
-			return View(pais);
+				ViewBag.Estado = new SelectList(estados, "Value", "Text");
+				ViewBag.Sexo = new SelectList(sexos, "Value", "Text");
+
+				var pais = _paisRepository.GetPaisId(id);
+
+				if (pais != null)
+				{
+					return View(pais);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpPost]
 		[Authorize(Roles = "Master, Admin")]
-		[ValidateAntiForgeryToken]	
+		[ValidateAntiForgeryToken]
 		public IActionResult UpdatePais(MdlPais pais)
 		{
-
-			if (ModelState.IsValid) {
-
-				_paisRepository.UpdatePais(pais);
-				return Redirect("/Pais/ListPais");
-			}
-			else
+			try
 			{
-				ModelState.AddModelError("", "Erro");
-				return View(pais);
+				if (ModelState.IsValid)
+				{
+
+					_paisRepository.UpdatePais(pais);
+					TempData["Mensagem"] = "Atualizado com sucesso";
+					return Redirect("/Pais/ListPais");
+				}
+				else
+				{
+					TempData["Mensagem"] = "Erro na atualização";
+					return View(pais);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
 			}
 
 		}
@@ -180,8 +235,16 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult RemovePais(int id)
 		{
-			_paisRepository.DeletePais(id);
-			return Redirect("/Pais/ListPais");
+			try
+			{
+				_paisRepository.DeletePais(id);
+				TempData["Mensagem"] = "Removido com sucesso";
+				return Redirect("/Pais/ListPais");
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]

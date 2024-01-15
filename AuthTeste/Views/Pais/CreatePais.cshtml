@@ -83,5 +83,14 @@
 				Voltar
 			</a>
 		</div>
+		@if (TempData["Mensagem"] != null)
+		{
+
+			<div id="animateMsg" class="col-12 mt-1 alert alert-danger text-center alert-dismissible fade show" role="alert">
+				<strong>@TempData["Mensagem"]</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+
+		}
 	</form>
 </div>

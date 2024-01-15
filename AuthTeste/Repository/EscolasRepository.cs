@@ -13,55 +13,109 @@ namespace AuthTeste.Repository
 		}
 		public IEnumerable<MdlEscola> GetEscolas()
 		{
-			return _contexto.Escola.ToList();
-		}  
+			try
+			{
+				var escolas = _contexto.Escola.ToList();
+
+				if (escolas != null)
+				{
+					return _contexto.Escola.ToList();
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception("Erro interno" + ex.Message);
+
+			}
+
+		}
 		public void InsertEscola(MdlEscola escola)
 		{
-			_contexto.Add(escola);
-			_contexto.SaveChanges();
+			try
+			{
+				if (escola != null)
+				{
+					_contexto.Add(escola);
+					_contexto.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro interno" + ex.Message);
+			}
+
 		}
 		public MdlEscola GetEscolaId(int id)
 		{
-			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
+			try
+			{
 
-			if(escola == null)
-			{
-				return null;
+				var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
+
+				if (escola == null)
+				{
+					return null;
+				}
+				else
+				{
+					return escola;
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return escola;
+
+				throw new Exception("Erro interno" + ex.Message);
+
 			}
 		}
 		public void UpdateEscola(MdlEscola pmtEscola)
 		{
-			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == pmtEscola.Id);
-
-			if(escola != null)
+			try
 			{
-				escola.Nome = pmtEscola.Nome;
-				escola.Logradouro = pmtEscola.Logradouro;
-				escola.Numero = pmtEscola.Numero;
-				escola.Bairro = pmtEscola.Bairro;
-				escola.Cidade = pmtEscola.Cidade;
-				escola.Estado = pmtEscola.Estado;
+				var escola = _contexto.Escola.FirstOrDefault(i => i.Id == pmtEscola.Id);
 
-				_contexto.SaveChanges();	
+				if (escola != null)
+				{
+					escola.Nome = pmtEscola.Nome;
+					escola.Logradouro = pmtEscola.Logradouro;
+					escola.Numero = pmtEscola.Numero;
+					escola.Bairro = pmtEscola.Bairro;
+					escola.Cidade = pmtEscola.Cidade;
+					escola.Estado = pmtEscola.Estado;
+
+					_contexto.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro interno" + ex.Message);
 			}
 		}
 		public bool RemoveEscola(int id)
 		{
-			var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
+			try
+			{
+				var escola = _contexto.Escola.FirstOrDefault(i => i.Id == id);
 
-			if(escola != null)
-			{
-				_contexto.Remove(escola);
-				_contexto.SaveChanges();
-				return true;
+				if (escola != null)
+				{
+					_contexto.Remove(escola);
+					_contexto.SaveChanges();
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return false;
+				throw new Exception("Erro interno" + ex.Message);
 			}
 
 		}

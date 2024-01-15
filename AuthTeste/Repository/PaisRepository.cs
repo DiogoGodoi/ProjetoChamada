@@ -1,59 +1,116 @@
 ﻿using AuthTeste.Contexto;
 using AuthTeste.Models;
 using AuthTeste.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
 {
-	public class PaisRepository: IPaisRepository
+	public class PaisRepository : IPaisRepository
 	{
 		private readonly MeuContextoChamada _context;
 		public PaisRepository(MeuContextoChamada _context)
 		{
-			this._context = _context;	
+			this._context = _context;
 		}
 		public void CreatePais(MdlPais pais)
 		{
-			_context.Add(pais);
-			_context.SaveChanges();	
+			try
+			{
+				if (pais != null)
+				{
+					_context.Add(pais);
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro interno" + ex.Message);
+			}
 		}
 		public void DeletePais(int id)
 		{
-			var pais = _context.Pais.FirstOrDefault(i => i.Id == id);
-			_context.Remove(pais);
-		    _context.SaveChanges();
+			try
+			{
+				var pais = _context.Pais.FirstOrDefault(i => i.Id == id);
 
+				if (pais != null)
+				{
+					_context.Remove(pais);
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro interno" + ex.Message);
+			}
 		}
 		public MdlPais GetPaisId(int id)
 		{
-			var pais = _context.Pais.FirstOrDefault(i => i.Id == id);
+			try
+			{
+				var pais = _context.Pais.FirstOrDefault(i => i.Id == id);
 
-			return pais;
+				if (pais != null)
+				{
+					return pais;
+				}
+				else
+				{
+					return null;
+				}
 
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public IEnumerable<MdlPais> ListPais()
 		{
-			var pais = _context.Pais.ToList();
-			return pais;
+			try
+			{
+				var pais = _context.Pais.ToList();
+
+				if (pais.Count() > 0)
+				{
+					return pais;
+				}
+				else
+				{
+					return null;
+				}
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+
 		}
 		public void UpdatePais(MdlPais pais)
 		{
-			var pai = _context.Pais.FirstOrDefault(i => i.Id == pais.Id);
-
-			if(pai != null)
+			try
 			{
-				pai.Nome = pais.Nome;
-				pai.Sobrenome = pais.Sobrenome;
-				pai.Cpf = pais.Cpf;	
-				pai.Sexo = pais.Sexo;
-				pai.Contato = pais.Contato;
-				pai.Logradouro = pais.Logradouro;
-				pai.Numero = pais.Numero;
-				pai.Logradouro = pais.Logradouro;
-				pai.Cidade = pais.Cidade;
-				pai.Estado = pais.Estado;
+				var pai = _context.Pais.FirstOrDefault(i => i.Id == pais.Id);
 
-				_context.SaveChanges();
+				if (pai != null)
+				{
+					pai.Nome = pais.Nome;
+					pai.Sobrenome = pais.Sobrenome;
+					pai.Cpf = pais.Cpf;
+					pai.Sexo = pais.Sexo;
+					pai.Contato = pais.Contato;
+					pai.Logradouro = pais.Logradouro;
+					pai.Numero = pais.Numero;
+					pai.Logradouro = pais.Logradouro;
+					pai.Cidade = pais.Cidade;
+					pai.Estado = pais.Estado;
+
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
 			}
 
 		}

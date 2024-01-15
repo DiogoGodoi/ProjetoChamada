@@ -10,6 +10,7 @@
 
 	@if (ViewBag.Mensagem == null)
 	{
+
 		<div class="card col-lg-4 col-10">
 			<div class="card-header d-flex justify-content-center">
 				<h3>DETALHES</h3>
@@ -17,11 +18,11 @@
 			<div class="d-flex justify-content-center p-3">
 				@if (Model.UrlImage == null)
 				{
-					<img src="~/css/images/EscolaPink.png" alt="Foto" class="iconMenuCard card-img-top">
+					<img src="~/css/images/EscolaPink.png" alt="Foto" class="iconMenuCard img-fluid img-thumbnail">
 				}
 				else
 				{
-					<img src="~/imagemData/@Model.UrlImage" alt="Foto" class="iconMenuCard card-img-top">
+					<img src="~/imagemData/@Model.UrlImage" alt="Foto" class="iconMenuCard img-fluid img-thumbnail">
 				}
 
 			</div>
