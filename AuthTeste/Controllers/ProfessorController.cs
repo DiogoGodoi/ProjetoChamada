@@ -133,9 +133,16 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult DeleteProfessor(int id)
 		{
-			_professorRepository.RemoveProfessor(id);
-
-			return Redirect("/Professor/ListProfessores");
+			try
+			{
+				_professorRepository.RemoveProfessor(id);
+				TempData["Mensagem"] = "Removido com sucesso";
+				return Redirect("/Professor/ListProfessores");
+			}
+			catch(Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]
