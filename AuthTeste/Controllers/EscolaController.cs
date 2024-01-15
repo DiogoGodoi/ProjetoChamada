@@ -19,24 +19,33 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult ListEscolas()
 		{
-			var escolas = _escolasRepository.GetEscolas();
-			ViewBag.CaminhoImg = "/css/images/escolas.png";
-			ViewBag.TitleJumbotron = "ESCOLAS";
-			ViewBag.Controller = "Escola";
-			ViewBag.Action = "CreateEscola";
-			ViewBag.Home = "Home";
-			ViewBag.Menu = "Menu";
-
-			if (escolas.Count() == 0)
+			try
 			{
+				var escolas = _escolasRepository.GetEscolas();
+				ViewBag.CaminhoImg = "/css/images/escolas.png";
+				ViewBag.TitleJumbotron = "ESCOLAS";
+				ViewBag.Controller = "Escola";
+				ViewBag.Action = "CreateEscola";
+				ViewBag.Home = "Home";
+				ViewBag.Menu = "Menu";
 
-				ModelState.AddModelError("", "Sem dados a exibir");
-				return View(escolas);
+				if (escolas.Count() == 0)
+				{
 
+					ViewBag.Mensagem = "Sem dados a exibir";
+					return View(escolas);
+
+				}
+				else
+				{
+					return View(escolas);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return View(escolas);
+				ViewBag.Mensagem = "Erro interno" + ex.Message;
+				return View();
+
 			}
 
 		}
@@ -59,10 +68,8 @@ namespace AuthTeste.Controllers
 			}
 			else
 			{
-				var extensoesPermitidas = new List<string> { ".png", ".jpg" };
-				var extensao = Path.GetExtension(arquivo.FileName).ToLower();
 
-				if (extensoesPermitidas.Contains(extensao))
+				if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png"))
 				{
 					string caminhoSave = caminhoServer + "\\imagemData\\";
 					string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
@@ -79,8 +86,8 @@ namespace AuthTeste.Controllers
 						escola.UrlImage = nomeArquivo;
 
 						_escolasRepository.InsertEscola(escola);
-						ViewBag.Mensagem = "Cadastrado com sucesso";
-						return View();
+						ViewData["Mensagem"] = "Cadastrado com sucesso";
+						return Redirect("/Escola/ListEscolas");
 					}
 				}
 				else
@@ -94,9 +101,24 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult GetEscolaId(int id)
 		{
-			var escola = _escolasRepository.GetEscolaId(id);
+			try
+			{
+				var escola = _escolasRepository.GetEscolaId(id);
 
-			return View(escola);
+                if (escola == null)
+                {
+					ViewBag.Mensagem = "Sem dados";
+					return View(escola);
+                }
+
+                return View(escola);
+			}
+			catch(Exception ex) {
+
+			ViewBag.Mensagem = "Erro interno" + ex.Message;
+			return StatusCode(400, ViewBag.Mensagem);
+
+			}			
 		}
 
 		[HttpGet]
@@ -134,7 +156,7 @@ namespace AuthTeste.Controllers
 
 			var result = _escolasRepository.RemoveEscola(id);
 
-			if(result == true)
+			if (result == true)
 			{
 
 				var caminhoImagem = Path.Combine(caminhoServer, "imagemData", escola.UrlImage);

@@ -38,9 +38,11 @@
 							  data-aos="fade" data-aos-duration="500"></span>
 					</div>
 
-					@if (!ViewData.ModelState.IsValid)
+					@if (ViewBag.Mensagem != null)
 					{
-						<div class="alert alert-danger d-flex justify-content-center align-items-center mt-4" asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+						<div id="animateMsg" class="col-12 mt-4 alert alert-danger text-center" style="font-size: 20px">
+							<strong>@ViewBag.Mensagem</strong>
+						</div>
 					}
 
 					<div class="botaoArea col-12 d-flex flex-column justify-content-center align-items-center mt-2 mb-3">
@@ -70,7 +72,11 @@
 	<script>
 		AOS.init();
 	</script>
+	<script>
 
+		$('#animateMsg').hide().fadeIn(1000)
+
+	</script>
 </body>
 </html>
 

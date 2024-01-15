@@ -64,5 +64,17 @@ else
 				Voltar
 			</a>
 		</div>
+
+		@if (ViewData["Mensagem"] != null)
+		{
+			<div id="msgAlert" class="col-8 alert-success text-center"><strong>@ViewData["Mensagem"]</strong></div>
+		}
+
 	</div>
 }
+
+<script>
+
+	$('#msgAlert').hide().fadeIn(1000);
+
+</script>
