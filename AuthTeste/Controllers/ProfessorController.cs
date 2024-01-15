@@ -25,58 +25,78 @@ namespace AuthTeste.Controllers
 		[HttpGet]
 		public IActionResult ListProfessores()
 		{
-			var professores = _professorRepository.GetProfessor();
-			ViewBag.CaminhoImg = "/css/images/teacher.png";
-			ViewBag.TitleJumbotron = "PROFESSORES";
-			ViewBag.Controller = "Professor";
-			ViewBag.Action = "CreateProfessor";
-			ViewBag.Home = "Home";
-			ViewBag.Menu = "Menu";
+			try
+			{
+				ViewBag.CaminhoImg = "/css/images/teacher.png";
+				ViewBag.TitleJumbotron = "PROFESSORES";
+				ViewBag.Controller = "Professor";
+				ViewBag.Action = "CreateProfessor";
+				ViewBag.Home = "Home";
+				ViewBag.Menu = "Menu";
+				var professores = _professorRepository.GetProfessor();
 
-			return View(professores);
+				if (professores != null)
+				{
+					return View(professores);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]
 		public IActionResult GetProfessoresId(int id)
 		{
-			var professor = _professorTurmaRepository.GetProfessoresTurmasId(id);
+			try
+			{
+				var professor = _professorTurmaRepository.GetProfessoresTurmasId(id);
 
-			ViewBag.Controller = "Professor";
-			ViewBag.Action = "DeleteProfessor";
-			ViewBag.RouteId = professor._mdlProfessor.Id;
+				ViewBag.Controller = "Professor";
+				ViewBag.Action = "DeleteProfessor";
+				ViewBag.RouteId = professor._mdlProfessor.Id;
 
-			return View(professor);
+				if (professor != null)
+				{
+					return View(professor);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpGet]
-        [Authorize(Roles = "Admin, Master")]
-        public IActionResult CreateProfessor()
+		[Authorize(Roles = "Admin, Master")]
+		public IActionResult CreateProfessor()
 		{
-			MdlProfessor professor = new MdlProfessor();
-
-			var turmas = _turmaRepository.GetTurmas();
-
-			ViewModelProfessorTurma professorTurma = new ViewModelProfessorTurma
-			{
-				_mdlProfessor = professor,
-				_mdlTurmaList = turmas
-			};
-
+	
 			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
 
-			return View(professorTurma);
+			return View();
 
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
 		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
 
 			if (ModelState.IsValid)
 			{
-
 				_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
 
 				foreach (var idx in turmaIds)
@@ -101,8 +121,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
 		public IActionResult DeleteProfessor(int id)
 		{
 			_professorRepository.RemoveProfessor(id);
@@ -111,8 +131,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-        [Authorize(Roles = "Admin, Master")]
-        public IActionResult AdcionarTurma(int id)
+		[Authorize(Roles = "Admin, Master")]
+		public IActionResult AdcionarTurma(int id)
 		{
 			var professor = _professorRepository.GetProfessorId(id);
 			var turmas = _turmaRepository.GetTurmas();
@@ -128,8 +148,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
 		public IActionResult AdcionarTurma(int id, ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
 			if (ModelState.IsValid)
@@ -145,7 +165,7 @@ namespace AuthTeste.Controllers
 						Fk_Turma_Id = idx
 					};
 
-				_professorTurmaRepository.AdcionarTurmaAoProfessor(_professorTurma);
+					_professorTurmaRepository.AdcionarTurmaAoProfessor(_professorTurma);
 
 				}
 
@@ -161,8 +181,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpGet]
-        [Authorize(Roles = "Admin, Master")]
-        public IActionResult RemoverTurma(int id)
+		[Authorize(Roles = "Admin, Master")]
+		public IActionResult RemoverTurma(int id)
 		{
 			var professor = _professorRepository.GetProfessorId(id);
 			var turmas = _turmaRepository.GetTurmas();
@@ -179,8 +199,8 @@ namespace AuthTeste.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
 		public IActionResult RemoverTurma(int id, List<int> turmaIds)
 		{
 			if (ModelState.IsValid)
@@ -191,7 +211,7 @@ namespace AuthTeste.Controllers
 					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
 					{
 						Fk_Professor_Id = id,
-						Fk_Turma_Id = idx	
+						Fk_Turma_Id = idx
 
 					};
 
@@ -207,10 +227,10 @@ namespace AuthTeste.Controllers
 			}
 		}
 
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-    }
+		[HttpGet]
+		public IActionResult AccessDenied()
+		{
+			return View();
+		}
+	}
 }

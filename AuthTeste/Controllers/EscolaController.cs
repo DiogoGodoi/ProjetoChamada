@@ -31,7 +31,6 @@ namespace AuthTeste.Controllers
 
 				if (escolas.Count() == 0)
 				{
-
 					ViewBag.Mensagem = "Sem dados a exibir";
 					return View(escolas);
 

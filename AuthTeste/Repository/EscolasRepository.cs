@@ -19,7 +19,7 @@ namespace AuthTeste.Repository
 
 				if (escolas != null)
 				{
-					return _contexto.Escola.ToList();
+					return escolas;
 				}
 				else
 				{
