@@ -82,7 +82,7 @@ namespace AuthTeste.Controllers
 		[Authorize(Roles = "Admin, Master")]
 		public IActionResult CreateProfessor()
 		{
-	
+
 			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
 
 			return View();
@@ -94,30 +94,38 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult CreateProfessor(ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
-
-			if (ModelState.IsValid)
+			try
 			{
-				_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
-
-				foreach (var idx in turmaIds)
+				if (ModelState.IsValid)
 				{
-					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+					_professorRepository.CreateProfessor(professorTurma._mdlProfessor);
+
+					foreach (var idx in turmaIds)
 					{
-						Fk_Professor_Id = professorTurma._mdlProfessor.Id,
-						Fk_Turma_Id = idx
-					};
+						MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+						{
+							Fk_Professor_Id = professorTurma._mdlProfessor.Id,
+							Fk_Turma_Id = idx
+						};
 
-					_professorTurmaRepository.CreateProfessorTurma(_professorTurma);
+						_professorTurmaRepository.CreateProfessorTurma(_professorTurma);
+					}
+
+					TempData["Mensagem"] = "Cadastrado com sucesso";
+					return Redirect("/Professor/ListProfessores");
 				}
-
-				return Redirect("/Professor/ListProfessores");
-
+				else
+				{
+					TempData["Mensagem"] = "Erro no cadastro";
+					ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
+					return View();
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				ModelState.AddModelError("", "Erro");
-				return View();
+				throw new Exception("Erro" + ex.Message);
 			}
+
 		}
 
 		[HttpPost]
