@@ -101,7 +101,7 @@ namespace AuthTeste.Controllers
 						}
 						else
 						{
-							ViewBag.Mensagem = "Somente arquivos com extensões .png e .jpg são permitidas";
+							TempData["Mensagem"] = "Somente arquivos com extensões .png e .jpg são permitidas";
 							return View(escola);
 						}
 					}
@@ -142,9 +142,28 @@ namespace AuthTeste.Controllers
 		[Authorize(Roles = "Admin, Master")]
 		public IActionResult UpdateEscola(int id)
 		{
-			var escola = _escolasRepository.GetEscolaId(id);
+			try
+			{
+				var escola = _escolasRepository.GetEscolaId(id);
 
-			return View(escola);
+				if(escola != null)
+				{
+					return View(escola);
+				}
+				else
+				{
+					ViewBag.Mensagem = "Sem dados";
+					return View(escola);
+				}
+
+			}
+			catch(Exception ex) {
+
+				ViewBag.Mensagem = "Erro interno" + ex.Message;
+
+				return StatusCode(400, ViewBag.Mensagem);
+
+			}
 		}
 
 		[HttpPost]
@@ -155,10 +174,14 @@ namespace AuthTeste.Controllers
 			if (ModelState.IsValid)
 			{
 				_escolasRepository.UpdateEscola(escola);
+
+				TempData["Mensagem"] = "Sucesso na atualização";
+
 				return Redirect("/Escola/ListEscolas");
 			}
 			else
 			{
+				TempData["Mensagem"] = "Erro na atualização";
 				return View(escola);
 			}
 		}
@@ -185,10 +208,13 @@ namespace AuthTeste.Controllers
 					}
 
 				}
+
+				TempData["Mensagem"] = "Deletado com sucesso";
+
 			}
 			else
 			{
-				ModelState.AddModelError("", "Erro");
+				TempData["Mensagem"] = "Erro interno";
 			}
 
 			return Redirect("/Escola/ListEscolas");
