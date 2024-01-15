@@ -41,6 +41,10 @@ namespace AuthTeste.Controllers
 		{
 			var professor = _professorTurmaRepository.GetProfessoresTurmasId(id);
 
+			ViewBag.Controller = "Professor";
+			ViewBag.Action = "DeleteProfessor";
+			ViewBag.RouteId = professor._mdlProfessor.Id;
+
 			return View(professor);
 		}
 

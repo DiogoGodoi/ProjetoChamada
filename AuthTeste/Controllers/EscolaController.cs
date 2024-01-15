@@ -127,6 +127,10 @@ namespace AuthTeste.Controllers
 					return View(escola);
 				}
 
+				ViewBag.Controller = "Escola";
+				ViewBag.Action = "RemoveEscola";
+				ViewBag.RouteId = escola.Id;
+
 				return View(escola);
 			}
 			catch (Exception ex)

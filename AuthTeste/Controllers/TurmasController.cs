@@ -38,8 +38,10 @@ namespace AuthTeste.Controllers
         public IActionResult GetTurmasId(int id)
         {
             var turmaProfessores = _professorTurmaRepository.GetTurmaProfessoresId(id);
-
-            return View(turmaProfessores);
+			ViewBag.Controller = "Turmas";
+			ViewBag.Action = "DeleteTurmas";
+			ViewBag.RouteId = turmaProfessores._mdlTurma.Id;
+			return View(turmaProfessores);
         }
 
         [HttpGet]

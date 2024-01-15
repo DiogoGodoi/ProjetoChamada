@@ -34,6 +34,11 @@ namespace AuthTeste.Controllers
 		public IActionResult GetPaisId(int id)
 		{
 			var pais = _paisRepository.GetPaisId(id);
+
+			ViewBag.Controller = "Pais";
+			ViewBag.Action = "RemovePais";
+			ViewBag.RouteId = pais.Id;
+
 			return View(pais);
 		}
 
