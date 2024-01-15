@@ -102,9 +102,13 @@
 						  data-aos-duration="500"></span>
 				</div>
 			</div>
-			@if (ViewBag.Mensagem != null)
+
+			@if (TempData["Mensagem"] != null)
 			{
-				<h5 class="mt-2">@ViewBag.Mensagem</h5>
+				<div id="animateMsg" class="col-12 mt-4 alert alert-success text-center" style="font-size: 20px">
+					<strong>@TempData["Mensagem"]</strong>
+				</div>
+
 			}
 
 			<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
@@ -118,3 +122,9 @@
 		</form>
 	}
 </div>
+
+<script>
+
+	$('#animateMsg').hide().fadeIn(1000);
+
+</script>

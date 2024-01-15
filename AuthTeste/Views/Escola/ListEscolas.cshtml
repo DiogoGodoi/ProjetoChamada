@@ -67,8 +67,10 @@ else
 
 		@if (TempData["Mensagem"] != null)
 		{
-			<div id="animateMsg" class="col-12 mt-4 alert alert-success text-center" style="font-size: 20px">
+
+			<div class="col-12 mt-4 alert alert-success text-center alert-dismissible fade show" role="alert">
 				<strong>@TempData["Mensagem"]</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 
 		}
@@ -78,7 +80,7 @@ else
 
 <script>
 
-	$(function () {
-		$('#animateMsg').hide().fadeIn(1000);
-	});
+	$(document).ready(function () {
+		$('#animateMsg').hide().fadeIn(4000);
+	})
 </script>
