@@ -65,9 +65,12 @@ else
 			</a>
 		</div>
 
-		@if (ViewData["Mensagem"] != null)
+		@if (TempData["Mensagem"] != null)
 		{
-			<div id="msgAlert" class="col-8 alert-success text-center"><strong>@ViewData["Mensagem"]</strong></div>
+			<div id="animateMsg" class="col-12 mt-4 alert alert-success text-center" style="font-size: 20px">
+				<strong>@TempData["Mensagem"]</strong>
+			</div>
+
 		}
 
 	</div>
@@ -75,6 +78,7 @@ else
 
 <script>
 
-	$('#msgAlert').hide().fadeIn(1000);
-
+	$(function () {
+		$('#animateMsg').hide().fadeIn(1000);
+	});
 </script>
