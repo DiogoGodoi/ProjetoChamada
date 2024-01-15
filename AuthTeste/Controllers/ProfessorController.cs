@@ -139,7 +139,7 @@ namespace AuthTeste.Controllers
 				TempData["Mensagem"] = "Removido com sucesso";
 				return Redirect("/Professor/ListProfessores");
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				throw new Exception("Erro" + ex.Message);
 			}
@@ -149,17 +149,35 @@ namespace AuthTeste.Controllers
 		[Authorize(Roles = "Admin, Master")]
 		public IActionResult AdcionarTurma(int id)
 		{
-			var professor = _professorRepository.GetProfessorId(id);
-			var turmas = _turmaRepository.GetTurmas();
-
-			ViewModelProfessorTurma _professorTurma = new ViewModelProfessorTurma
+			try
 			{
-				_mdlProfessor = professor,
-				_mdlTurmaList = turmas
-			};
+				var professor = _professorRepository.GetProfessorId(id);
+				var turmas = _turmaRepository.GetTurmas();
 
-			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
-			return View(_professorTurma);
+				if (professor != null)
+				{
+					ViewModelProfessorTurma _professorTurma = new ViewModelProfessorTurma
+					{
+						_mdlProfessor = professor,
+						_mdlTurmaList = turmas
+					};
+
+					ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
+					return View(_professorTurma);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception("Erro" + ex.Message);
+
+			}
+
 		}
 
 		[HttpPost]
@@ -167,50 +185,72 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult AdcionarTurma(int id, ViewModelProfessorTurma professorTurma, List<int> turmaIds)
 		{
-			if (ModelState.IsValid)
+			try
 			{
-				_professorRepository.UpdateProfessor(professorTurma._mdlProfessor);
-				professorTurma._mdlProfessor.Id = id;
-
-				foreach (var idx in turmaIds)
+				if (ModelState.IsValid)
 				{
-					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
-					{
-						Fk_Professor_Id = professorTurma._mdlProfessor.Id,
-						Fk_Turma_Id = idx
-					};
+					_professorRepository.UpdateProfessor(professorTurma._mdlProfessor);
+					professorTurma._mdlProfessor.Id = id;
 
-					_professorTurmaRepository.AdcionarTurmaAoProfessor(_professorTurma);
+					foreach (var idx in turmaIds)
+					{
+						MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+						{
+							Fk_Professor_Id = professorTurma._mdlProfessor.Id,
+							Fk_Turma_Id = idx
+						};
+
+						_professorTurmaRepository.AdcionarTurmaAoProfessor(_professorTurma);
+
+					}
+
+					TempData["Mensagem"] = "Turma adcionada com sucesso";
+					return Redirect($"/Professor/GetProfessoresId/{id}");
 
 				}
-
-
-				return Redirect("/Professor/ListProfessores");
-
+				else
+				{
+					TempData["Mensagem"] = "Erro ao adcionar turma";
+					return View(professorTurma);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				ModelState.AddModelError("", "Erro");
-				return View(professorTurma);
+				throw new Exception("Erro" + ex.Message);
 			}
+
 		}
 
 		[HttpGet]
 		[Authorize(Roles = "Admin, Master")]
 		public IActionResult RemoverTurma(int id)
 		{
-			var professor = _professorRepository.GetProfessorId(id);
-			var turmas = _turmaRepository.GetTurmas();
-
-			ViewModelProfessorTurma _professorTurma = new ViewModelProfessorTurma
+			try
 			{
-				_mdlProfessor = professor,
-				_mdlTurmaList = turmas
-			};
+				var professor = _professorRepository.GetProfessorId(id);
+				var turmas = _turmaRepository.GetTurmas();
 
-			ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
+				if (professor != null)
+				{
+					ViewModelProfessorTurma _professorTurma = new ViewModelProfessorTurma
+					{
+						_mdlProfessor = professor,
+						_mdlTurmaList = turmas
+					};
 
-			return View(_professorTurma);
+					ViewBag.Turmas = new MultiSelectList(_turmaRepository.GetTurmas(), "Id", "Nome");
+
+					return View(_professorTurma);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 
 		[HttpPost]
@@ -218,27 +258,33 @@ namespace AuthTeste.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult RemoverTurma(int id, List<int> turmaIds)
 		{
-			if (ModelState.IsValid)
+			try
 			{
-
-				foreach (var idx in turmaIds)
+				if (ModelState.IsValid)
 				{
-					MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+					foreach (var idx in turmaIds)
 					{
-						Fk_Professor_Id = id,
-						Fk_Turma_Id = idx
+						MdlProfessorTurma _professorTurma = new MdlProfessorTurma
+						{
+							Fk_Professor_Id = id,
+							Fk_Turma_Id = idx
 
-					};
+						};
 
-					_professorTurmaRepository.RemoverTurmaDoProfessor(_professorTurma);
+						_professorTurmaRepository.RemoverTurmaDoProfessor(_professorTurma);
+					}
+					TempData["Mensagem"] = "Turma removida com sucesso";
+					return Redirect($"/Professor/GetProfessoresId/{id}");
 				}
-				return Redirect("/Professor/ListProfessores");
-
+				else
+				{
+					TempData["Mensagem"] = "Erro ao remover";
+					return View(turmaIds);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				ModelState.AddModelError("", "Erro");
-				return View(turmaIds);
+				throw new Exception("Erro" + ex.Message);
 			}
 		}
 

@@ -50,10 +50,6 @@
 				</select>
 				<span asp-validation-for="@Model._professorTurma.Fk_Turma_Id" class="text-danger"
 					  data-aos="fade" data-aos-duration="500"></span>
-				@if (ViewBag.Mensagem != null)
-				{
-					<h5 class="mt-2 text-start">@ViewBag.Mensagem</h5>
-				}
 			</div>
 		</div>
 		<div class="botaoArea col-12 d-flex flex-row justify-content-evenly align-items-center mt-2 mb-3">
@@ -64,5 +60,12 @@
 				Voltar
 			</a>
 		</div>
+		@if (TempData["Mensagem"] != null)
+		{
+			<div id="animateMsg" class="col-11 mt-2 alert alert-danger text-center alert-dismissible fade show" role="alert">
+				<strong>@TempData["Mensagem"]</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		}
 	</form>
 </div>
