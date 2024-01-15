@@ -4,7 +4,7 @@ using AuthTeste.Repository.Interfaces;
 
 namespace AuthTeste.Repository
 {
-	public class ProfessoresRepository: IProfessorRepository
+	public class ProfessoresRepository : IProfessorRepository
 	{
 		private readonly MeuContextoChamada _context;
 		public ProfessoresRepository(MeuContextoChamada _context)
@@ -13,41 +13,95 @@ namespace AuthTeste.Repository
 		}
 		public IEnumerable<MdlProfessor> GetProfessor()
 		{
-			var professores = _context.Professor.ToList();
+			try
+			{
+				var professores = _context.Professor.ToList();
 
-			return professores;
-			
+				if (professores.Count > 0)
+				{
+					return professores;
+				}
+				else
+				{
+					return null;
+				}
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public MdlProfessor GetProfessorId(int id)
 		{
-			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
+			try
+			{
+				var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
 
-			return professor;
-
+				if (professor != null)
+				{
+					return professor;
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public void CreateProfessor(MdlProfessor professor)
 		{
-			_context.Professor.Add(professor);
-			_context.SaveChanges();
+			try
+			{
+				if (professor != null)
+				{
+					_context.Professor.Add(professor);
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public void UpdateProfessor(MdlProfessor professor)
 		{
-			var _professor = _context.Professor.FirstOrDefault(i => i.Id == professor.Id);
-
-			if(_professor != null)
+			try
 			{
-				_professor.Nome = professor.Nome;
-				_professor.Sobrenome = professor.Sobrenome;
-				_professor.Cref = professor.Cref;
+				var _professor = _context.Professor.FirstOrDefault(i => i.Id == professor.Id);
 
-				_context.SaveChanges();
+				if (_professor != null)
+				{
+					_professor.Nome = professor.Nome;
+					_professor.Sobrenome = professor.Sobrenome;
+					_professor.Cref = professor.Cref;
+
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
 			}
 		}
 		public void RemoveProfessor(int id)
 		{
-			var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
-			_context.Professor.Remove(professor);	
-			_context.SaveChanges();	
+			try
+			{
+				var professor = _context.Professor.FirstOrDefault(i => i.Id == id);
+				if (professor != null)
+				{
+					_context.Professor.Remove(professor);
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 	}
 }
