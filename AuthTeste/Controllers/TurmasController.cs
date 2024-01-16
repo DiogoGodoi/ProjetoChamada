@@ -7,122 +7,190 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AuthTeste.Controllers
 {
-    public class TurmasController : Controller
-    {
-        private readonly ITurmaRepository _turmaRepository;
+	public class TurmasController : Controller
+	{
+		private readonly ITurmaRepository _turmaRepository;
 		private readonly IProfessorTurmaRepository _professorTurmaRepository;
-		private readonly IEscolasRepository _escolasRepository;  
-        public TurmasController(ITurmaRepository _turmaRepository, IEscolasRepository _escolasRepository,
+		private readonly IEscolasRepository _escolasRepository;
+		public TurmasController(ITurmaRepository _turmaRepository, IEscolasRepository _escolasRepository,
 			IProfessorTurmaRepository _professorTurmaRepository)
-        {
-            this._turmaRepository = _turmaRepository;
-            this._escolasRepository = _escolasRepository;
-            this._professorTurmaRepository = _professorTurmaRepository;
+		{
+			this._turmaRepository = _turmaRepository;
+			this._escolasRepository = _escolasRepository;
+			this._professorTurmaRepository = _professorTurmaRepository;
 
 		}
-        
-        [HttpGet]
-        public IActionResult ListTurmas()
-        {
-            var turmas = _turmaRepository.GetTurmas();
-			ViewBag.CaminhoImg = "/css/images/turmas.png";
-			ViewBag.TitleJumbotron = "TURMAS";
-			ViewBag.Controller = "Turmas";
-			ViewBag.Action = "CreateTurmas";
-			ViewBag.Home = "Home";
-			ViewBag.Menu = "Menu";
-			return View(turmas);
-        }
 
-        [HttpGet]
-        public IActionResult GetTurmasId(int id)
-        {
-            var turmaProfessores = _professorTurmaRepository.GetTurmaProfessoresId(id);
-			ViewBag.Controller = "Turmas";
-			ViewBag.Action = "DeleteTurmas";
-			ViewBag.RouteId = turmaProfessores._mdlTurma.Id;
-			return View(turmaProfessores);
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Admin, Master")]
-        public IActionResult CreateTurmas() {
-
-            MdlTurma turma = new MdlTurma();
-
-            ViewBag.Escolas = new SelectList(_escolasRepository.GetEscolas(), "Id", "Nome");
-
-            return View(turma);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateTurmas(MdlTurma turma) {
-
-            if (ModelState.IsValid)
-            {
-                _turmaRepository.CreateTurma(turma);
-                return Redirect("/Turmas/ListTurmas");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Erro");
-                return View(turma);
-            }
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Admin, Master")]
-        public IActionResult UpdateTurmas(int id)
-        {
-            var turma =  _turmaRepository.GetById(id);
-
-		    ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
+		[HttpGet]
+		public IActionResult ListTurmas()
+		{
+			try
 			{
-				_turma = turma,
-				_escolas = _escolasRepository.GetEscolas()
-			};
+				ViewBag.CaminhoImg = "/css/images/turmas.png";
+				ViewBag.TitleJumbotron = "TURMAS";
+				ViewBag.Controller = "Turmas";
+				ViewBag.Action = "CreateTurmas";
+				ViewBag.Home = "Home";
+				ViewBag.Menu = "Menu";
 
-			return View(_turmaEscola);
-        }
+				var turmas = _turmaRepository.GetTurmas();
 
-        [HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
-        public IActionResult UpdateTurmas(ViewModelTurmaEscola _turmaEscola)
-        {
-            if (ModelState.IsValid)
-            {
-                if(_turmaEscola._turma == null)
-                {
+				return View(turmas);
+
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+
+		}
+
+		[HttpGet]
+		public IActionResult GetTurmasId(int id)
+		{
+			try
+			{
+				var turmaProfessores = _professorTurmaRepository.GetTurmaProfessoresId(id);
+				ViewBag.Controller = "Turmas";
+				ViewBag.Action = "DeleteTurmas";
+				ViewBag.RouteId = turmaProfessores._mdlTurma.Id;
+
+				if (turmaProfessores != null)
+				{
+					return View(turmaProfessores);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin, Master")]
+		public IActionResult CreateTurmas()
+		{
+			try
+			{
+				ViewBag.Escolas = new SelectList(_escolasRepository.GetEscolas(), "Id", "Nome");
+
+				return View();
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
+		public IActionResult CreateTurmas(MdlTurma turma)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					_turmaRepository.CreateTurma(turma);
+					return Redirect("/Turmas/ListTurmas");
+				}
+				else
+				{
+					ModelState.AddModelError("", "Erro");
+					return View(turma);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin, Master")]
+		public IActionResult UpdateTurmas(int id)
+		{
+			try
+			{
+				var turma = _turmaRepository.GetById(id);
+
+				if (turma != null)
+				{
+					ViewModelTurmaEscola _turmaEscola = new ViewModelTurmaEscola
+					{
+						_turma = turma,
+						_escolas = _escolasRepository.GetEscolas()
+					};
+
+					return View(_turmaEscola);
+				}
+				else
+				{
+					return StatusCode(404);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
+		public IActionResult UpdateTurmas(ViewModelTurmaEscola _turmaEscola)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					if (_turmaEscola._turma == null)
+					{
+						ModelState.AddModelError("", "Erro");
+						return View(_turmaEscola._turma);
+					}
+					_turmaRepository.UpdateTurma(_turmaEscola._turma);
+					return Redirect("/Turmas/ListTurmas");
+				}
+				else
+				{
 					ModelState.AddModelError("", "Erro");
 					return View(_turmaEscola._turma);
 				}
-                _turmaRepository.UpdateTurma(_turmaEscola._turma);
-                return Redirect("/Turmas/ListTurmas");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Erro");
-                return View(_turmaEscola._turma);
-            }
-        }
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+		}
 
 		[HttpPost]
-        [Authorize(Roles = "Admin, Master")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteTurmas(int id)
-        {
-            _turmaRepository.DeleteTurma(id);
+		[Authorize(Roles = "Admin, Master")]
+		[ValidateAntiForgeryToken]
+		public IActionResult DeleteTurmas(int id)
+		{
+			try
+			{
+				_turmaRepository.DeleteTurma(id);
 
-            return Redirect("/Turmas/ListTurmas");
-        }
+				return Redirect("/Turmas/ListTurmas");
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
+		}
 
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-    }
+		[HttpGet]
+		public IActionResult AccessDenied()
+		{
+			return View();
+		}
+	}
 }

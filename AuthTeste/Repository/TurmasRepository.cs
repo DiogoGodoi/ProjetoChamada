@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthTeste.Repository
 {
-	public class TurmasRepository: ITurmaRepository
+	public class TurmasRepository : ITurmaRepository
 	{
 		private readonly MeuContextoChamada _context;
 		public TurmasRepository(MeuContextoChamada _context)
@@ -14,53 +14,94 @@ namespace AuthTeste.Repository
 		}
 		public IEnumerable<MdlTurma> GetTurmas()
 		{
-			var turmas = _context.Turma.Include(i => i.Escola).OrderBy(i => i.Nome).ToList();
+			try
+			{
+				var turmas = _context.Turma.Include(i => i.Escola).OrderBy(i => i.Nome).ToList();
 
-			return turmas;
+				if (turmas != null)
+				{
+					return turmas;
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public MdlTurma GetById(int id)
 		{
-
-			var turma = _context.Turma.Include(i => i.Escola).FirstOrDefault(i => i.Id == id);
-
-			if(turma != null)
+			try
 			{
-				return turma;
+				var turma = _context.Turma.Include(i => i.Escola).FirstOrDefault(i => i.Id == id);
+
+				if (turma != null)
+				{
+					return turma;
+				}
+				else
+				{
+					return null;
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return null;
+				throw new Exception("Erro" + ex.Message);
 			}
+
 		}
-		public void CreateTurma(MdlTurma turma) {
-
-			if(turma != null)
+		public void CreateTurma(MdlTurma turma)
+		{
+			try
 			{
-				_context.Turma.Add(turma);
-				_context.SaveChanges();
+				if (turma != null)
+				{
+					_context.Turma.Add(turma);
+					_context.SaveChanges();
+				}
 			}
-
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public void UpdateTurma(MdlTurma pmtTurma)
 		{
-			var turma = _context.Turma.FirstOrDefault(i => i.Id == pmtTurma.Id);
-
-			if(turma != null)
+			try
 			{
-				turma.Nome = pmtTurma.Nome;
-				turma.Fk_Escola_Id = pmtTurma.Fk_Escola_Id;
+				var turma = _context.Turma.FirstOrDefault(i => i.Id == pmtTurma.Id);
 
-				_context.SaveChanges();
+				if (turma != null)
+				{
+					turma.Nome = pmtTurma.Nome;
+					turma.Fk_Escola_Id = pmtTurma.Fk_Escola_Id;
+
+					_context.SaveChanges();
+				}
 			}
-
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
+			}
 		}
 		public void DeleteTurma(int id)
 		{
-			var turma = _context.Turma.FirstOrDefault(i => i.Id == id);
-			if(turma != null)
+			try
 			{
-				_context.Turma.Remove(turma);
-				_context.SaveChanges();
+				var turma = _context.Turma.FirstOrDefault(i => i.Id == id);
+				 
+				if (turma != null)
+				{
+					_context.Turma.Remove(turma);
+					_context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro" + ex.Message);
 			}
 		}
 	}
