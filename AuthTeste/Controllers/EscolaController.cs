@@ -79,7 +79,7 @@ namespace AuthTeste.Controllers
 					{
 						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png"))
 						{
-							string caminhoSave = caminhoServer + "\\imagemData\\";
+							string caminhoSave = caminhoServer + "\\imagens\\escola\\";
 							string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
 
 							if (!Directory.Exists(caminhoSave))
@@ -149,7 +149,7 @@ namespace AuthTeste.Controllers
 			{
 				var escola = _escolasRepository.GetEscolaId(id);
 
-				if(escola != null)
+				if (escola != null)
 				{
 					return View(escola);
 				}
@@ -160,7 +160,8 @@ namespace AuthTeste.Controllers
 				}
 
 			}
-			catch(Exception ex) {
+			catch (Exception ex)
+			{
 
 				ViewBag.Mensagem = "Erro interno" + ex.Message;
 
@@ -172,20 +173,70 @@ namespace AuthTeste.Controllers
 		[HttpPost]
 		[Authorize(Roles = "Admin, Master")]
 		[ValidateAntiForgeryToken]
-		public IActionResult UpdateEscola(MdlEscola escola)
+		public IActionResult UpdateEscola(MdlEscola escola, IFormFile arquivo)
 		{
-			if (ModelState.IsValid)
+			try
 			{
-				_escolasRepository.UpdateEscola(escola);
+				if (ModelState.IsValid)
+				{
+					var escolaId = _escolasRepository.GetEscolaId(escola.Id);
 
-				TempData["Mensagem"] = "Sucesso na atualização";
+					if (arquivo == null)
+					{
+						_escolasRepository.UpdateEscola(escola);
+						TempData["Mensagem"] = "Atualizado com sucesso";
+						return Redirect("/Escola/ListEscolas");
+					}
+					else
+					{
+						if (escola.UrlImage != null)
+						{
+							var caminhoImagem = Path.Combine(caminhoServer, "imagem\\escola", escola.UrlImage);
 
-				return Redirect("/Escola/ListEscolas");
+							if (System.IO.File.Exists(caminhoImagem))
+							{
+								System.IO.File.Delete(caminhoImagem);
+							}
+
+						}
+
+						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png"))
+						{
+							string caminhoSave = caminhoServer + "\\imagens\\escola\\";
+							string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
+
+							if (!Directory.Exists(caminhoSave))
+							{
+								Directory.CreateDirectory(caminhoSave);
+							}
+
+							using (var stream = System.IO.File.Create(caminhoSave + nomeArquivo))
+							{
+								arquivo.CopyTo(stream);
+
+								escola.UrlImage = nomeArquivo;
+
+								_escolasRepository.UpdateEscola(escola);
+								TempData["Mensagem"] = "Atualizado com sucesso";
+								return Redirect("/Escola/ListEscolas");
+							}
+						}
+						else
+						{
+							TempData["Mensagem"] = "Somente arquivos com extensões .png e .jpg são permitidas";
+							return View(escola);
+						}
+					}
+				}
+				else
+				{
+					TempData["Mensagem"] = "Erro na atualização";
+					return View(escola);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				TempData["Mensagem"] = "Erro na atualização";
-				return View(escola);
+				throw new Exception("Erro" + ex.Message);
 			}
 		}
 
@@ -203,7 +254,7 @@ namespace AuthTeste.Controllers
 			{
 				if (escola.UrlImage != null)
 				{
-					var caminhoImagem = Path.Combine(caminhoServer, "imagemData", escola.UrlImage);
+					var caminhoImagem = Path.Combine(caminhoServer, "imagem\\escola", escola.UrlImage);
 
 					if (System.IO.File.Exists(caminhoImagem))
 					{

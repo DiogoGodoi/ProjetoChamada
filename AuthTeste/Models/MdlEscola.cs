@@ -21,6 +21,12 @@ namespace AuthTeste.Models
 		[DataType(DataType.Text)]
 		public string Nome { get; set; } = "";
 
+		[Required(ErrorMessage = "Campo obrigatório")]
+		[StringLength(14, MinimumLength = 12, ErrorMessage = "O tamanho do campo é de 12 a 14 caracteres")]
+		[DataType(DataType.Text)]
+		[Display(Name = "Contato")]
+		public string Contato { get; set; } = "";
+
 		[StringLength(100, ErrorMessage = "Caminho muito longo")]
 		[DataType(DataType.ImageUrl)]
 		[Display(Name = "Imagem")]

@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\imagemDatab4d0e3cd-5ade-42f8-9c4a-2ebb9913d619_colegioVivere.png" />
-    <Content Remove="wwwroot\imagemData\00000000-0000-0000-0000-000000000000_colegioVivere.png" />
+    <Content Remove="wwwroot\imagens\00000000-0000-0000-0000-000000000000_colegioVivere.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\imagemData\" />
+    <Folder Include="wwwroot\imagens\escola\" />
   </ItemGroup>
 
 </Project>
