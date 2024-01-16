@@ -13,6 +13,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\imagemDatab4d0e3cd-5ade-42f8-9c4a-2ebb9913d619_colegioVivere.png" />
     <Content Remove="wwwroot\imagens\00000000-0000-0000-0000-000000000000_colegioVivere.png" />
+    <Content Remove="wwwroot\imagens\escola\53210628-277d-41e4-abd7-416895d05698WhatsApp Image 2024-01-03 at 15.55.34.jpeg" />
   </ItemGroup>
 
   <ItemGroup>

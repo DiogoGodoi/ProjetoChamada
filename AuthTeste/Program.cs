@@ -3,6 +3,7 @@ using AuthTeste.Repository;
 using AuthTeste.Repository.Interfaces;
 using AuthTeste.Services.EmailService;
 using AuthTeste.Services.EmailService.Interfaces;
+using AuthTeste.Services.UploadFileService;
 using AuthTeste.Services.UserRoleService;
 using Microsoft.AspNetCore.Identity;
 
@@ -44,6 +45,7 @@ namespace AuthTeste
             builder.Services.AddTransient<ITurmaRepository, TurmasRepository>();
             builder.Services.AddTransient<IProfessorTurmaRepository, ProfessorTurmaRepository>();
             builder.Services.AddTransient<IPaisRepository, PaisRepository>();
+            builder.Services.AddTransient<IFileManager, FileManager>();
             builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
             var app = builder.Build();
