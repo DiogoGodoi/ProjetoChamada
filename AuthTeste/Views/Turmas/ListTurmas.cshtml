@@ -43,7 +43,6 @@ else
 				</tbody>
 			</table>
 		</div>
-
 		<div class="jumbotron d-flex flex-row justify-content-center">
 			<a asp-controller="Turmas" asp-action="CreateTurmas" class="btn btn-outline-primary mx-4">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -59,6 +58,15 @@ else
 				Voltar
 			</a>
 		</div>
+		@if (TempData["Mensagem"] != null)
+		{
+
+			<div id="animateMsg" class="col-12 mt-4 alert alert-success text-center alert-dismissible fade show" role="alert">
+				<strong>@TempData["Mensagem"]</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+
+		}
 	</div>
 }
 

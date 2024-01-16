@@ -41,10 +41,12 @@
 				</a>
 			</div>
 
-		@if (!ViewData.ModelState.IsValid)
+		@if (TempData["Mensagem"] != null)
 		{
-			<div class="alert alert-danger mt-4 mb-2">
-				<div asp-validation-summary="ModelOnly" style="font-size: 20px"></div>
+
+			<div id="animateMsg" class="col-12 mt-4 alert alert-danger text-center alert-dismissible fade show" role="alert">
+				<strong>@TempData["Mensagem"]</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 
 		}

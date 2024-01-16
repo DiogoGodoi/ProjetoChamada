@@ -96,11 +96,12 @@ namespace AuthTeste.Controllers
 				if (ModelState.IsValid)
 				{
 					_turmaRepository.CreateTurma(turma);
+					TempData["Mensagem"] = "Cadastrado com sucesso";
 					return Redirect("/Turmas/ListTurmas");
 				}
 				else
 				{
-					ModelState.AddModelError("", "Erro");
+					TempData["Mensagem"] = "Erro no cadastro";
 					return View(turma);
 				}
 			}
@@ -152,15 +153,16 @@ namespace AuthTeste.Controllers
 				{
 					if (_turmaEscola._turma == null)
 					{
-						ModelState.AddModelError("", "Erro");
+						TempData["Mensagem"] = "Erro na alteração";
 						return View(_turmaEscola._turma);
 					}
 					_turmaRepository.UpdateTurma(_turmaEscola._turma);
+					TempData["Mensagem"] = "Alteração realizada com sucesso";
 					return Redirect("/Turmas/ListTurmas");
 				}
 				else
 				{
-					ModelState.AddModelError("", "Erro");
+					TempData["Mensagem"] = "Erro interno";
 					return View(_turmaEscola._turma);
 				}
 			}
@@ -178,7 +180,7 @@ namespace AuthTeste.Controllers
 			try
 			{
 				_turmaRepository.DeleteTurma(id);
-
+				TempData["Mensagem"] = "Removido com sucesso";
 				return Redirect("/Turmas/ListTurmas");
 			}
 			catch (Exception ex)
