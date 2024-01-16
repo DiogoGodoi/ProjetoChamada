@@ -87,6 +87,8 @@ namespace AuthTeste.Repository
 					escola.Bairro = pmtEscola.Bairro;
 					escola.Cidade = pmtEscola.Cidade;
 					escola.Estado = pmtEscola.Estado;
+					escola.Contato = pmtEscola.Contato;
+					escola.UrlImage = pmtEscola.UrlImage;
 
 					_contexto.SaveChanges();
 				}

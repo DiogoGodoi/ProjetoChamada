@@ -20,7 +20,7 @@ else
 				<thead>
 					<tr>
 						<th scope="col"><h3>Nome</h3></th>
-						<th scope="col" class="text-center"><h3>Bairro</h3></th>
+						<th scope="col" class="text-center"><h3>Contato</h3></th>
 						<th scope="col" class="text-center"><h3>Cidade</h3></th>
 						<th scope="col" class="text-center"><h3>Estado</h3></th>
 						<th scope="col" class="text-center"><h3>Ação</h3></th>
@@ -31,7 +31,14 @@ else
 					{
 						<tr>
 							<td><h4>@item.Nome</h4></td>
-							<td><h4 class="text-center">@item.Bairro</h4></td>
+							@if (String.IsNullOrEmpty(item.Contato))
+							{
+								<td><h4 class="text-center">S/Nº</h4></td>
+							}
+							else
+							{
+								<td><h4 class="text-center">@item.Contato</h4></td>
+							}
 							<td><h4 class="text-center">@item.Cidade</h4></td>
 							<td><h4 class="text-center">@item.Estado</h4></td>
 							<td class="d-flex justify-content-center">

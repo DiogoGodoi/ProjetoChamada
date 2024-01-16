@@ -60,7 +60,7 @@
 					<span asp-validation-for="Cidade" class="text-danger"
 						  data-aos="fade" data-aos-duration="500"></span>
 				</div>
-				<div class="form-group col-4">
+				<div class="form-group col-6">
 					<label asp-for="Estado" class="control-label"></label>
 					<select asp-for="Estado" class="form-select">
 						<option value="" selected>Selecione</option>
@@ -95,14 +95,15 @@
 					<span asp-validation-for="Estado" class="text-danger"
 						  data-aos="fade" data-aos-duration="500"></span>
 				</div>
-				<div class="form-group col-5">
+				<div class="form-group col-6">
 					<label asp-for="Contato" class="control-label"></label>
 					<input asp-for="Contato" class="form-control" placeholder="( ) _____-____">
-					<span asp-validation-for="Contato" class="text-danger" data-aos-duration="500"></span>
+					<span asp-validation-for="Contato" class="text-danger" 
+					data-aos-duration="500"></span>
 				</div>
-				<div class="form-group col-3">
+				<div class="form-group col-12">
 					<label class="control-label">Imagem</label>
-					<input class="form-control" type="file" id="formFile" name="arquivo" />
+					<input class="form-control" type="file" name="arquivo" />
 					<span asp-validation-for="UrlImage" class="text-danger"
 						  data-aos-duration="500"></span>
 				</div>

@@ -102,6 +102,7 @@ namespace AuthTeste.Controllers
 				else
 				{
 					TempData["Mensagem"] = "Erro no cadastro";
+					ViewBag.Escolas = new SelectList(_escolasRepository.GetEscolas(), "Id", "Nome");
 					return View(turma);
 				}
 			}
@@ -163,7 +164,7 @@ namespace AuthTeste.Controllers
 				else
 				{
 					TempData["Mensagem"] = "Erro interno";
-					return View(_turmaEscola._turma);
+					return Redirect("/Escola/ListEscolas/");
 				}
 			}
 			catch (Exception ex)

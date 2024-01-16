@@ -77,7 +77,7 @@ namespace AuthTeste.Controllers
 					}
 					else
 					{
-						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png"))
+						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png") || arquivo.FileName.Contains(".jpeg"))
 						{
 							string caminhoSave = caminhoServer + "\\imagens\\escola\\";
 							string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
@@ -189,9 +189,9 @@ namespace AuthTeste.Controllers
 					}
 					else
 					{
-						if (escola.UrlImage != null)
+						if (escolaId.UrlImage != null)
 						{
-							var caminhoImagem = Path.Combine(caminhoServer, "imagem\\escola", escola.UrlImage);
+							var caminhoImagem = Path.Combine(caminhoServer, "\\imagens\\escola\\", escolaId.UrlImage);
 
 							if (System.IO.File.Exists(caminhoImagem))
 							{
@@ -200,7 +200,7 @@ namespace AuthTeste.Controllers
 
 						}
 
-						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png"))
+						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png") || arquivo.FileName.Contains(".jpeg"))
 						{
 							string caminhoSave = caminhoServer + "\\imagens\\escola\\";
 							string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
@@ -230,13 +230,13 @@ namespace AuthTeste.Controllers
 				}
 				else
 				{
-					TempData["Mensagem"] = "Erro na atualização";
+					//TempData["Mensagem"] = "Erro na atualização";
 					return View(escola);
 				}
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("Erro" + ex.Message);
+				throw new Exception("Erro " + ex.Message);
 			}
 		}
 
