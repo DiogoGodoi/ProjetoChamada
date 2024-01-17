@@ -181,48 +181,60 @@ namespace AuthTeste.Controllers
 					}
 					else
 					{
-						if (escolaId.UrlImage != null)
+						if (!String.IsNullOrEmpty(escolaId.UrlImage))
 						{
-							var caminhoImagem = Path.Combine(caminhoServer, "\\imagens\\escola\\", escolaId.UrlImage);
-
-							if (System.IO.File.Exists(caminhoImagem))
+							if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png") || arquivo.FileName.Contains(".jpeg"))
 							{
-								System.IO.File.Delete(caminhoImagem);
+								var caminhoUrl = "\\imagens\\escola\\";
+								var retornoRemove = _fileManager.DeleteFile(escolaId, caminhoUrl);
+
+								if (retornoRemove == true)
+								{
+									var retornoCreate = _fileManager.CreateFile(escola, arquivo, caminhoUrl);
+
+									if (retornoCreate == 1)
+									{
+										_escolasRepository.UpdateEscola(escola);
+										TempData["Mensagem"] = "Atualizado com sucesso";
+										return Redirect("/Escola/ListEscolas");
+									}
+									else if (retornoCreate == 2)
+									{
+										TempData["Mensagem"] = "Somente arquivos com extensões .png e .jpg são permitidas";
+										return View(escola);
+									}
+									else if (retornoCreate == 3)
+									{
+										_escolasRepository.UpdateEscola(escola);
+										TempData["Mensagem"] = "Atualizado com sucesso";
+										return Redirect("/Escola/ListEscolas");
+									}
+									else
+									{
+										return StatusCode(400);
+									}
+								}
+								else
+								{
+									TempData["Mensagem"] = "Erro interno 1";
+									return Redirect("/Escola/ListEscolas");
+								}
 							}
-
-						}
-
-						if (arquivo.FileName.Contains(".jpg") || arquivo.FileName.Contains(".png") || arquivo.FileName.Contains(".jpeg"))
-						{
-							string caminhoSave = caminhoServer + "\\imagens\\escola\\";
-							string nomeArquivo = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
-
-							if (!Directory.Exists(caminhoSave))
+							else
 							{
-								Directory.CreateDirectory(caminhoSave);
-							}
-
-							using (var stream = System.IO.File.Create(caminhoSave + nomeArquivo))
-							{
-								arquivo.CopyTo(stream);
-
-								escola.UrlImage = nomeArquivo;
-
-								_escolasRepository.UpdateEscola(escola);
-								TempData["Mensagem"] = "Atualizado com sucesso";
-								return Redirect("/Escola/ListEscolas");
+								TempData["Mensagem"] = "Somente arquivos com extensões .png e .jpg são permitidas";
+								return View(escola);
 							}
 						}
 						else
 						{
-							TempData["Mensagem"] = "Somente arquivos com extensões .png e .jpg são permitidas";
-							return View(escola);
+							TempData["Mensagem"] = "Erro interno 2";
+							return Redirect("/Escola/ListEscolas");
 						}
 					}
 				}
 				else
 				{
-					//TempData["Mensagem"] = "Erro na atualização";
 					return View(escola);
 				}
 			}
@@ -244,7 +256,7 @@ namespace AuthTeste.Controllers
 
 				if (result == true)
 				{
-					var retorno = _fileManager.DeleteFile(escola.UrlImage, "\\imagens\\escola\\");
+					var retorno = _fileManager.DeleteFile(escola, "\\imagens\\escola\\");
 
 					if (retorno == true)
 					{

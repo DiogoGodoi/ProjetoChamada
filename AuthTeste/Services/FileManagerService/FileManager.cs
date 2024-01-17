@@ -47,13 +47,13 @@ namespace AuthTeste.Services.UploadFileService
 				throw new Exception("Erro " + ex.Message);
 			}
 		}
-		public bool DeleteFile(string urlImage, string caminho)
+		public bool DeleteFile(MdlEscola escola, string caminho)
 		{
 			try
 			{
-				if (!String.IsNullOrEmpty(urlImage))
+				if (!String.IsNullOrEmpty(escola.UrlImage))
 				{
-					var caminhoImagem = caminhoServer + caminho + urlImage;
+					var caminhoImagem = caminhoServer + caminho + escola.UrlImage;
 
 					if (File.Exists(caminhoImagem))
 					{
@@ -75,6 +75,10 @@ namespace AuthTeste.Services.UploadFileService
 			{
 				throw new Exception("Erro" + ex.Message);
 			}
+		}
+		public bool UpdateFile(MdlEscola escola, IFormFile arquivo, string caminho)
+		{
+			return false;
 		}
 	}
 }
